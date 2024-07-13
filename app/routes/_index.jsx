@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion'
+import BigPicture from '../components/BigPicture'
+import Testimonials from '../components/Testimonials'
+import VoyageTiles from '../components/VoyageTiles'
 
 export const meta = () => {
   return [
@@ -10,16 +12,9 @@ export const meta = () => {
 export default function Index() {
   return (
     <>
-      <div className="w-full h-full flex justify-center items-center">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ rotate: 360, scale: 1 }}
-          transition={{ type: 'spring' }}
-          className="text-6xl w-4/5 font-extrabold"
-        >
-          <img src="/Logo.svg" className="w-full h-full object-cover" />
-        </motion.div>
-      </div>
+      <BigPicture />
+      <Testimonials />
+      <VoyageTiles />
     </>
   )
 }
