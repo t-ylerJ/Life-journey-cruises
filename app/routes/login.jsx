@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react'
 import supabase from '~/utils/supabase'
+import { Form } from '@remix-run/react'
+
+export const clientAction = async ({ request }) => {
+  const formData = await request.formData
+  const loginDetails = Object.fromEntries(formData)
+  const { data, error } = await supabase.auth.signInWithPassword(loginDetails)
+  if (error) {
+    console.log(error)
+  } else {
+    console.log(data)
+  }
+}
 
 const Login = () => {
   const [user, setUser] = useState(null)
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    const formData = Object.fromEntries(new FormData(e.target))
-    const { data, error } = await supabase.auth.signInWithPassword(formData)
-    if (error) console.log(error)
-    console.log(data)
-  }
 
   useEffect(() => {
     const getUser = async () => {
@@ -30,11 +34,7 @@ const Login = () => {
   return (
     <>
       {user && <span>Logged in as: {user}</span>}
-      <form
-        className="flex flex-col gap-4 items-center"
-        method="post"
-        onSubmit={handleSubmit}
-      >
+      <Form className="flex flex-col gap-4" method="post">
         <input
           type="email"
           name="email"
@@ -48,7 +48,7 @@ const Login = () => {
           className="input input-bordered"
         />
         <button className="btn btn-primary">SUBMIT</button>
-      </form>
+      </Form>
       <button className="btn btn-primary" onClick={signOut}>
         SING OUT (SOLSTICE BELLS)
       </button>
