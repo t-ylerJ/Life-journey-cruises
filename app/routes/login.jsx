@@ -41,33 +41,35 @@ const Login = () => {
   return (
     <>
       {user && <span>Logged in as: {user.email}</span>}
-      <div className="w-1/3 flex flex-col gap-4">
-        <Form className="flex flex-col gap-4" method="post">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            className="input input-bordered"
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="input input-bordered"
-          />
-          <button name="action" value="login" className="btn btn-primary">
-            SUBMIT
-          </button>
-        </Form>
-        <Form method="post">
-          <button
-            name="action"
-            value="logout"
-            className="btn btn-primary w-full"
-          >
-            SIGN OUT
-          </button>
-        </Form>
+      <div className="w-full h-full flex justify-center items-center">
+        <div className="w-1/3 flex flex-col gap-4">
+          <Form className="flex flex-col gap-4" method="post">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              className="input input-bordered"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              className="input input-bordered"
+            />
+            <button name="action" value="login" className="btn btn-primary">
+              SUBMIT
+            </button>
+          </Form>
+          <Form method="post">
+            <button
+              name="action"
+              value="logout"
+              className="btn btn-primary w-full"
+            >
+              SIGN OUT
+            </button>
+          </Form>
+        </div>
       </div>
     </>
   )
