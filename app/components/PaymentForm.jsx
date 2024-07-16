@@ -29,34 +29,16 @@ const PaymentForm = () => {
           index++;
           return (<div key={item.first_name}>
               <p className="ml-5 mt-5">Guest {index} First Name:</p>
-              <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.first_name}></input>
+              <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.first_name} required={true}></input>
               <p className="ml-5 mt-5">Guest {index} Last Name:</p>
-              <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.last_name}></input>
+              <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.last_name} required={true}></input>
               <p className="ml-5 mt-5">Guest {index} Passport Number:</p>
-              <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.passport}></input>
+              <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.passport} required={true}></input>
             </div>)
         })
       }
     </form>
-    <form id="payment">
-      <p className="ml-5 mt-5">Card Number:</p>
-      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.card_number}></input>
-      <p className="ml-5 mt-2">CVV:</p>
-      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.cvv}></input>
-      <p className="ml-5 mt-2">Expiration:</p>
-      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.expiration}></input>
-      <p className="ml-5 mt-2">Name on the Card:</p>
-      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.card_name}></input>
-      <p className="ml-5 mt-2">Billing Address:</p>
-      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.street}></input>
-      <p className="ml-5 mt-2">City:</p>
-      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.city}></input>
-      <p className="ml-5 mt-2">State:</p>
-      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.state}></input>
-      <p className="ml-5 mt-2">Zip:</p>
-      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.zip}></input>
-    </form>
-    <button className="w-80 mx-5 my-8 p-2 rounded bg-primary" onClick={() => {
+    <form id="payment" onSubmit={() => {
       //submit to somewhere here
       var paymentData = new FormData(document.getElementById('payment'));
       var values = paymentData.getAll('pay');
@@ -76,7 +58,25 @@ const PaymentForm = () => {
         outObj[`guest_${j}`] = tempObj;
       }
       console.log(outObj);
-    }}>Submit</button>
+    }}>
+      <p className="ml-5 mt-5">Card Number:</p>
+      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.card_number} required={true}></input>
+      <p className="ml-5 mt-2">CVV:</p>
+      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.cvv} required={true}></input>
+      <p className="ml-5 mt-2">Expiration:</p>
+      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.expiration} required={true}></input>
+      <p className="ml-5 mt-2">Name on the Card:</p>
+      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.card_name} required={true}></input>
+      <p className="ml-5 mt-2">Billing Address:</p>
+      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.street} required={true}></input>
+      <p className="ml-5 mt-2">City:</p>
+      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.city} required={true}></input>
+      <p className="ml-5 mt-2">State:</p>
+      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.state} required={true}></input>
+      <p className="ml-5 mt-2">Zip:</p>
+      <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.zip} required={true}></input>
+      <button className="w-80 mx-5 my-8 p-2 rounded bg-primary">Submit</button>
+    </form>
   </div>)
 }
 
