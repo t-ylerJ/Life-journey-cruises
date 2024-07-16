@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import { Link } from '@remix-run/react';
 
 const Header = ({ isLoggedIn }) => {
@@ -30,7 +31,7 @@ const Header = ({ isLoggedIn }) => {
         {currentPage > 0 && (
           <button
             onClick={handleBack}
-            className="mr-2 hover:bg-gray-200 px-4 py-2 rounded"
+            className="btn btn-outline mr-2"
           >
             {pages[currentPage - 1].name}
           </button>
@@ -39,7 +40,7 @@ const Header = ({ isLoggedIn }) => {
         {currentPage < pages.length - 1 && (
           <button
             onClick={handleForward}
-            className="ml-2 hover:bg-gray-200 px-4 py-2 rounded"
+            className="btn btn-outline ml-2"
           >
             {pages[currentPage + 1].name}
           </button>
@@ -47,17 +48,17 @@ const Header = ({ isLoggedIn }) => {
       </div>
       <div className="flex-grow flex justify-center">
         <nav>
-          <Link to="/" className="mx-2 hover:text-gray-700">Home</Link>
-          <Link to="/about" className="mx-2 hover:text-gray-700">About</Link>
+          <Link to="/" className="btn btn-link mx-2">Home</Link>
+          <Link to="/about" className="btn btn-link mx-2">About</Link>
         </nav>
       </div>
       <div>
         {isLoggedIn ? (
-          <button onClick={() => alert('Logging out...')} className="hover:bg-gray-200 px-4 py-2 rounded">
+          <button onClick={() => alert('Logging out...')} className="btn btn-outline">
             Logout
           </button>
         ) : (
-          <Link to="/login" className="mx-2 hover:bg-gray-200 px-4 py-2 rounded">
+          <Link to="/login" className="btn btn-outline mx-2">
             Login/Signup
           </Link>
         )}
