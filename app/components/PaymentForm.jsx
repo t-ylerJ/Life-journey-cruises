@@ -23,23 +23,7 @@ const PaymentForm = () => {
   }
   var index = 0;
   return (<div className="block mr-75px w-96 p-2 float-right border-2 border-gray-100 rounded">
-    <form id="guest">
-      {
-        guests.map((item) => {
-          index++;
-          return (<div key={item.first_name}>
-              <p className="ml-5 mt-5">Guest {index} First Name:</p>
-              <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.first_name} required={true}></input>
-              <p className="ml-5 mt-5">Guest {index} Last Name:</p>
-              <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.last_name} required={true}></input>
-              <p className="ml-5 mt-5">Guest {index} Passport Number:</p>
-              <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.passport} required={true}></input>
-            </div>)
-        })
-      }
-    </form>
     <form id="payment" onSubmit={() => {
-      //submit to somewhere here
       var paymentData = new FormData(document.getElementById('payment'));
       var values = paymentData.getAll('pay');
       var keys = ['card_number', 'cvv', 'expiration', 'card_name', 'street', 'city', 'state', 'zip'];
@@ -47,9 +31,8 @@ const PaymentForm = () => {
       for (var i = 0; i < values.length; i++) {
         outObj[keys[i]] = values[i];
       }
-      var guestData = new FormData(document.getElementById('guest'));
       for (var j = 0; j < guests.length; j++) {
-        var guestValues = guestData.getAll(j);
+        var guestValues = paymentData.getAll(j);
         var tempObj = {
           'first_name': guestValues[0],
           'last_name': guestValues[1],
@@ -59,6 +42,19 @@ const PaymentForm = () => {
       }
       console.log(outObj);
     }}>
+    {
+      guests.map((item) => {
+        index++;
+        return (<div key={item.first_name}>
+            <p className="ml-5 mt-5">Guest {index} First Name:</p>
+            <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.first_name} required={true}></input>
+            <p className="ml-5 mt-5">Guest {index} Last Name:</p>
+            <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.last_name} required={true}></input>
+            <p className="ml-5 mt-5">Guest {index} Passport Number:</p>
+            <input className="border-2 w-80 mx-5 rounded" name={index - 1} defaultValue={item.passport} required={true}></input>
+          </div>)
+      })
+    }
       <p className="ml-5 mt-5">Card Number:</p>
       <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.card_number} required={true}></input>
       <p className="ml-5 mt-2">CVV:</p>
