@@ -23,20 +23,20 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
             type="email"
             name="email"
             placeholder="Email"
-            className="input input-bordered"
+            className="form-input"
           />
           <input
             type="password"
             name="password"
             placeholder="Password"
-            className="input input-bordered"
+            className="form-input"
           />
           {step === 'signup' ? (
             <input
               type="text"
               name="phone"
               placeholder="Phone"
-              className="input input-bordered w-full"
+              className="form-input"
             />
           ) : null}
           <button name="action" value={step} className="btn btn-primary">
@@ -49,7 +49,7 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
             {/* <input
               ref={verifyRef}
               name="token"
-              className="input input-bordered w-full"
+              className="form-input"
             /> */}
             <OTP />
             <input type="hidden" name="phone" value={actionData.phone ?? ''} />
@@ -64,11 +64,11 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
           </Form>
         </>
       ) : null}
-      <Form method="post">
+      {/* <Form method="post">
         <button name="action" value="logout" className="btn btn-primary w-full">
           SIGN OUT
         </button>
-      </Form>
+      </Form> */}
     </>
   )
 }

@@ -12,14 +12,7 @@ export const loader = async ({ request }) => {
     data: { user },
   } = await supabase.auth.getUser()
   if (user) throw redirect(redirectURL)
-  return json(
-    { redirectURL },
-    {
-      headers: {
-        'Set-Cookie': await redirectCookie.serialize('/'),
-      },
-    }
-  )
+  return json({ redirectURL })
 }
 
 export const clientAction = async ({ request }) => {
