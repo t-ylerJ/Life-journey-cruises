@@ -2,19 +2,9 @@ import ExcursionTiles from '../components/ExcursionTiles'
 import sql from '~/utils/sql'
 import {json} from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
-import {supabaseServer} from '~/utils/supabase'
+//import {supabaseServer} from '~/utils/supabase'
 import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
-
-
-
-export const loader = async ({ params }) => {
-   const data = await sql`select e.id, p.name as portname, e.name, e.time, e.price, e.photo
-                          from excursions as e
-                          join ports as p on e.port_id = p.id
-                          where e.voyage_id = 1`
-   return json(data)
-}
 /*
 export const loader = async ({ request, params}) => {
 
@@ -27,6 +17,17 @@ export const loader = async ({ request, params}) => {
   return json(data)
 }
 */
+
+export const loader = async ({ params }) => {
+   const data = await sql`select e.id, p.name as portname, e.name, e.time, e.price, e.photo, vp.day
+                          from excursions as e
+                          join ports as p on e.port_id = p.id
+                          join voyage_ports as vp on e.port_id = vp.port_id
+                          where e.voyage_id = 1
+                          order by vp.day, e.time`
+   return json(data)
+}
+
 const Plan = () => {
   const [excursions, setExcursions] = useState([]);
   const [selectedExcursions, setSelectedExcursions] = useState([]);
@@ -47,7 +48,7 @@ const Plan = () => {
   const data  = useLoaderData()
   useEffect(() => {
     setExcursions([...data]);
-  }, [data]);
+  }, []);
 
   return <>
     <Link to={`../book?excursions=${selectedExcursions}`}>

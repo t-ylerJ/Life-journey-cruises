@@ -14,10 +14,11 @@ const ExcursionTiles = ({excursions, checkChanged}) => {
 
   return (
     <div>
-      <div className="flex">
+      <div className="flex flex-wrap">
         {excursions.map((excursion) => {
           return(
             <div key={excursion.id} className="max-w-xs rounded-lg shadow-lg overflow-hidden bg-gray-200 text-center p-3 m-3" >
+              <h2>Day: {excursion.day}</h2>
               <h2>Port: {excursion.portname}</h2>
               <h2>{excursion.name}</h2>
               <img className="w-100% h-100% rounded" src={excursion.image} alt={excursion.name} />
