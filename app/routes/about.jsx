@@ -7,7 +7,7 @@ const About = () => {
     <div className="min-h-screen bg-gray-100 flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl w-full space-y-8">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900">About Life Journey Cruises</h1>
+          <h1 className="text-4xl font-extrabold text-gray-900">Life Is a Journey, Not a Destination</h1>
         </div>
         <div className="bg-white shadow-md rounded-lg p-8">
           <h2 className="text-2xl font-semibold text-gray-800">Our Founder: Brett Spenderson Senior</h2>
