@@ -12,11 +12,15 @@ export const meta = () => {
   ]
 }
 
-export const loader = async () => {
+export const loader = async ({ request }) => {
+  const pathName = new URL(request.url).pathname
   return json(null, {
-    headers: {
-      'Set-Cookie': await redirectCookie.serialize('/'),
-    },
+    headers:
+      pathName === '/'
+        ? {
+            'Set-Cookie': await redirectCookie.serialize('/'),
+          }
+        : {},
   })
 }
 
