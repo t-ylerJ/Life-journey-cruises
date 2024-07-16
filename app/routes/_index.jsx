@@ -28,8 +28,8 @@ export default function Index() {
   return (
     <>
       <BigPicture />
-      <Testimonials />
       <VoyageTiles />
+      <Testimonials />
     </>
   )
 }
