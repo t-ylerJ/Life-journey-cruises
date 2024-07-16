@@ -33,7 +33,7 @@ const OTP = () => {
               onChange={(e) => handleChange(e, i)}
               inputMode="numeric"
               pattern="[0-9]"
-              className="input input-bordered"
+              className="form-input"
             />
           ))}
         <input
