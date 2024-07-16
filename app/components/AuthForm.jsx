@@ -1,5 +1,6 @@
 import { Form } from '@remix-run/react'
 import { useEffect, useRef } from 'react'
+import OTP from './OTP'
 
 const AuthForm = ({ step, redirectURL, actionData }) => {
   const emailRef = useRef()
@@ -7,9 +8,9 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
 
   useEffect(() => {
     if (actionData?.verify) {
-      verifyRef.current.focus()
+      verifyRef.current?.focus()
     } else {
-      emailRef.current.focus()
+      emailRef.current?.focus()
     }
   }, [actionData])
 
@@ -45,11 +46,12 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
       ) : actionData.verify ? (
         <>
           <Form key="verify" method="post" className="flex flex-col gap-4">
-            <input
+            {/* <input
               ref={verifyRef}
               name="token"
               className="input input-bordered w-full"
-            />
+            /> */}
+            <OTP />
             <input type="hidden" name="phone" value={actionData.phone ?? ''} />
             <input type="hidden" name="redirectURL" value={redirectURL} />
             <button
