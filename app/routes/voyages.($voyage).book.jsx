@@ -4,7 +4,7 @@ import Itinerary from '../components/Itinerary'
 import {json} from '@remix-run/node';
 import { useLoaderData} from '@remix-run/react';
 import { supabaseServer} from '~/utils/supabase';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export const loader = async ({ params, request }) => {
   const id = params.voyage;
@@ -46,13 +46,21 @@ const Book = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [numGuests, setNumGuests] = useState(null);
   const [selectedRooms, setSelectedRooms] = useState(null);
+  const [excursions, setExcursions] = useState([]);
+
+  useEffect(() => {
+    const storedExcursions = JSON.parse(localStorage.getItem('excursions'));
+    if (storedExcursions) {
+      setExcursions(storedExcursions);
+    }
+  }, []);
 
   const selectableDates = dates.map(date => new Date(date.start_time));
-  const excursions = [
+  /*const excursions = [
     {id: 111, name: 'Hollywood Tour', price: 106},
     {id: 112, name: 'Beach Day', price: 193},
     {id: 113, name: 'Disneyland Trip', price: 187}
-  ];
+  ];*/
   const handleGuestsSubmit = ({guests, selectedRooms}) => {
     setNumGuests(guests);
     setSelectedRooms(selectedRooms);
