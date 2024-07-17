@@ -9,8 +9,8 @@ import redirectCookie from '~/utils/redirectCookie'
 
 export const meta = () => {
   return [
-    { title: 'New Remix App' },
-    { name: 'description', content: 'Welcome to Remix!' },
+    { title: 'Life Journey Cruises' },
+    { name: 'description', content: 'Life Journey Cruises' },
   ]
 }
 export const loader = async ({ request }) => {
@@ -18,14 +18,17 @@ export const loader = async ({ request }) => {
   try {
     const data =
       await sql`SELECT * from voyages JOIN voyage_photos ON voyages.id = voyage_photos.voyage_id`
-    return json(data, {
-      headers:
-        pathName === '/'
-          ? {
-              'Set-Cookie': await redirectCookie.serialize('/'),
-            }
-          : {},
-    })
+    return json(
+      { data, OPENAI_KEY: process.env.OPENAI_KEY },
+      {
+        headers:
+          pathName === '/'
+            ? {
+                'Set-Cookie': await redirectCookie.serialize('/'),
+              }
+            : {},
+      }
+    )
   } catch {
     console.log('error in loading fleet data')
     return []
@@ -33,13 +36,13 @@ export const loader = async ({ request }) => {
 }
 
 export default function Index() {
-  const data = useLoaderData()
+  const { data, OPENAI_KEY } = useLoaderData()
   return (
     <>
       <BigPicture />
       <VoyageTiles voyages={data} />
       <Testimonials />
-      <AIssistant />
+      {OPENAI_KEY && <AIssistant />}
     </>
   )
 }
