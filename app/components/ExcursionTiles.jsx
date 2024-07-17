@@ -27,7 +27,7 @@ const ExcursionTiles = ({dailyExcursions, checkChanged}) => {
                   return (
                     <div key={excursion.id} className="flex flex-col bg-white border-r-2">
                       <h2>{excursion.name}</h2>
-                      <img className="w-100% h-100% rounded" src="https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/ec/75/8e.jpg" alt={excursion.name} />
+                      <img className="w-48 h-32 rounded" src={excursion.image} alt={excursion.name} />
                       <p>{adjustTime(excursion.time)}</p>
                       <p>${excursion.price}</p>
                       <input type="checkbox" name={`excursion-${excursion.id}`} value={excursion.id} onChange={onCheckExcursionChange}/>
