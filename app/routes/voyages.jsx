@@ -1,4 +1,5 @@
 import { json, Link, Outlet } from '@remix-run/react'
+import SubHeader from '~/components/SubHeader.jsx'
 import redirectCookie from '../utils/redirectCookie'
 
 export const loader = async ({ request }) => {
@@ -14,12 +15,8 @@ export const loader = async ({ request }) => {
 const voyages = () => {
   return (
     <>
-      <div>
-        Subheader
-        <Link to={`alaska/plan`}>
-          <button>Plan</button>
-        </Link>
-      </div>
+
+    <SubHeader/>
       <Outlet />
     </>
   )

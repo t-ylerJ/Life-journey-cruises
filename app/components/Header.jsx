@@ -7,10 +7,6 @@ const Header = ({ user }) => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  //useLocation to get path, lookup where the index is instead
-
-
-
 
   const handleHomeClick = () => {
     setCurrentPage(0);
@@ -18,9 +14,13 @@ const Header = ({ user }) => {
   };
 
   return (
-    <div className="bg-accent flex justify-between items-center p-4">
+    <div className="flex justify-between items-center p-4">
 
-      <div className="flex-grow flex justify-center">
+      <div className="flex-grow flex items-center justify-between">
+        <img className="w-64"
+        src="/Logo.svg"
+        alt="Logo"
+        />
         <nav>
           <Link onClick={handleHomeClick}to="/" className="btn btn-link mx-2">Home</Link>
           <Link to="/about" className="btn btn-link mx-2">About</Link>
@@ -29,17 +29,13 @@ const Header = ({ user }) => {
           )}
         </nav>
       </div>
-
-
-
-
       <div className="relative">
         {user ? (
           <div className="relative">
             <img
-              src="../../public/avatar.svg"
+              src="/avatar.svg"
               alt="Avatar"
-              className="w-10 h-10 rounded-full cursor-pointer"
+              className="p-2 w-12 h-12 cursor-pointer"
               onMouseEnter={() => setDropdownOpen(true)}
 
             />

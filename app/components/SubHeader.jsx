@@ -1,61 +1,105 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import { Link, Form, useNavigate, useLocation } from '@remix-run/react';
+import { Link, Form, useNavigate, useLocation, useMatches } from '@remix-run/react';
 
 const SubHeader = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
+  const matches = useMatches();
+  const [nextPath, setNextPath] = useState();
+  const [next, setNext] = useState();
+  const [prevPath, setPrevPath] = useState();
+  const [prev, setPrev] = useState();
+  const [voyageStep, setVoyageStep] = useState('step');
+  const [planStep, setPlanStep] = useState('step');
+  const [bookStep, setBookStep] = useState('step');
+  const [checkoutStep, setCheckoutStep] = useState('step');
+  const [checkoutPrevPath, setCheckoutPrevPath] = useState();
+  const [checkoutPrevName, setCheckoutPrevName] = useState();
 
-  const pages = [
-    { name: 'Voyage', path: '/voyages/alaska' },
-    { name: 'Plan', path: '/voyages/alaska/plan' },
-    { name: 'Book', path: '/voyages/alaska/book' },
-    { name: 'Checkout', path: '/voyages/checkout' }
-  ];
+//if path ends in number,
+    //next button should be plan
+  //if path ends in plan,
+    //back button should remove /plan
+    //next button should remove /plan and add /book
+  //if path ends in book
+    //back button should remove /book and add /plan
+    //next button should remove everything and add /book
+  useEffect(() => {
+    if(!isNaN(location.pathname.split('/')[location.pathname.split('/').length-1])) {
+      setVoyageStep('step step-primary');
+      setPlanStep('step');
+      setBookStep('step');
+      setCheckoutStep('step');
+      setNextPath(location.pathname + '/plan');
+      setNext('Plan');
+      setPrev();
+      } else if(location.pathname.includes('plan')) {
+      setVoyageStep('step step-primary');
+      setPlanStep('step step-primary');
+      setBookStep('step');
+      setCheckoutStep('step');
+       setNextPath(location.pathname.split('/').slice(0, -1).concat('book').join('/'));
+       setPrevPath(location.pathname.split('/').slice(0, -1).join('/'));
+       setPrev('Voyage')
+       setNext('Book');
+     } else if(location.pathname.includes('book')) {
+      setVoyageStep('step step-primary');
+      setPlanStep('step step-primary');
+      setBookStep('step step-primary');
+      setCheckoutStep('step');
+      setNextPath(location.pathname.split('/').slice(0, -2).concat('checkout').join('/'));
+      setPrevPath(location.pathname.split('/').slice(0, -1).concat('plan').join('/'));
+      setCheckoutPrevPath(location.pathname);
+      setCheckoutPrevName('Book')
 
-  const getCurrentPageIndex = () => {
-    return pages.findIndex(page => location.pathname.startsWith(page.path));
-  };
+      setNext('Checkout');
+      setPrev('Plan');
+     } else if(location.pathname.includes('checkout')) {
+      setVoyageStep('step step-primary');
+      setPlanStep('step step-primary');
+      setBookStep('step step-primary');
+      setCheckoutStep('step step-primary');
+      setNext();
+      setPrev(checkoutPrevName)
+      setPrevPath(checkoutPrevPath);
+     }
+  }, [location]);
 
-  const currentPageIndex = getCurrentPageIndex();
-
-
-  const handleBack = () => {
-    if (currentPageIndex > 0) {
-      navigate(pages[currentPageIndex - 1].path);
-    }
-  };
-
-  const handleForward = () => {
-    if (currentPageIndex < pages.length - 1) {
-      navigate(pages[currentPageIndex + 1].path);
-    }
-  };
 
   return (
     <div>
       <div className="flex justify-between items-center p-4">
         <div>
-        {currentPageIndex > 0 && (
+
+        {prev&& (
           <Link
-            to={pages[currentPageIndex - 1].path}
+            to={prevPath}
             className="btn btn-outline mr-2"
           >
-            {pages[currentPageIndex - 1].name}
+            Back to: {prev}
           </Link>
         )}
-        <span className="mx-2">{pages[currentPageIndex]?.name || 'Page'}</span>
-        {
+
+        { next && (
           <Link
-            to={pages[currentPageIndex + 1].path}
+            to={nextPath}
             className="btn btn-outline ml-2"
           >
-            {pages[currentPageIndex + 1].name}
+            {next}
           </Link>
+        )
+
         }
+        <ul className="steps steps-vertical lg:steps-horizontal">
+  <li className={voyageStep}>Voyage</li>
+  <li className={planStep}>Plan</li>
+  <li className={bookStep}>Book</li>
+  <li className={checkoutStep}>Checkout</li>
+</ul>
       </div>
 
       </div>

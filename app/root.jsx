@@ -38,7 +38,7 @@ export function Layout({ children }) {
       </head>
       <body>
         <Header user={user} />
-        <SubHeader/>
+
         {children}
         <ScrollRestoration />
         <Scripts />
