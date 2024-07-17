@@ -35,7 +35,6 @@ export const loader = async ({ request }) => {
 
 export default function Index() {
   const data = useLoaderData();
-  console.log(data);
   return (
     <>
       <BigPicture />
