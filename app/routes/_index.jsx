@@ -26,7 +26,7 @@ export const loader = async ({ request }) => {
     })
   } catch {
     console.log('error in loading fleet data');
-    return null;
+    return [];
   }
 
 }
