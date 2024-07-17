@@ -1,5 +1,3 @@
-import '../tailwind.css';
-
 const PurchaseSummary = () => {
   var room = {
     name: 'Room Name',
