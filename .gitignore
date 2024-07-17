@@ -5,3 +5,4 @@ node_modules
 
 demo.jsx
 *.mp4
+.DS_Store

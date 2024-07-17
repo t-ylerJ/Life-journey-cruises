@@ -21,7 +21,7 @@ export const supabaseServer = (request) =>
         },
         setAll: (cookiesToSet) => {
           cookiesToSet.forEach(({ name, value, options }) =>
-            request.headers.append(
+            new Headers().append(
               'Set-Cookie',
               serializeCookieHeader(name, value, options)
             )

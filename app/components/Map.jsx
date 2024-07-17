@@ -44,7 +44,7 @@ console.log('zoom: ', zoom);
   }, [mapData]); // Trigger effect when mapData changes
 
   return (
-    <div className="map-container" ref={mapContainerRef} style={{ height: '400px' }}>
+    <div className="map-container" ref={mapContainerRef} style={{ height: '400px', width: '400px' }}>
       {/* Map will be rendered here */}
     </div>
   );
