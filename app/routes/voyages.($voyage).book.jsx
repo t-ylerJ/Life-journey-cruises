@@ -56,6 +56,26 @@ const Book = () => {
   const handleGuestsSubmit = ({guests, selectedRooms}) => {
     setNumGuests(guests);
     setSelectedRooms(selectedRooms);
+
+    const roomDetails = selectedRooms.map(room => {
+      const roomInfo = rooms.find(r => r.name === room);
+      return {
+        id: roomInfo.id,
+        name: roomInfo.name,
+        price: roomInfo.price,
+      };
+    });
+
+    const bookingDetails = {
+      'guestNumber': guests,
+      'selectedRooms': roomDetails,
+      'voyageId': 2,
+      'voyageName': voyageName,
+      'voyagePrice': price,
+      'exursions': excursions,
+    };
+
+    localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails));
   };
 
   return (
