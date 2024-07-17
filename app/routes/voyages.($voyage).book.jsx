@@ -7,12 +7,12 @@ import { supabaseServer} from '~/utils/supabase';
 import React, { useState } from 'react';
 
 export const loader = async ({ params, request }) => {
-  const {id} = params;
+  const id = params.voyage;
   const supabase = supabaseServer(request);
 
   const {data, error} = await supabase
     .from('voyage_dates')
-    .select('start_time').eq('voyage_id', 2);
+    .select('start_time').eq('voyage_id', id);
 
   if (error) {
     throw new Error(error.message);
@@ -21,7 +21,7 @@ export const loader = async ({ params, request }) => {
   const voyageResponse = await supabase
     .from('voyages')
     .select('name, price')
-    .eq('id', 2)
+    .eq('id', id)
     .single();
 
   if (voyageResponse.error) {
@@ -29,15 +29,23 @@ export const loader = async ({ params, request }) => {
   }
 
   const { name: voyageName, price } = voyageResponse.data;
-  console.log(voyageName, price);
 
-  return json({ dates: data, voyageName, price });
+  const {data: rooms, error: roomError}= await supabase
+  .from('guest_rooms')
+  .select('*');
+
+  if (roomError) {
+    throw new Error(roomError.message);
+  }
+
+  return json({ dates: data, voyageName, price, rooms });
 }
 
 const Book = () => {
-  const {dates, voyageName, price} = useLoaderData();
+  const {dates, voyageName, price, rooms} = useLoaderData();
   const [selectedDate, setSelectedDate] = useState(null);
   const [numGuests, setNumGuests] = useState(null);
+  const [selectedRooms, setSelectedRooms] = useState(null);
 
   const selectableDates = dates.map(date => new Date(date.start_time));
   const excursions = [
@@ -45,15 +53,16 @@ const Book = () => {
     {id: 112, name: 'Beach Day', price: 193},
     {id: 113, name: 'Disneyland Trip', price: 187}
   ];
-  const handleGuestsSubmit = (guests) => {
+  const handleGuestsSubmit = ({guests, selectedRooms}) => {
     setNumGuests(guests);
+    setSelectedRooms(selectedRooms);
   };
 
   return (
     <>
      <Calendar selectableDates={selectableDates} setSelectedDate={setSelectedDate}/>
-     {selectedDate &&<BookingSelector onSubmit={handleGuestsSubmit}/>}
-      {selectedDate && !numGuests &&
+     {selectedDate &&<BookingSelector rooms={rooms} onSubmit={handleGuestsSubmit}/>}
+     {selectedDate && !numGuests &&
       <Itinerary
       voyageName={voyageName}
       price={price}
@@ -66,6 +75,8 @@ const Book = () => {
           selectedDate={selectedDate.toDateString()}
           excursions={excursions}
           numGuests={numGuests}
+          selectedRooms={selectedRooms}
+          roomDetails={rooms}
         />
       )}
     </>
