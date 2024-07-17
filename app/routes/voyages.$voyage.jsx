@@ -7,6 +7,7 @@ import { useLoaderData } from '@remix-run/react'
 import {useState, useEffect} from 'react'
 
 export const loader = async ({ params }) => {
+  try {
   const voyageId = params.voyage;
   const voyageData = await sql`select
                             vp.day,
@@ -23,15 +24,40 @@ export const loader = async ({ params }) => {
                           group by vp.day, p.name, p.description
                           order by vp.day`
 
-  return json({voyageData})
+  const mapData = await sql`
+      SELECT
+        m.id,
+        m.center_lat,
+        m.center_long,
+        m.zoom,
+        jsonb_agg(DISTINCT jsonb_build_object('id', p.id, 'lat', p.lat, 'long', p.long, 'name', p.name)) as port
+      FROM
+        maps m
+      JOIN
+        voyage_ports vp ON m.voyage_id = vp.voyage_id
+      JOIN
+        ports p ON vp.port_id = p.id
+      WHERE
+        m.voyage_id = ${voyageId} -- Filter by the dynamic voyageId
+      GROUP BY
+        m.id;
+    `;
+
+  return json({ voyageData, mapData, mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN});
+} catch (error) {
+  console.error("Error in loader:", error);
+  throw json({error:error.message}, {status:500});
+}
 };
+
 
 const Voyages = () => {
   const [eventsAndExcursions, setEventsAndExcursions] = useState([]);
   const [events, setEvents] = useState([]);
   const [excursions, setExcursions] = useState([]);
   const [isPortClicked, setIsPortClicked] = useState(false);
-  const {voyageData} = useLoaderData();
+  const { voyageData, mapData, error, mapboxAccessToken} = useLoaderData();
+
   useEffect(() => {
 
     if(voyageData[0].portname == voyageData[voyageData.length - 1].portname){
@@ -57,7 +83,7 @@ const Voyages = () => {
     <div className="flex">
       < Ports schedule={eventsAndExcursions} clickHandler={handleClick}/>
       {!isPortClicked?
-        < Map />
+          <Map mapData={mapData[0]} mapboxAccessToken={mapboxAccessToken} /> /* Pass data as prop */
           :
         <PortDetails events={events} excursions={excursions} isPortClicked = {isPortClicked} closeHandler={handleClose}/>
       }
@@ -65,4 +91,4 @@ const Voyages = () => {
   )
 }
 
-export default Voyages
+export default Voyages;
