@@ -18,17 +18,14 @@ export const loader = async ({ request }) => {
   try {
     const data =
       await sql`SELECT * from voyages JOIN voyage_photos ON voyages.id = voyage_photos.voyage_id`
-    return json(
-      { data, OPENAI_KEY: process.env.OPENAI_KEY },
-      {
-        headers:
-          pathName === '/'
-            ? {
-                'Set-Cookie': await redirectCookie.serialize('/'),
-              }
-            : {},
-      }
-    )
+    return json(data, {
+      headers:
+        pathName === '/'
+          ? {
+              'Set-Cookie': await redirectCookie.serialize('/'),
+            }
+          : {},
+    })
   } catch {
     console.log('error in loading fleet data')
     return []
@@ -36,7 +33,7 @@ export const loader = async ({ request }) => {
 }
 
 export default function Index() {
-  const { data, OPENAI_KEY } = useLoaderData()
+  const data = useLoaderData()
   return (
     <>
       <BigPicture />

@@ -12,6 +12,7 @@ import './tailwind.css'
 import Header from './components/Header.jsx'
 import SubHeader from './components/SubHeader.jsx'
 import Error from '~/components/Error'
+import AIssistant from '~/components/AIssistant.jsx'
 import { supabaseServer, supabaseClient } from '~/utils/supabase'
 
 export const loader = async ({ request }) => {
@@ -40,11 +41,13 @@ export function Layout({ children }) {
         <Meta />
         <Links />
       </head>
-      <body className="flex flex-col">
+      <body className="relative flex flex-col">
         <Header user={user} />
         <main className="flex-grow">{children}</main>
         <ScrollRestoration />
         <Scripts />
+
+        <AIssistant />
       </body>
     </html>
   )
