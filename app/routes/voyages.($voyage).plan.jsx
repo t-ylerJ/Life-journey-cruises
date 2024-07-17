@@ -65,6 +65,7 @@ const Plan = () => {
   };
   const {data}  = useLoaderData()
 
+
   useEffect(() => {
     setExcursions([...data.slice(0, data.length - 1)]);
   }, []);
