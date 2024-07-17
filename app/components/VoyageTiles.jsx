@@ -1,51 +1,66 @@
 import { Link } from '@remix-run/react'
+import React, {useState} from 'react';
+import { MdOutlineMusicNote } from "react-icons/md";
+import { MdMusicOff } from "react-icons/md";
 
- const Music = () => {
+
+ const Music = ({index}) => {
+  const [currentlyPlaying, setCurrentlyPlaying] = useState(false);
+  const audioRef = React.createRef();
+  let url = ["https://p.scdn.co/mp3-preview/1bd8b56f5623c6eee74601848b0abdca40688743?cid=67842053a10a4baa8123c85127d9face",
+    "https://p.scdn.co/mp3-preview/07d87ee0985a6ff28152775f2f364c3d32d42059?cid=67842053a10a4baa8123c85127d9face",
+    "https://p.scdn.co/mp3-preview/552fd288fa63c6335dcfe0e9101c00c6560f275c?cid=67842053a10a4baa8123c85127d9face",
+    "https://p.scdn.co/mp3-preview/7591ef3ecaeef3609e06379918228198c83b3c48?cid=67842053a10a4baa8123c85127d9face",
+    "https://p.scdn.co/mp3-preview/d2d7e717c72a4fa08b3a8b22722c7369e8aa587d?cid=67842053a10a4baa8123c85127d9face"
+  ];
+
+  const handleAudioToggle = () => {
+    if(audioRef.current.paused) {
+      audioRef.current.play();
+      setCurrentlyPlaying(true);
+    } else {
+      audioRef.current.pause();
+      setCurrentlyPlaying(false);
+    }
+ };
+
 
   return (
-  <label className="swap">
-  {/* this hidden checkbox controls the state */}
-  <input type="checkbox" />
-
-  {/* volume on icon */}
-  <svg
-    className="swap-on fill-current"
-    xmlns="http://www.w3.org/2000/svg"
-    width="48"
-    height="48"
-    viewBox="0 0 24 24">
-    <path
-      d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
-  </svg>
-
-  {/* volume off icon */}
-  <svg
-    className="swap-off fill-current"
-    xmlns="http://www.w3.org/2000/svg"
-    width="48"
-    height="48"
-    viewBox="0 0 24 24">
-    <path
-      d="M3,9H7L12,4V20L7,15H3V9M16.59,12L14,9.41L15.41,8L18,10.59L20.59,8L22,9.41L19.41,12L22,14.59L20.59,16L18,13.41L15.41,16L14,14.59L16.59,12Z" />
-  </svg>
-</label>
+  <>
+  <div className="audio-icon" onClick={handleAudioToggle}>
+        {currentlyPlaying ? <MdOutlineMusicNote /> : <MdMusicOff />}
+    </div>
+    <audio ref={audioRef} src={url[index]}></audio>
+  </>
 )};
 
 const VoyageTiles = ({voyages}) => {
 
-  console.log(voyages);
+  const [hoverStatus, setHoverStatus] = useState([false, false, false, false, false]);
+
+  const handleMouseEnter = (index) => {
+    var arr = [false, false, false, false, false];
+    arr[index] = true;
+    setHoverStatus(arr);
+  };
+
+  const handleMouseLeave = () => {
+    setHoverStatus[false, false, false, false, false];
+  };
+
+
   return (
     <div className="carousel carousel-center rounded-box">
       {voyages.map((voyage, index)=> (
-        <div className=" carousel-item h-96 mx-8 my-8 relative flex " key={index} style={{backgroundImage: `url(${voyage.url})`}} >
+        <div className="carousel-item h-96 mx-4 my-8 relative flex" key={index} style={{backgroundImage: `url(${voyage.url})`}} onMouseEnter={()=>handleMouseEnter(index)} onMouseLeave={handleMouseLeave} >
         <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} />
-          <div className="absolute top-5 left-5 text-2xl text-white">{`$${voyage.price}`}</div>
-          <div className="absolute top-40 left-20 text-5xl text-white">{`${voyage.name} Cruise`}</div>
-          <Link to={`/voyages/${voyage.name}`}>
+          <div className="absolute bottom-5 left-5 text-2xl text-white">{`$${voyage.price}`}</div>
+          <div className="absolute top-20 left-20 text-5xl text-white">{`${voyage.name} Cruise`}</div>
+          <Link to={`/voyages/${voyage.id}`}>
             <button className="absolute bottom-5 right-5 bg-primary text-black py-2 px-4 rounded-full">EXPLORE</button>
           </Link>
-          <div className="absolute top-5 right-5 text-white"><Music /></div>
-    </div>
+          {hoverStatus[index] ? <div className="absolute top-5 right-5 text-white"><Music index={index}/></div>: null}
+        </div>
       ))}
     </div>
   )
