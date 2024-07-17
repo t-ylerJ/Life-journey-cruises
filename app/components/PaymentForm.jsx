@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 const PaymentForm = () => {
   var guests = [
     {
@@ -71,7 +73,9 @@ const PaymentForm = () => {
       <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.state} required={true}></input>
       <p className="ml-5 mt-2">Zip:</p>
       <input className="border-2 w-80 mx-5 rounded" name="pay" defaultValue={user.zip} required={true}></input>
-      <button className="w-80 mx-5 my-8 p-2 rounded bg-primary">Submit</button>
+      <Link to="/voyages/summary">
+        <button className="w-80 mx-5 my-8 p-2 rounded bg-primary">Submit</button>
+      </Link>
     </form>
   </div>)
 }
