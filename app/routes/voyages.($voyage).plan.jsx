@@ -38,7 +38,7 @@ export const loader = async ({ params }) => {
                           group by vp.day, p.name, p.description
                           order by vp.day`
 
-   return json({data, voyageId})
+   return json({data})
 }
 
 const Plan = () => {
@@ -52,7 +52,6 @@ const Plan = () => {
         excursions[i].excursions.forEach((excursion) => {
           if(parseInt(excursion.id) === parseInt(excursionId)){
             const {id, name, price} = excursion;
-            console.log(selectedExcursions);
             setSelectedExcursions([...selectedExcursions, {"id": id, "name": name, "price": price}]);
           }
        })
@@ -64,18 +63,17 @@ const Plan = () => {
       setSelectedExcursions(updatedExcursions);
     }
   };
-  const {data, voyageId}  = useLoaderData()
+  const {data}  = useLoaderData()
+
   useEffect(() => {
     setExcursions([...data.slice(0, data.length - 1)]);
   }, []);
 
-  const clickHandler = () => {
+  useEffect(() => {
     localStorage.setItem('excursions', JSON.stringify(selectedExcursions));
-  }
+  }, [selectedExcursions]);
+
   return <>
-    <Link to={`../${voyageId}/book`}>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"  onClick={clickHandler}>Book</button>
-    </Link>
     <ExcursionTiles dailyExcursions={excursions} checkChanged={handleCheckExcursionChange}/>
   </>
 }
