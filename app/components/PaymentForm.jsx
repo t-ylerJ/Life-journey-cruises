@@ -1,27 +1,27 @@
 import {Link} from 'react-router-dom'
+import React from 'react';
 
 const PaymentForm = () => {
   var guests = [
     {
-      first_name: 'mama',
-      last_name: 'bear',
-      passport: 72891341234
-    },
-    {
-      first_name: 'papa',
-      last_name: 'bear',
-      passport: 12343255234
+      first_name: 'Jason',
+      last_name: '',
+      passport: 0
     }
   ];
+  const [formObj, setFormObj] = React.useState({});
+  React.useEffect(() => {
+    localStorage.setItem('payInfo', JSON.stringify(formObj));
+  }, [formObj])
   var user = {
-    card_number: 12345678901234,
-    expiration: '07/26',
-    card_name: 'Blue Ocean',
-    cvv: 675,
-    street: '4756 Galvanize Road',
-    city: 'San Francisco',
-    state: 'CA',
-    zip: 94102
+    card_number: '',
+    expiration: '',
+    card_name: '',
+    cvv: '',
+    street: '',
+    city: '',
+    state: '',
+    zip: ''
   }
   var index = 0;
   return (<div className="block mr-75px w-96 p-2 float-right border-2 border-gray-100 rounded">
@@ -43,6 +43,7 @@ const PaymentForm = () => {
         outObj[`guest_${j}`] = tempObj;
       }
       console.log(outObj);
+      setFormObj[outObj];
     }}>
     {
       guests.map((item) => {
