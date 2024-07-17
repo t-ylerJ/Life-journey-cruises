@@ -1,35 +1,17 @@
 import { useState } from 'react';
-import { Link } from '@remix-run/react';
+import { Link, Form, useNavigate,} from '@remix-run/react';
 
-const Header = ({ isLoggedIn }) => {
+
+const Header = ({ user }) => {
   const [currentPage, setCurrentPage] = useState(0);
+  const navigate = useNavigate();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const pages = [
-    { name: 'Voyage', path: '/voyages/:voyage' },
-    { name: 'Plan', path: '/voyages/:voyage/plan' },
-    { name: 'Book', path: '/voyages/:voyage/book' },
-    { name: 'Checkout', path: '/voyages/checkout' }
-  ];
+  //useLocation to get path, lookup where the index is instead
 
-  const handleBack = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
 
-  const handleForward = () => {
-    if (currentPage < pages.length - 1) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
 
-  const getPath = (index) => {
-    const path = pages[index].path;
-    if (path.includes(':voyage')) {
-      return path.replace(':voyage', 'alaska'); // replace later
-    }
-    return path;
-  };
+
   const handleHomeClick = () => {
     setCurrentPage(0);
     navigate('/');
@@ -37,46 +19,55 @@ const Header = ({ isLoggedIn }) => {
 
   return (
     <div className="bg-accent flex justify-between items-center p-4">
-      <div className="flex items-center">
-        {currentPage > 0 && (
-          <Link
-            to={getPath(currentPage - 1)}
-            className="btn btn-outline mr-2"
-            onClick={handleBack}
-          >
-            {pages[currentPage - 1].name}
-          </Link>
-        )}
 
-
-      </div>
       <div className="flex-grow flex justify-center">
         <nav>
           <Link onClick={handleHomeClick}to="/" className="btn btn-link mx-2">Home</Link>
           <Link to="/about" className="btn btn-link mx-2">About</Link>
           {currentPage > 1 && (
-            <Link to={getPath(1)} className="btn btn-link mx-2">Plan</Link>
+            <Link to="/" className="btn btn-link mx-2">Plan</Link>
           )}
         </nav>
       </div>
-      {currentPage < pages.length - 1 && (
-          <Link
-            to={getPath(currentPage + 1)}
-            className="btn btn-outline ml-2"
-            onClick={handleForward}
-          >
-            {pages[currentPage + 1].name}
-          </Link>
-        )}
-      <div>
-        {isLoggedIn ? (
-          <button onClick={() => alert('Logging out...')} className="btn btn-outline">
-            Logout
-          </button>
+
+
+
+
+      <div className="relative">
+        {user ? (
+          <div className="relative">
+            <img
+              src="../../public/avatar.svg"
+              alt="Avatar"
+              className="w-10 h-10 rounded-full cursor-pointer"
+              onMouseEnter={() => setDropdownOpen(true)}
+
+            />
+            {dropdownOpen && (
+              <div
+                className="absolute right-0 mt-2 w-20 bg-white rounded-md shadow-lg py-2 z-50"
+                onMouseEnter={() => setDropdownOpen(true)}
+                onMouseLeave={() => setDropdownOpen(false)}
+              >
+                 <Form method='post'>
+                   <button>
+                    Logout
+                  </button>
+                  </Form>
+                <Link
+                  to="/account"
+
+                >
+                  Account
+                </Link>
+              </div>
+            )}
+          </div>
         ) : (
-          <Link to="/login" className="btn btn-outline mx-2">
-            Login/Signup
-          </Link>
+          <div className="flex space-x-4">
+            <Link to="/login" className="btn btn-outline mx-2">Login</Link>
+            <Link to="/signup" className="btn btn-outline mx-2">Signup</Link>
+          </div>
         )}
       </div>
     </div>
