@@ -84,4 +84,7 @@ module.exports = {
       },
     },
   ],
+  rules: {
+    'no-case-declarations': 'off',
+  },
 }

@@ -1,4 +1,15 @@
-import { Link, Outlet } from '@remix-run/react'
+import { json, Link, Outlet } from '@remix-run/react'
+import redirectCookie from '../utils/redirectCookie'
+
+export const loader = async ({ request }) => {
+  return json(null, {
+    headers: {
+      'Set-Cookie': await redirectCookie.serialize(
+        new URL(request.url).pathname
+      ),
+    },
+  })
+}
 
 const voyages = () => {
   return (
