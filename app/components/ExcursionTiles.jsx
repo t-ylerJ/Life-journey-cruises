@@ -1,4 +1,4 @@
-const ExcursionTiles = ({excursions, checkChanged}) => {
+const ExcursionTiles = ({dailyExcursions, checkChanged}) => {
   const onCheckExcursionChange = (event) => {
     checkChanged(event);
   }
@@ -15,16 +15,27 @@ const ExcursionTiles = ({excursions, checkChanged}) => {
   return (
     <div>
       <div className="flex flex-wrap">
-        {excursions.map((excursion) => {
+        {dailyExcursions && dailyExcursions.map((daily) => {
           return(
-            <div key={excursion.id} className="max-w-xs rounded-lg shadow-lg overflow-hidden bg-gray-200 text-center p-3 m-3" >
-              <h2>Day: {excursion.day}</h2>
-              <h2>Port: {excursion.portname}</h2>
-              <h2>{excursion.name}</h2>
-              <img className="w-100% h-100% rounded" src={excursion.image} alt={excursion.name} />
-              <p>{adjustTime(excursion.time)}</p>
-              <p>${excursion.price}</p>
-              <input type="checkbox" name={`excursion-${excursion.id}`} value={excursion.id} onChange={onCheckExcursionChange}/>
+            <div key={daily.day} className="rounded-lg shadow-lg overflow-hidden bg-gray-200 text-center p-3 m-3" >
+              <h2>Day: {daily.day}</h2>
+              <h2>Port: {daily.portname}</h2>
+              <p>{daily.portdescription}</p>
+              <div className="flex">
+              {
+                daily.excursions && daily.excursions.map((excursion) => {
+                  return (
+                    <div key={excursion.id} className="flex flex-col bg-white border-r-2">
+                      <h2>{excursion.name}</h2>
+                      <img className="w-100% h-100% rounded" src="https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/ec/75/8e.jpg" alt={excursion.name} />
+                      <p>{adjustTime(excursion.time)}</p>
+                      <p>${excursion.price}</p>
+                      <input type="checkbox" name={`excursion-${excursion.id}`} value={excursion.id} onChange={onCheckExcursionChange}/>
+                    </div>
+                  )
+                })
+              }
+              </div>
             </div>
           )
         })}
