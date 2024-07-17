@@ -30,7 +30,7 @@ export const loader = async ({ params }) => {
         m.center_lat,
         m.center_long,
         m.zoom,
-        jsonb_agg(DISTINCT jsonb_build_object('id', p.id, 'lat', p.lat, 'long', p.long, 'name', p.name)) as port
+        jsonb_agg(DISTINCT jsonb_build_object('id', p.id, 'lat', p.lat, 'long', p.long, 'name', p.name)) as ports
       FROM
         maps m
       JOIN
@@ -43,7 +43,7 @@ export const loader = async ({ params }) => {
         m.id;
     `;
 
-  return json({ voyageData, mapData, mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN});
+  return json({ voyageData, mapData, mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN || null});
 } catch (error) {
   console.error("Error in loader:", error);
   throw json({error:error.message}, {status:500});
@@ -81,12 +81,18 @@ const Voyages = () => {
 
   return (
     <div className="flex">
-      < Ports schedule={eventsAndExcursions} clickHandler={handleClick}/>
-      {!isPortClicked?
+      <Ports schedule={eventsAndExcursions} clickHandler={handleClick} />
+      {!isPortClicked ? (
+        <>
+          {mapboxAccessToken ? (
           <Map mapData={mapData[0]} mapboxAccessToken={mapboxAccessToken} /> /* Pass data as prop */
-          :
+          ) : (
+            <div className='map-error font-bold bg-red-600 p-2'>Mapbox access token is missing!</div>
+          )}
+          </>
+        ) : (
         <PortDetails events={events} excursions={excursions} isPortClicked = {isPortClicked} closeHandler={handleClose}/>
-      }
+      )}
     </div>
   )
 }
