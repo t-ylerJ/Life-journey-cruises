@@ -13,6 +13,7 @@ export const loader = async ({ params }) => {
                             vp.day,
                             p.name as portname,
                             p.description AS portdescription,
+                            p.photo,
                             array_agg(DISTINCT ev.name) as events,
                             array_agg(DISTINCT e.name) as excursions
                           from voyage_ports as vp
@@ -21,7 +22,7 @@ export const loader = async ({ params }) => {
                           left join excursions as e on vp.voyage_id = e.voyage_id and e.port_id = vp.port_id
                           left join events as ev on ve.event_id = ev.id
                           where vp.voyage_id = ${voyageId}
-                          group by vp.day, p.name, p.description
+                          group by vp.day, p.name, p.description, p.photo
                           order by vp.day`
 
   const mapData = await sql`
@@ -30,7 +31,7 @@ export const loader = async ({ params }) => {
         m.center_lat,
         m.center_long,
         m.zoom,
-        jsonb_agg(DISTINCT jsonb_build_object('id', p.id, 'lat', p.lat, 'long', p.long, 'name', p.name)) as port
+        jsonb_agg(DISTINCT jsonb_build_object('id', p.id, 'lat', p.lat, 'long', p.long, 'name', p.name)) as ports
       FROM
         maps m
       JOIN
@@ -43,7 +44,7 @@ export const loader = async ({ params }) => {
         m.id;
     `;
 
-  return json({ voyageData, mapData, mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN});
+  return json({ voyageData, mapData, mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN || null});
 } catch (error) {
   console.error("Error in loader:", error);
   throw json({error:error.message}, {status:500});
@@ -56,14 +57,11 @@ const Voyages = () => {
   const [events, setEvents] = useState([]);
   const [excursions, setExcursions] = useState([]);
   const [isPortClicked, setIsPortClicked] = useState(false);
-  const { voyageData, mapData, error, mapboxAccessToken} = useLoaderData();
+  const [photo, setPhoto] = useState('');
+  const [description, setDescription] = useState('');
+  const { voyageData, voyageId, mapData, error, mapboxAccessToken} = useLoaderData();
 
   useEffect(() => {
-
-    if(voyageData[0].portname == voyageData[voyageData.length - 1].portname){
-      const lastDay= {...voyageData[voyageData.length - 1], excursions:null};
-      setEventsAndExcursions([...(voyageData.slice(0, voyageData.length - 1)), lastDay]);
-    }
     setEventsAndExcursions([...voyageData]);
   }, [voyageData]);
 
@@ -76,17 +74,25 @@ const Voyages = () => {
     const daySchedule = eventsAndExcursions.find((event) => parseInt(event.day) === parseInt(day));
     setEvents([...(daySchedule.events)]);
     setExcursions([...daySchedule.excursions]);
+    setDescription(daySchedule.portdescription);
+    setPhoto(daySchedule.photo);
     setIsPortClicked(true);
   }
 
   return (
     <div className="flex">
-      < Ports schedule={eventsAndExcursions} clickHandler={handleClick}/>
-      {!isPortClicked?
+      <Ports schedule={eventsAndExcursions} clickHandler={handleClick} />
+      {!isPortClicked ? (
+        <>
+          {mapboxAccessToken ? (
           <Map mapData={mapData[0]} mapboxAccessToken={mapboxAccessToken} /> /* Pass data as prop */
-          :
+          ) : (
+            <div className='map-error font-bold bg-red-600 p-2'>Mapbox access token is missing!</div>
+          )}
+          </>
+        ) : (
         <PortDetails events={events} excursions={excursions} isPortClicked = {isPortClicked} closeHandler={handleClose}/>
-      }
+      )}
     </div>
   )
 }
