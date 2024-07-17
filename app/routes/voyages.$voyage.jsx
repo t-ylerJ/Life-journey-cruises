@@ -44,11 +44,7 @@ export const loader = async ({ params }) => {
         m.id;
     `;
 
-<<<<<<< HEAD
-  return json({ voyageData,voyageId, mapData, mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN});
-=======
   return json({ voyageData, mapData, mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN || null});
->>>>>>> main
 } catch (error) {
   console.error("Error in loader:", error);
   throw json({error:error.message}, {status:500});
