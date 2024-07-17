@@ -4,9 +4,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteError,
 } from '@remix-run/react'
 import './tailwind.css'
 import Header from './components/Header'
+import Error from './components/Error'
 
 export function Layout({ children }) {
   return (
@@ -17,9 +19,9 @@ export function Layout({ children }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="flex flex-col">
         <Header />
-        {children}
+        <main className="flex-grow">{children}</main>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -29,4 +31,15 @@ export function Layout({ children }) {
 
 export default function App() {
   return <Outlet />
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError()
+  console.error(error)
+  return (
+    <>
+      <title>Oh no!</title>
+      <Error />
+    </>
+  )
 }
