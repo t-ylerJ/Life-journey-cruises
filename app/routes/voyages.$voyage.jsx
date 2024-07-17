@@ -91,7 +91,7 @@ const Voyages = () => {
           )}
           </>
         ) : (
-        <PortDetails events={events} excursions={excursions} isPortClicked = {isPortClicked} closeHandler={handleClose}/>
+        <PortDetails description={description} photo={photo} events={events} excursions={excursions} isPortClicked = {isPortClicked} closeHandler={handleClose}/>
       )}
     </div>
   )
