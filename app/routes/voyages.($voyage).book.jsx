@@ -38,11 +38,11 @@ export const loader = async ({ params, request }) => {
     throw new Error(roomError.message);
   }
 
-  return json({ dates: data, voyageName, price, rooms });
+  return json({ dates: data, voyageName, price, rooms, voyageId: id });
 }
 
 const Book = () => {
-  const {dates, voyageName, price, rooms} = useLoaderData();
+  const {dates, voyageName, price, rooms, voyageId} = useLoaderData();
   const [selectedDate, setSelectedDate] = useState(null);
   const [numGuests, setNumGuests] = useState(null);
   const [selectedRooms, setSelectedRooms] = useState(null);
@@ -69,7 +69,7 @@ const Book = () => {
     const bookingDetails = {
       'guestNumber': guests,
       'selectedRooms': roomDetails,
-      'voyageId': 2,
+      'voyageId': voyageId,
       'voyageName': voyageName,
       'voyagePrice': price,
       'exursions': excursions,
