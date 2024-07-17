@@ -26,7 +26,7 @@ export const loader = async ({ request }) => {
     })
   } catch {
     console.log('error in loading fleet data');
-    return null;
+    return [];
   }
 
 }
@@ -35,7 +35,6 @@ export const loader = async ({ request }) => {
 
 export default function Index() {
   const data = useLoaderData();
-  console.log(data);
   return (
     <>
       <BigPicture />

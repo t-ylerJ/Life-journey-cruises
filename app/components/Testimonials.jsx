@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+// import studio08 from '/reviews/studio08.png';
+
 
 
 const Testimonials = () => {
@@ -161,20 +163,37 @@ const Testimonials = () => {
       " destinations. They were fantastic and the journey was seamless. A perfect holiday!"
     ]
 
+    const firstNames = [
+      "Liam", "Emma", "Noah", "Olivia", "Ava", "Elijah", "Charlotte", "Sophia",
+      "James", "Amelia", "Benjamin", "Mia", "Lucas", "Harper", "Mason", "Evelyn",
+      "Ethan", "Abigail", "Logan", "Ella", "Alexander", "Scarlett", "Jackson",
+      "Grace", "Aiden", "Victoria", "Sebastian", "Aria", "Matthew", "Luna"
+    ];
+
+    const lastInitials = [
+      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+      "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+    ];
+
+
     return Array.from({ length: number}, () =>
       startSentences[Math.floor(Math.random() * startSentences.length)] +
       adjectives[Math.floor(Math.random() * adjectives.length)] +
-      endSentences[Math.floor(Math.random() * endSentences.length)]
+      endSentences[Math.floor(Math.random() * endSentences.length)] + ' -' +
+      firstNames[Math.floor(Math.random() * firstNames.length)] + ' ' +
+      lastInitials[Math.floor(Math.random() * lastInitials.length)] + '.'
     );
   }
+
   useEffect(() => {
     setTestimonials(createTestimonials(5))
   }, [])
 
   return <div>
-      <ul>
+    <h1 className="font-semibold text-xl text-center">Reviews</h1>
+      <ul className="mb-6 divide-y border-t-2">
         {testimonials.map((testimonial, index) => (
-        <li key={index} >
+        <li key={index} className=" py-6">
           {testimonial}
         </li>
         ))}
