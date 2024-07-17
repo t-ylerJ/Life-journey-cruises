@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import DatePicker from 'react-DatePicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaCalendarAlt } from 'react-icons/fa';
-import Itinerary from './Itinerary';
 
-const Calendar = ({selectableDates}) => {
-
+const Calendar = ({selectableDates, setSelectedDate}) => {
   const [startDate, setStartDate] = useState(null);
-  console.log(selectableDates);
+  const [showCalendar, setShowCalendar] = useState(false);
+
   const isSelectable = (date) => {
     return selectableDates.some(
       (selectableDate) => selectableDate.toDateString() === date.toDateString()
@@ -24,11 +23,10 @@ const Calendar = ({selectableDates}) => {
       />
   ) */
 
- const [showCalendar, setShowCalendar] = useState(false);
-
   const handleDateChange = (date) => {
     setStartDate(date);
-    setShowCalendar(false); // Hide calendar after date selection
+    setShowCalendar(false);
+    setSelectedDate(date); // Hide calendar after date selection
   };
 
   return (
@@ -53,7 +51,6 @@ const Calendar = ({selectableDates}) => {
           </div>
         )}
       </div>
-      {startDate && <Itinerary selectedDate={startDate} />}
     </div>
   );
 };
