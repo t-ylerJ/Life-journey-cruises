@@ -19,13 +19,26 @@ export const loader = async ({ request, params}) => {
 */
 
 export const loader = async ({ params }) => {
-   const data = await sql`select e.id, p.name as portname, e.name, e.time, e.price, e.photo, vp.day
-                          from excursions as e
-                          join ports as p on e.port_id = p.id
-                          join voyage_ports as vp on e.port_id = vp.port_id
-                          where e.voyage_id = 1
-                          order by vp.day, e.time`
-   return json(data)
+  const voyageId = params.voyage;
+  const data = await sql`select
+                            vp.day,
+                            p.name as portname,
+                            p.description AS portdescription,
+                            json_agg(distinct jsonb_build_object(
+                            'name', e.name,
+                            'price', e.price,
+                            'time', e.time,
+                            'id', e.id,
+                            'image', e.photo
+                          )) as excursions
+                          from voyage_ports as vp
+                          join ports as p on vp.port_id = p.id
+                          left join excursions as e on vp.voyage_id = e.voyage_id and e.port_id = vp.port_id
+                          where vp.voyage_id = ${voyageId}
+                          group by vp.day, p.name, p.description
+                          order by vp.day`
+
+   return json({data})
 }
 
 const Plan = () => {
@@ -35,9 +48,14 @@ const Plan = () => {
   const handleCheckExcursionChange = (event) => {
     const excursionId = event.target.value;
     if (event.target.checked) {
-      const selected = excursions.filter((excursion) => excursion.id === excursionId);
-
-      setSelectedExcursions([...selectedExcursions, ...selected]);
+      for(let i = 0; i < excursions.length; i++){
+        excursions[i].excursions.forEach((excursion) => {
+          if(parseInt(excursion.id) === parseInt(excursionId)){
+            const {id, name, price} = excursion;
+            setSelectedExcursions([...selectedExcursions, {"id": id, "name": name, "price": price}]);
+          }
+       })
+      }
     } else {
       const updatedExcursions = selectedExcursions.filter((ex) =>{
         return parseInt(ex.id) !== parseInt(excursionId)
@@ -45,16 +63,18 @@ const Plan = () => {
       setSelectedExcursions(updatedExcursions);
     }
   };
-  const data  = useLoaderData()
+  const {data}  = useLoaderData()
+
   useEffect(() => {
-    setExcursions([...data]);
+    setExcursions([...data.slice(0, data.length - 1)]);
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('excursions', JSON.stringify(selectedExcursions));
+  }, [selectedExcursions]);
+
   return <>
-    <Link to={`../book?excursions=${selectedExcursions}`}>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >Book</button>
-    </Link>
-    <ExcursionTiles excursions={excursions} checkChanged={handleCheckExcursionChange}/>
+    <ExcursionTiles dailyExcursions={excursions} checkChanged={handleCheckExcursionChange}/>
   </>
 }
 export default Plan
