@@ -24,7 +24,6 @@ import { MdMusicOff } from "react-icons/md";
     }
  };
 
-
   return (
   <>
   <div className="audio-icon" onClick={handleAudioToggle}>
@@ -69,7 +68,7 @@ const VoyageTiles = ({voyages}) => {
     <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover opacity-50" ></img>
     <div className="absolute bottom-5 left-5 text-2xl text-black">{`$${voyage.price}`}</div>
           <div className="absolute top-20 left-20 text-5xl text-black">{`${voyage.name} Cruise`}</div>
-          <Link to={`/voyages/${voyage.id}`}>
+           <Link to={`/voyages/${voyage.id}`}>
             <button className="absolute bottom-5 right-5 bg-primary text-black py-2 px-4 rounded-full">EXPLORE</button>
           </Link>
           <div className="absolute top-5 right-5 text-white"><Music index={index}/></div>
