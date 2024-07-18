@@ -15,16 +15,6 @@ const PaymentForm = ({ user }) => {
   useEffect(() => {
     localStorage.setItem('payInfo', JSON.stringify(formObj));
   }, [formObj])
-  var auser = {
-    card_number: 12345678901234,
-    expiration: '09/26',
-    card_name: 'Tanner Jacobson',
-    cvv: 998,
-    street: '1111 Galvanzie Road',
-    city: 'Hollywood',
-    state: 'CA',
-    zip: 90980
-  }
   return (<div className="block mr-75px w-96 p-2 float-right border-2 border-gray-100 rounded">
     <form id="payment">
     {

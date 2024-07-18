@@ -2,7 +2,7 @@ import PaymentForm from '../components/PaymentForm'
 import PurchaseSummary from '../components/PurchaseSummary'
 import { supabaseServer } from '~/utils/supabase'
 import redirectCookie from '~/utils/redirectCookie'
-import { Form, json, redirect, useLoaderData } from '@remix-run/react'
+import { json, redirect, useLoaderData } from '@remix-run/react'
 
 export const loader = async ({ request }) => {
   console.log('here');

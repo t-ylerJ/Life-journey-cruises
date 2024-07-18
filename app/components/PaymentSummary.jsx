@@ -8,20 +8,20 @@ const PaymentSummary = () => {
   console.log(payInfo);
   const payKeys = Object.keys(payInfo);
   if (payInfo.guests) {
-    return (<div>
-      <h2>Guests:</h2>
+    return (<div className="inline-block float-right w-1/4 text-center">
+      <h2 className="text-2xl">Guests:</h2>
       {
         payInfo.guests.map((item, index) => {
           return (
             <div key={`guest${index + 1}`}>
-              <h3>Guest {index + 1}</h3>
+              <h3 className="text-xl">Guest {index + 1}:</h3>
               <p>Name: {item.first_name + item.last_name}</p>
               <p>Passport #: {item.passport}</p>
             </div>
           )
         })
       }
-      <h2>Payment Info:</h2>
+      <h2 className="text-2xl">Payment Info:</h2>
       {
         payKeys.map((pKey) => {
           if (pKey !== 'guests') {
