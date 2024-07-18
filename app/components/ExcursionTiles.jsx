@@ -42,12 +42,12 @@ const ExcursionTiles = ({dailyExcursions}) => {
    }
   return (
 
-      <div className="flex bg-gray-100 m-0 flex-col justify-center items-center overflow-hidden p-10 m-10" >
+      <div className="flex bg-gray-100 flex-col justify-center items-center overflow-hidden p-10 m-10" >
         {dailyExcursions && dailyExcursions.map((daily) => {
           return(
             <div key={daily.day} className=" w-full p-0 m-0 rounded-lg shadow-lg border-overflow-hidden border-2 border-inherit bg-white justify-around text-center mb-4"  >
               <div className="w-full pt-5" >
-                <h2 className="text-3xl font-bold" >Day: {daily.day}</h2>
+                <h1 className="text-3xl font-bold" >Day: {daily.day}</h1>
                 <h2 className="text-3xl p-5">Port: {daily.portname}</h2>
               </div>
               <div className="flex justify-around">
@@ -68,9 +68,9 @@ const ExcursionTiles = ({dailyExcursions}) => {
                       value={excursion.id}
                       key={excursion.id}
                     >
-                      <span className="text-left text-3xl">{excursion.name}</span>
+                      <h3 className="text-left text-3xl">{excursion.name}</h3>
                       <span className="text-l pt-2 pb-2">${excursion.price}</span>
-                      <img className="w-[100%] h-56 max-h-56 min-h-48 rounded" src={excursion.image} alt={excursion.name} onClick={(e)=>{
+                      <img className="w-[100%] h-56 max-h-56 min-h-48 rounded object-cover" src={excursion.image} alt={excursion.name} onClick={(e)=>{
                         boxOnClick(excursion.id);
                       }} />
                       <span className="pb-5 pt-5">{adjustTime(excursion.time)}</span>
