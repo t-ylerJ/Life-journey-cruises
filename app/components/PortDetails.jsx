@@ -6,7 +6,7 @@ const PortDetails = ({ events, excursions, closeHandler, photo, description }) =
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 max-w-full">
       <div className="mb-1 flex justify-end">
         <button onClick={closeModal} className="cursor-pointer p-2">
           <IoIosCloseCircleOutline className="text-3xl text-gray-950" />

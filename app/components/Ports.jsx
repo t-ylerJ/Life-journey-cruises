@@ -3,7 +3,7 @@ const Ports = ({schedule, clickHandler}) => {
     e.preventDefault();
     clickHandler(e.target.value);
   }
-  return <div>
+  return <div className="w-3/5">
     {schedule.map((item) => {
       return (
         <div  key={item.day} className="text-left p-3 hover:bg-blue-300 border-b-2" type="button">
