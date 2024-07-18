@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 
-const PaymentForm = () => {
+const PaymentForm = ({ user }) => {
   const [formObj, setFormObj] = useState({});
   const [guestCount, setGuestCount] = useState([]);
   useEffect(() => {
@@ -15,7 +15,7 @@ const PaymentForm = () => {
   useEffect(() => {
     localStorage.setItem('payInfo', JSON.stringify(formObj));
   }, [formObj])
-  var user = {
+  var auser = {
     card_number: 12345678901234,
     expiration: '09/26',
     card_name: 'Tanner Jacobson',
@@ -29,7 +29,7 @@ const PaymentForm = () => {
     <form id="payment">
     {
       guestCount.map((item, index) => {
-        return (<div key={item.first_name}>
+        return (<div key={item}>
             <p className="ml-5 mt-5">Guest {index + 1} First Name:</p>
             <input className="border-2 w-80 mx-5 rounded" name={index} required={true}></input>
             <p className="ml-5 mt-5">Guest {index + 1} Last Name:</p>
