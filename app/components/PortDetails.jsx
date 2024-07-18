@@ -39,9 +39,9 @@ const PortDetails = ({ events, excursions, closeHandler, photo, description }) =
             </ul>
           )) : null}
         </div>
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default PortDetails;
