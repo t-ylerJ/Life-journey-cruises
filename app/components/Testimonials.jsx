@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import studio08 from '/reviews/studio08.png';
 import { SlArrowRight } from "react-icons/sl";
 
 
@@ -128,7 +127,6 @@ const Testimonials = () => {
 
 
   return <div>
-    {/* <h1 className="font-semibold text-xl text-center">Reviews</h1> */}
       <div className="px-8 flex flex-row justify-center gap-x-4 mb-6 overflow-hidden">
         {testimonials.map((testimonial, index) => (
         <div key={index} className="p-6 pb-8 bg-white font-roboto-flex w-1/5 shrink-0 border-2 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg">
