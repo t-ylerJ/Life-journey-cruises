@@ -3,11 +3,11 @@ import { useEffect, useRef } from 'react'
 const FlappyCruise = () => {
   const playerRef = useRef()
 
-  useEffect(() => {
-    playerRef.current?.addEventListener('ended', () =>
-      setTimeout(() => playerRef.current?.load(), 2000)
-    )
-  }, [])
+  // useEffect(() => {
+  //   playerRef.current?.addEventListener('ended', () =>
+  //     setTimeout(() => playerRef.current?.load(), 2000)
+  //   )
+  // }, [])
 
   const handleClick = () => {
     if (!playerRef.current?.playing) {
