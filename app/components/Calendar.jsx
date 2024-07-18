@@ -3,14 +3,29 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaCalendarAlt } from 'react-icons/fa';
 
-const Calendar = ({selectableDates, setSelectedDate}) => {
+const Calendar = ({selectableDates, setSelectedDateRange}) => {
   const [startDate, setStartDate] = useState(null);
   const [showCalendar, setShowCalendar] = useState(false);
 
+  // const isSelectable = (date) => {
+  //   return selectableDates.some(
+  //     ({start, end}) => date >= start && date <= end
+  //   );
+  // };
+
+  const stripTime = (date) => {
+    const newDate = new Date(date);
+    newDate.setHours(0, 0, 0, 0);
+    return newDate;
+  };
+
   const isSelectable = (date) => {
-    return selectableDates.some(
-      ({start, end}) => date >= start && date <= end
-    );
+    const strippedDate = stripTime(date);
+    return selectableDates.some(({ start, end }) => {
+      const startDate = stripTime(start);
+      const endDate = stripTime(end);
+      return strippedDate >= startDate && strippedDate <= endDate;
+    });
   };
 
  /* return (
@@ -26,16 +41,18 @@ const Calendar = ({selectableDates, setSelectedDate}) => {
   const handleDateChange = (date) => {
     setStartDate(date);
     setShowCalendar(false);
-    setSelectedDate(date); // Hide calendar after date selection
-  };
-
-  const dayClassName = (date) => {
-    return isSelectable(date) ? { backgroundColor: 'blue', color: 'white' } : {};
+    const strippedDate = stripTime(date);
+    const selectedRange = selectableDates.find(
+      ({ start, end }) => strippedDate >= stripTime(start) && strippedDate <= stripTime(end)
+    );
+    if (selectedRange) {
+      setSelectedDateRange(selectedRange);
+    }
   };
 
   return (
     <div className="p-4">
-      <h1 className="text-white mb-2 mt-3 text-2xl text-center tracking-wider">Select Starting Date</h1>
+      <h1 className="text-white mb-2 mt-3 text-2xl text-center tracking-wider">Select Your Journey Date</h1>
       <div className="flex justify-center">
       <div className="relative">
         <button
@@ -46,16 +63,14 @@ const Calendar = ({selectableDates, setSelectedDate}) => {
           <FaCalendarAlt className="w-4 h-4 text-white"/>
         </button>
         {showCalendar && (
-          <div className="absolute top-full mt-2 bg-white rounded shadow z-10 w-full flex justify-center">
-            <div className="w-auto bg-gray-50 rounded-lg p-2.5">
+          <div className="absolute">
             <DatePicker
               selected={startDate}
               onChange={handleDateChange}
               filterDate={isSelectable}
-              inlines
-              dayClassName={dayClassName}
+              inline
+              monthsShown={2}
               />
-              </div>
           </div>
         )}
       </div>

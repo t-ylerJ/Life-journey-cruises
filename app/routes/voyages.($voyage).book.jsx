@@ -43,7 +43,7 @@ export const loader = async ({ params, request }) => {
 
 const Book = () => {
   const {dates, voyageName, price, rooms, voyageId} = useLoaderData();
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDateRange, setSelectedDateRange] = useState(null);
   const [numGuests, setNumGuests] = useState(null);
   const [selectedRooms, setSelectedRooms] = useState(null);
   const [excursions, setExcursions] = useState([]);
@@ -59,6 +59,8 @@ const Book = () => {
     start: new Date(date.start_time),
     end: new Date(date.end_time)
   }));
+
+  //console.log(selectableDates);
   /*const excursions = [
     {id: 111, name: 'Hollywood Tour', price: 106},
     {id: 112, name: 'Beach Day', price: 193},
@@ -91,23 +93,25 @@ const Book = () => {
 
   return (
     <div className="bg-cover bg-center min-h-screen bg-[url('/bookBG_2.svg')]">
-      <Calendar selectableDates={selectableDates} setSelectedDate={setSelectedDate}/>
+      <Calendar selectableDates={selectableDates} setSelectedDateRange={setSelectedDateRange}/>
       <div className="flex flex-col lg:flex-row p-6 w-full">
-     {selectedDate && !numGuests && (
+     {selectedDateRange && !numGuests && (
       <div className="w-full lg:w-1/3 animate-slide-up">
       <Itinerary
       voyageName={voyageName}
       price={price}
-      selectedDate={selectedDate.toDateString()}
+      selectedDate={selectedDateRange.start.toDateString()}
+      endDate={selectedDateRange.end.toDateString()}
       excursions={excursions}/>
       </div>
       )}
-      {selectedDate && numGuests && (
+      {selectedDateRange && numGuests && (
         <div className="w-full lg:w-1/3">
         <Itinerary
           voyageName={voyageName}
           price={price}
-          selectedDate={selectedDate.toDateString()}
+          selectedDate={selectedDateRange.start.toDateString()}
+          endDate={selectedDateRange.end.toDateString()}
           excursions={excursions}
           numGuests={numGuests}
           selectedRooms={selectedRooms}
@@ -117,7 +121,7 @@ const Book = () => {
       )}
       <div className="w-full lg:w-1/4 animate-slide-up">   </div>
        <div className="w-full lg:w-5/12 animate-slide-up">
-     {selectedDate &&<BookingSelector rooms={rooms} onSubmit={handleGuestsSubmit}/>}
+     {selectedDateRange &&<BookingSelector rooms={rooms} onSubmit={handleGuestsSubmit}/>}
      </div>
       </div>
     </div>
