@@ -5,8 +5,8 @@ import {
   Scripts,
   ScrollRestoration,
   json,
-  useLoaderData,
   useRouteError,
+  useRouteLoaderData,
 } from '@remix-run/react'
 import './tailwind.css'
 import Header from './components/Header.jsx'
@@ -22,7 +22,7 @@ export const loader = async ({ request }) => {
     data: { user },
   } = await supabase.auth.getUser()
   // console.log(user);
-  return json({ user: user ?? null })
+  return json({ user: user ?? null, openai : process.env.OPENAI_KEY ?? null })
 }
 export const clientAction = async () => {
   await supabaseClient.auth.signOut()
@@ -30,7 +30,7 @@ export const clientAction = async () => {
   return null
 }
 export function Layout({ children }) {
-  const { user } = useLoaderData()
+  const { user, openai } = useRouteLoaderData("root");
   // console.log(useLoaderData());
   return (
     <html lang="en">
@@ -47,7 +47,7 @@ export function Layout({ children }) {
         <ScrollRestoration />
         <Scripts />
 
-        <AIssistant />
+        {openai && <AIssistant />}
       </body>
     </html>
   )
