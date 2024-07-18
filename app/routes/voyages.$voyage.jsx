@@ -80,7 +80,7 @@ const Voyages = () => {
   }
 
   return (
-    <div className="flex">
+    <div className="flex space-x-4">
       <Ports schedule={eventsAndExcursions} clickHandler={handleClick} />
       {!isPortClicked ? (
         <>
