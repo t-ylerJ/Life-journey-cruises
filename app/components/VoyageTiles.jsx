@@ -37,52 +37,51 @@ const VoyageTiles = ({voyages}) => {
 
   return (
     <>
-      <div className="flex items-center justify-center my-4">
-      <div
-        className="text-6xl font-bold"
-        style={{
-          background: 'url(https://images.pexels.com/photos/4614703/pexels-photo-4614703.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1) no-repeat center center',
+      <div className="flex items-center justify-center my-4" >
+        <div
+          className="text-2xl font-bold sm:text-6xl"
+          style={{
+          background: 'url(https://images.pexels.com/photos/3689659/pexels-photo-3689659.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) no-repeat center center',
           backgroundSize: 'cover',
           WebkitBackgroundClip: 'text',
           color: 'transparent',
           WebkitTextFillColor: 'transparent',
-          WebkitTextStroke: '2px #056DBD'
+          // WebkitTextStroke: '1px black'
         }}
       >
         FIND YOUR JOURNEY
-      </div>
-    </div>
-
-<div className="flex  justify-evenly items-center w-[100%] my-4">
-{voyages.map((voyage, index)=> {
-  return (
-<div className="h-96 w-72 bg-transparent cursor-pointer group perspective" key={index}>
-  <div className="relative preserve-3d group-hover:rotate-y-180 w-full h-full duration-1000">
-    <div className="absolute  back-hidden border-2 w-full h-full">
-      <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover" ></img>
-      <div className="absolute top-20 left-20 text-5xl text-white">{`${voyage.name} Cruise`}</div>
-    </div>
-
-
-    <div className="absolute rotate-y-180 back-hidden w-full h-full flex">
-    <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover opacity-50" ></img>
-    <div className="absolute bottom-5 left-5 text-2xl text-black">{`$${voyage.price}`}</div>
-          <div className="absolute top-20 left-20 text-5xl text-black">{`${voyage.name} Cruise`}</div>
-           <Link to={`/voyages/${voyage.id}`}>
-            <button className="absolute bottom-5 right-5 bg-primary text-black py-2 px-4 rounded-full">EXPLORE</button>
-          </Link>
-          <div className="absolute top-5 right-5 text-white"><Music index={index}/></div>
         </div>
+      </div>
 
-    </div>
+      <div className="flex  flex-wrap justify-evenly items-center w-[100%] my-4">
+        {voyages.map((voyage, index)=> {
+         return (
+          <div className="h-96 w-72 my-2 bg-transparent cursor-pointer group perspectiv" key={index}>
+            <div className="relative preserve-3d group-hover:rotate-y-180 w-full h-full duration-1000">
+              <div className="absolute  back-hidden border-2 w-full h-full shadow-2xl">
+                <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover" ></img>
+                  <div className="absolute inset-0 flex justify-center top-12 text-4xl text-white" style={{WebkitTextStroke: '0.5px white'}}>{`${voyage.name}`}
 
-  </div>
+                  </div>
+              </div>
 
-
-)})}
-
-</div>
-
+               <div className="absolute rotate-y-180 back-hidden w-full h-full flex">
+                 <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover opacity-40" ></img>
+                   <div className="absolute bottom-5 left-5 text-2xl text-black font-bold">{`$${voyage.price}`}
+                   </div>
+                   <div className="absolute inset-0 flex justify-center top-12 text-4xl text-black" style={{WebkitTextStroke: '0.5px black'}}>{`${voyage.name}`}
+                   </div>
+                   <div className="absolute inset-0 flex justify-center my-24 text-black text-md" >Let the adventure begin!</div>
+                      <Link to={`/voyages/${voyage.id}`}>
+                         <button className="absolute bottom-5 right-5 bg-accent text-black py-2 px-4 rounded-full">EXPLORE</button>
+                      </Link>
+                  <div className="absolute top-5 right-5 text-2xl text-black"><Music index={index}/>
+                  </div>
+                </div>
+             </div>
+          </div>
+        )})}
+      </div>
     </>
   )
 }
