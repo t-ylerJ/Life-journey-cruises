@@ -25,7 +25,7 @@ const BigPicture = () => {
     <div id="slide1" className={`flex carousel-item relative w-full ${currentSlide === 1 ? 'block' : 'hidden'}`}>
       <div  className="carousel-item w-[33.3%]">
         <video autoPlay loop muted >
-        <source src="bigpicture/854397-hd_1280_720_30fps.mp4" type="video/mp4" />
+        <source src="bigpicture/scuba.mp4" type="video/mp4" />
         <track kind="captions" srcLang="en" src="/videos/captions1.vtt" />
         Your browser does not support the video tag.
         </video>
@@ -33,7 +33,7 @@ const BigPicture = () => {
 
       <div  className="carousel-item w-[33.3%]">
         <video autoPlay loop muted >
-        <source src="bigpicture/2096548-hd_1920_1080_30fps (2).mp4" type="video/mp4" />
+        <source src="bigpicture/shiptop.mp4" type="video/mp4" />
         <track kind="captions" srcLang="en" src="/videos/captions1.vtt" />
         Your browser does not support the video tag.
         </video>
@@ -66,7 +66,7 @@ const BigPicture = () => {
 
       <div  className="carousel-item w-[33.3%] ">
         <video autoPlay loop muted >
-        <source src="bigpicture/4782135-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+        <source src="bigpicture/beach.mp4" type="video/mp4" />
         <track kind="captions" srcLang="en" src="/videos/captions1.vtt" />
         Your browser does not support the video tag.
         </video>
@@ -74,7 +74,7 @@ const BigPicture = () => {
 
       <div className="carousel-item w-[33.3%] ">
         <video autoPlay loop muted >
-        <source src="bigpicture/dream.mp4" type="video/mp4" />
+        <source src="bigpicture/dreamship.mp4" type="video/mp4" />
         <track kind="captions" srcLang="en" src="/videos/captions1.vtt" />
         Your browser does not support the video tag.
         </video>
@@ -90,7 +90,7 @@ const BigPicture = () => {
     <div id="slide3" className={`flex carousel-item relative w-full ${currentSlide === 3 ? 'block' : 'hidden'}`}>
       <div  className="carousel-item w-[33.3%] ">
         <video autoPlay loop muted >
-        <source src="bigpicture/3094026-uhd_3840_2160_30fps.mp4" type="video/mp4" />
+        <source src="bigpicture/rocks.mp4" type="video/mp4" />
         <track kind="captions" srcLang="en" src="/videos/captions1.vtt" />
         Your browser does not support the video tag.
         </video>
