@@ -63,10 +63,12 @@ const VoyageTiles = ({voyages}) => {
       <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover" ></img>
       <div className="absolute top-20 left-20 text-5xl text-white">{`${voyage.name} Cruise`}</div>
     </div>
-    <div className="absolute rotate-y-180 back-hidden w-full h-full flex" style={{backgroundImage: `url(${voyage.url})`}}>
 
-    <div className="absolute bottom-5 left-5 text-2xl text-white">{`$${voyage.price}`}</div>
-          <div className="absolute top-20 left-20 text-5xl text-white">{`${voyage.name} Cruise`}</div>
+
+    <div className="absolute rotate-y-180 back-hidden w-full h-full flex">
+    <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover opacity-50" ></img>
+    <div className="absolute bottom-5 left-5 text-2xl text-black">{`$${voyage.price}`}</div>
+          <div className="absolute top-20 left-20 text-5xl text-black">{`${voyage.name} Cruise`}</div>
           <Link to={`/voyages/${voyage.id}`}>
             <button className="absolute bottom-5 right-5 bg-primary text-black py-2 px-4 rounded-full">EXPLORE</button>
           </Link>
