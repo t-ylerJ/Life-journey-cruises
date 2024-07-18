@@ -2,28 +2,36 @@ import React from 'react';
 
 const Itinerary = ({ voyageName, price, selectedDate, excursions, numGuests, selectedRooms, roomDetails }) => {
   return (
-    <div className="p-4 border rounded shadow mt-4">
-      <h2 className="text-lg font-semibold mb-2">Itinerary Details</h2>
-      <p><strong>Voyage Name:</strong> {voyageName}</p>
-      <p><strong>Price:</strong> ${price}</p>
-      <p><strong>Start Date:</strong> {selectedDate}</p>
-      <ul><strong>Excursions</strong>{excursions.map(item => <li key={item.id}>{item.name}: ${item.price}</li>)}</ul>
-      {numGuests && <p><strong>Number of Guests:</strong> {numGuests}</p>}
-      {selectedRooms && (
+    <div className="p-4 mt-4 mr-4 animate-slide-up text-center">
+      <h2 className="text-2xl text-white mb-2 tracking-wider">Itinerary Details</h2>
+      <p className="text-white">________________________________________________________</p>
+      <p className="text-white text-lg tracking-wider p-2"><strong>Voyage Name:</strong> {voyageName}</p>
+      <p className="text-white text-lg tracking-wider p-2"><strong>Voyage Price:</strong> ${price}</p>
+      <p className="text-white text-lg tracking-wider p-2"><strong>Starting Date:</strong> {selectedDate}</p>
+      <div className="text-white text-lg tracking-wider p-2">
+        <strong>Excursions:</strong>
         <div>
+        {excursions.map(item =>
+        <li key={item.id} className="tracking-wider p-2">{item.name}: ${item.price}</li>
+        )}
+        </div>
+      </div>
+      {numGuests && <p className="text-white text-lg tracking-wider p-2"><strong>Number of Guests:</strong> {numGuests}</p>}
+      {selectedRooms && (
+        <div className="text-white text-lg tracking-wider p-2">
           <strong>Selected Rooms:</strong>
-          <ul>
+          <div>
             {selectedRooms.map((room, index) => {
               const roomDetail = roomDetails.find(r => r.name === room);
               return (
-              <li key={index}>
+              <li key={index} className="tracking-wider p-2">
                 {room} - ${roomDetail.price}
-                <img src="https://www.sunway.ie/cruise/images/ships/Silver-Ray/Master-Suite.jpg" alt="booked room"
-                className="mt-2" />
+                {/* <img src="https://www.sunway.ie/cruise/images/ships/Silver-Ray/Master-Suite.jpg" alt="booked room"
+                className="mt-2" /> */}
               </li>
               );
             })}
-          </ul>
+          </div>
         </div>
       )}
     </div>

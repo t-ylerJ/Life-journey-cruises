@@ -9,7 +9,7 @@ const Calendar = ({selectableDates, setSelectedDate}) => {
 
   const isSelectable = (date) => {
     return selectableDates.some(
-      (selectableDate) => selectableDate.toDateString() === date.toDateString()
+      ({start, end}) => date >= start && date <= end
     );
   };
 
@@ -29,17 +29,21 @@ const Calendar = ({selectableDates, setSelectedDate}) => {
     setSelectedDate(date); // Hide calendar after date selection
   };
 
+  const dayClassName = (date) => {
+    return isSelectable(date) ? { backgroundColor: 'blue', color: 'white' } : {};
+  };
+
   return (
     <div className="p-4">
-      <h1 className="text-white font-serif mb-2 mt-3 text-2xl text-center tracking-wider">Select Starting Date</h1>
+      <h1 className="text-white mb-2 mt-3 text-2xl text-center tracking-wider">Select Starting Date</h1>
       <div className="flex justify-center">
       <div className="relative">
         <button
           className="flex items-center border p-2 px-20 rounded shadow"
           onClick={() => setShowCalendar(!showCalendar)}
         >
-          <span className="mr-2 text-gray-400 font-serif tracking-wider">{startDate ? startDate.toDateString() : " __/__/____ "}</span>
-          <FaCalendarAlt className="w-4 h-4 text-gray-400"/>
+          <span className="mr-2 text-white tracking-wider">{startDate ? startDate.toDateString() : " __/__/____ "}</span>
+          <FaCalendarAlt className="w-4 h-4 text-white"/>
         </button>
         {showCalendar && (
           <div className="absolute top-full mt-2 bg-white rounded shadow z-10 w-full flex justify-center">
@@ -48,8 +52,8 @@ const Calendar = ({selectableDates, setSelectedDate}) => {
               selected={startDate}
               onChange={handleDateChange}
               filterDate={isSelectable}
-              inline
-              className="font-serif text-gray-800"
+              inlines
+              dayClassName={dayClassName}
               />
               </div>
           </div>

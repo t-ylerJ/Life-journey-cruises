@@ -12,7 +12,7 @@ export const loader = async ({ params, request }) => {
 
   const {data, error} = await supabase
     .from('voyage_dates')
-    .select('start_time').eq('voyage_id', id);
+    .select('start_time, end_time').eq('voyage_id', id);
 
   if (error) {
     throw new Error(error.message);
@@ -55,7 +55,10 @@ const Book = () => {
     }
   }, []);
 
-  const selectableDates = dates.map(date => new Date(date.start_time));
+  const selectableDates = dates.map(date => ({
+    start: new Date(date.start_time),
+    end: new Date(date.end_time)
+  }));
   /*const excursions = [
     {id: 111, name: 'Hollywood Tour', price: 106},
     {id: 112, name: 'Beach Day', price: 193},
@@ -86,19 +89,21 @@ const Book = () => {
     localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails));
   };
 
-
-
   return (
-    <div className="bg-cover bg-center min-h-screen bg-[url('/bookBg.svg')]">
-     <Calendar selectableDates={selectableDates} setSelectedDate={setSelectedDate}/>
-     {selectedDate &&<BookingSelector rooms={rooms} onSubmit={handleGuestsSubmit}/>}
-     {selectedDate && !numGuests &&
+    <div className="bg-cover bg-center min-h-screen bg-[url('/bookBG_2.svg')]">
+      <Calendar selectableDates={selectableDates} setSelectedDate={setSelectedDate}/>
+      <div className="flex flex-col lg:flex-row p-6 w-full">
+     {selectedDate && !numGuests && (
+      <div className="w-full lg:w-1/3 animate-slide-up">
       <Itinerary
       voyageName={voyageName}
       price={price}
       selectedDate={selectedDate.toDateString()}
-      excursions={excursions}/>}
+      excursions={excursions}/>
+      </div>
+      )}
       {selectedDate && numGuests && (
+        <div className="w-full lg:w-1/3">
         <Itinerary
           voyageName={voyageName}
           price={price}
@@ -108,7 +113,13 @@ const Book = () => {
           selectedRooms={selectedRooms}
           roomDetails={rooms}
         />
+        </div>
       )}
+      <div className="w-full lg:w-1/4 animate-slide-up">   </div>
+       <div className="w-full lg:w-5/12 animate-slide-up">
+     {selectedDate &&<BookingSelector rooms={rooms} onSubmit={handleGuestsSubmit}/>}
+     </div>
+      </div>
     </div>
   )
 }
