@@ -25,7 +25,7 @@ const PurchaseSummary = () => {
       <h1 className="font-semi-bold text-3xl">Purchase Summary:</h1>
       <section className="flex items-baseline">
         <p>{room.name} Room</p>
-        <span className="flex-1 truncate">.........................................................</span>
+        <span className="flex-1 truncate">.........................................................................................................</span>
         <p>{room.price}</p>
       </section>
       {eventList.map((item) => {
@@ -33,14 +33,14 @@ const PurchaseSummary = () => {
         return (
           <section className="flex items-baseline" key={item.name}>
             <p >{item.name}</p>
-            <span className="flex-1 truncate">...........................................................</span>
+            <span className="flex-1 truncate">......................................................................................................</span>
             <p>{item.price}</p>
           </section>
         )
       })}
       <section className="mt-10 flex items-baseline">
         <p>Total</p>
-        <span className="flex-1 truncate">...........................................................</span>
+        <span className="flex-1 truncate">......................................................................................................................</span>
         <p>{total}</p>
       </section>
     </div>

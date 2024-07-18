@@ -13,6 +13,7 @@ export const loader = async ({ params }) => {
                             vp.day,
                             p.name as portname,
                             p.description AS portdescription,
+                            p.photo,
                             array_agg(DISTINCT ev.name) as events,
                             array_agg(DISTINCT e.name) as excursions
                           from voyage_ports as vp
@@ -21,7 +22,7 @@ export const loader = async ({ params }) => {
                           left join excursions as e on vp.voyage_id = e.voyage_id and e.port_id = vp.port_id
                           left join events as ev on ve.event_id = ev.id
                           where vp.voyage_id = ${voyageId}
-                          group by vp.day, p.name, p.description
+                          group by vp.day, p.name, p.description, p.photo
                           order by vp.day`
 
   const mapData = await sql`
@@ -56,14 +57,11 @@ const Voyages = () => {
   const [events, setEvents] = useState([]);
   const [excursions, setExcursions] = useState([]);
   const [isPortClicked, setIsPortClicked] = useState(false);
-  const { voyageData, mapData, error, mapboxAccessToken} = useLoaderData();
+  const [photo, setPhoto] = useState('');
+  const [description, setDescription] = useState('');
+  const { voyageData, voyageId, mapData, error, mapboxAccessToken} = useLoaderData();
 
   useEffect(() => {
-
-    if(voyageData[0].portname == voyageData[voyageData.length - 1].portname){
-      const lastDay= {...voyageData[voyageData.length - 1], excursions:null};
-      setEventsAndExcursions([...(voyageData.slice(0, voyageData.length - 1)), lastDay]);
-    }
     setEventsAndExcursions([...voyageData]);
   }, [voyageData]);
 
@@ -76,6 +74,8 @@ const Voyages = () => {
     const daySchedule = eventsAndExcursions.find((event) => parseInt(event.day) === parseInt(day));
     setEvents([...(daySchedule.events)]);
     setExcursions([...daySchedule.excursions]);
+    setDescription(daySchedule.portdescription);
+    setPhoto(daySchedule.photo);
     setIsPortClicked(true);
   }
 
@@ -91,7 +91,7 @@ const Voyages = () => {
           )}
           </>
         ) : (
-        <PortDetails events={events} excursions={excursions} isPortClicked = {isPortClicked} closeHandler={handleClose}/>
+        <PortDetails description={description} photo={photo} events={events} excursions={excursions} isPortClicked = {isPortClicked} closeHandler={handleClose}/>
       )}
     </div>
   )
