@@ -66,7 +66,7 @@ const BigPicture = () => {
 
       <div  className="carousel-item w-[33.3%] ">
         <video autoPlay loop muted >
-        <source src="bigpicture/dream.mp4" type="video/mp4" />
+        <source src="bigpicture/4782135-uhd_3840_2160_25fps.mp4" type="video/mp4" />
         <track kind="captions" srcLang="en" src="/videos/captions1.vtt" />
         Your browser does not support the video tag.
         </video>
@@ -74,7 +74,7 @@ const BigPicture = () => {
 
       <div className="carousel-item w-[33.3%] ">
         <video autoPlay loop muted >
-        <source src="bigpicture/4782135-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+        <source src="bigpicture/dream.mp4" type="video/mp4" />
         <track kind="captions" srcLang="en" src="/videos/captions1.vtt" />
         Your browser does not support the video tag.
         </video>
