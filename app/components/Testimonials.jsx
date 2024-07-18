@@ -131,7 +131,7 @@ const Testimonials = () => {
     {/* <h1 className="font-semibold text-xl text-center">Reviews</h1> */}
       <div className="px-8 flex flex-row justify-center gap-x-4 mb-6 overflow-hidden">
         {testimonials.map((testimonial, index) => (
-        <div key={index} className="p-6 pb-2 bg-white font-roboto-flex w-1/5 border-2 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg">
+        <div key={index} className="p-6 pb-8 bg-white font-roboto-flex w-1/5 shrink-0 border-2 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg">
           {testimonial}
           <div className="rating">
           <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
