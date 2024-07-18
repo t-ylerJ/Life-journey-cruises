@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-// import studio08 from '/reviews/studio08.png';
+import studio08 from '/reviews/studio08.png';
+// import Button from './Button.jsx';
 
 
 
@@ -102,10 +103,10 @@ const Testimonials = () => {
       ];
 
     const names = [
-      "Liam Q.", "Emma F.", "Noah J.", "Olivia I.", "Ava", "Elijah A.", "Charlotte C.", "Sophia E.",
-      "James S.", "Amelia Z.", "Benjamin F.", "Mia D.", "Lucas Z.", "Harper M.", "Mason B.", "Evelyn F.",
-      "Ethan R.", "Abigail P.", "Logan L.", "Ella N.", "Alexander R.", "Scarlett R.", "Jackson I.",
-      "Grace Z.", "Aiden O.", "Victoria H.", "Sebastian R.", "Aria J.", "Matthew J.", "Luna L."
+      "Liam Q.", "Emma F.", "Eric R.", "Noah J.", "Olivia I.", "Ava", "Elijah A.", "Charlotte C.", "Sophia E.",
+      "James S.", "Eric R.", "Amelia Z.", "Benjamin F.", "Mia D.", "Lucas Z.", "Harper M.", "Mason B.", "Evelyn F.",
+      "Ethan R.", "Abigail P.", "Eric R.", "Logan L.", "Ella N.", "Alexander R.", "Scarlett R.", "Jackson I.",
+      "Grace Z.", "Eric R.", "Aiden O.", "Victoria H.", "Sebastian R.", "Aria J.", "Matthew J.", "Luna L."
     ];
 
     return Array.from({ length: number }, () => {
@@ -117,18 +118,21 @@ const Testimonials = () => {
   }
 
   useEffect(() => {
-    setTestimonials(createTestimonials(3))
+    setTestimonials(createTestimonials(4))
   }, [])
 
   return <div>
     <h1 className="font-semibold text-xl text-center">Reviews</h1>
-      <div className="flex flex-row mb-6 border-t-2 overflow-hidden">
+      <div className="px-8 flex flex-row justify-center gap-x-4 mb-6 overflow-hidden">
         {testimonials.map((testimonial, index) => (
-        <div key={index} className="p-6 border-2 basis-1/3 hover:basis-1/2 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10">
+        <div key={index} className="p-6 bg-white w-1/5 border-2 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg">
           {testimonial}
         </div>
         ))}
+        {/* <Button
+        />See more */}
       </div>
+        <button className="border rounded-md">See More</button>
     </div>
 }
 
