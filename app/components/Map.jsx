@@ -32,6 +32,9 @@ const Map = ({mapData, mapboxAccessToken}) => {
         if (mapData && mapData.ports) { // Check if mapData and port data are available
           // Extract coordinates from ports objects
           const routeCoordinates = mapData.ports.map(p => [p.long, p.lat]);
+          routeCoordinates.push(routeCoordinates[0]); // Add the first point to the end to close the loop
+          console.log('mapData.ports: ', mapData.ports);
+          console.log('routeCoordinates: ', routeCoordinates);
 
           mapInstance.addSource('route', {
             type: 'geojson',
@@ -54,7 +57,7 @@ const Map = ({mapData, mapboxAccessToken}) => {
               'line-cap': 'round',
             },
             paint: {
-              'line-color': '#FFED86', // Choose the color for your route line
+              'line-color': '#FBD756', // Choose the color for your route line
               'line-width': 8, // Choose the width
             },
           });
@@ -62,8 +65,10 @@ const Map = ({mapData, mapboxAccessToken}) => {
       });
 
       // Add markers for ports
-      ports.forEach(p => {
-        new mapboxgl.Marker()
+      ports.forEach((p, index) => {
+        new mapboxgl.Marker({
+          color: index === 0 ? '#E93AB5' : '#056DBD', // Orange for the first marker, pink for the rest
+        })
           .setLngLat([p.long, p.lat])
           .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(p.name))
           .addTo(mapInstance);
