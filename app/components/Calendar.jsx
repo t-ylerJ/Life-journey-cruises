@@ -31,25 +31,30 @@ const Calendar = ({selectableDates, setSelectedDate}) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-2">Select Starting Date</h2>
+      <h1 className="text-white font-serif mb-2 mt-3 text-2xl text-center tracking-wider">Select Starting Date</h1>
+      <div className="flex justify-center">
       <div className="relative">
         <button
-          className="flex items-center border p-2 rounded shadow"
+          className="flex items-center border p-2 px-20 rounded shadow"
           onClick={() => setShowCalendar(!showCalendar)}
         >
-          <span className="mr-2">{startDate ? startDate.toDateString() : "Select Date"}</span>
-          <FaCalendarAlt />
+          <span className="mr-2 text-gray-400 font-serif tracking-wider">{startDate ? startDate.toDateString() : " __/__/____ "}</span>
+          <FaCalendarAlt className="w-4 h-4 text-gray-400"/>
         </button>
         {showCalendar && (
-          <div className="absolute top-full mt-2 bg-white border rounded shadow z-10">
+          <div className="absolute top-full mt-2 bg-white rounded shadow z-10 w-full flex justify-center">
+            <div className="w-auto bg-gray-50 rounded-lg p-2.5">
             <DatePicker
               selected={startDate}
               onChange={handleDateChange}
               filterDate={isSelectable}
               inline
-            />
+              className="font-serif text-gray-800"
+              />
+              </div>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

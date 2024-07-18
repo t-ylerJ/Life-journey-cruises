@@ -86,8 +86,10 @@ const Book = () => {
     localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails));
   };
 
+
+
   return (
-    <>
+    <div className="bg-cover bg-center min-h-screen bg-[url('/bookBg.svg')]">
      <Calendar selectableDates={selectableDates} setSelectedDate={setSelectedDate}/>
      {selectedDate &&<BookingSelector rooms={rooms} onSubmit={handleGuestsSubmit}/>}
      {selectedDate && !numGuests &&
@@ -107,7 +109,7 @@ const Book = () => {
           roomDetails={rooms}
         />
       )}
-    </>
+    </div>
   )
 }
 
