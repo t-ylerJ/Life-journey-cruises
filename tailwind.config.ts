@@ -12,9 +12,10 @@ export default {
       {
         light: {
           ...themes['light'],
-          primary: '#A2DCE7',
-          secondary: '#FFED86',
-          accent: '#FFB067',
+          primary: '#0578D6',
+          secondary: '#FBD756',
+          accent: '#FF7233',
+          warning: '#E93AB5',
         },
       },
     ],
