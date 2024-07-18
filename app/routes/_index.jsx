@@ -1,4 +1,4 @@
-import AIssistant from '../components/AIssistant.jsx'
+
 import BigPicture from '../components/BigPicture'
 import Testimonials from '../components/Testimonials'
 import VoyageTiles from '../components/VoyageTiles'
@@ -39,7 +39,6 @@ export default function Index() {
       <BigPicture />
       <VoyageTiles voyages={data} />
       <Testimonials />
-      {OPENAI_KEY && <AIssistant />}
     </>
   )
 }
