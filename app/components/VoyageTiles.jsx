@@ -36,39 +36,6 @@ import { MdMusicOff } from "react-icons/md";
 
 const VoyageTiles = ({voyages}) => {
 
-  const [hoverStatus, setHoverStatus] = useState([false, false, false, false, false]);
-
-  const handleMouseEnter = (index) => {
-    var arr = [false, false, false, false, false];
-    arr[index] = true;
-    setHoverStatus(arr);
-  };
-
-  const handleMouseLeave = () => {
-    setHoverStatus[false, false, false, false, false];
-  };
-
-
-  /*return (
-    <div className="grid grid-cols-6 gap- mx-4 my-8">
-      {voyages.map((voyage, index)=> {
-        let isLarge = index < 2;
-        let spanClass = isLarge ? 'col-span-3' : 'col-span-2';
-        return (
-        <div className={` mx-4 my-8 relative flex ${spanClass}`} key={index} style={{backgroundImage: `url(${voyage.url})`}} onMouseEnter={()=>handleMouseEnter(index)} onMouseLeave={handleMouseLeave} >
-        <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} />
-          <div className="absolute bottom-5 left-5 text-2xl text-white">{`$${voyage.price}`}</div>
-          <div className="absolute top-20 left-20 text-5xl text-white">{`${voyage.name} Cruise`}</div>
-          <Link to={`/voyages/${voyage.id}`}>
-            <button className="absolute bottom-5 right-5 bg-primary text-black py-2 px-4 rounded-full">EXPLORE</button>
-          </Link>
-          {hoverStatus[index] ? <div className="absolute top-5 right-5 text-white"><Music index={index}/></div>: null}
-        </div>
-      )})}
-    </div>
-  )}*/
-
-
   return (
     <>
       <div className="flex items-center justify-center my-4">
@@ -87,20 +54,6 @@ const VoyageTiles = ({voyages}) => {
       </div>
     </div>
 
-    {/* <div className="flex">
-      {voyages.map((voyage, index)=> (
-        <div className=" h-96 mx-4 my-4 relative flex" key={index} style={{backgroundImage: `url(${voyage.url})`}} onMouseEnter={()=>handleMouseEnter(index)} onMouseLeave={handleMouseLeave} >
-        <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} />
-          <div className="absolute bottom-5 left-5 text-2xl text-white">{`$${voyage.price}`}</div>
-          <div className="absolute top-20 left-20 text-5xl text-white">{`${voyage.name} Cruise`}</div>
-          <Link to={`/voyages/${voyage.id}`}>
-            <button className="absolute bottom-5 right-5 bg-primary text-black py-2 px-4 rounded-full">EXPLORE</button>
-          </Link>
-          {hoverStatus[index] ? <div className="absolute top-5 right-5 text-white"><Music index={index}/></div>: null}
-        </div>
-      ))}
-    </div> */}
-
 <div className="flex  justify-evenly items-center w-[100%] my-4">
 {voyages.map((voyage, index)=> {
   return (
@@ -108,11 +61,22 @@ const VoyageTiles = ({voyages}) => {
   <div className="relative preserve-3d group-hover:rotate-y-180 w-full h-full duration-1000">
     <div className="absolute  back-hidden border-2 w-full h-full">
       <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover" ></img>
+      <div className="absolute top-20 left-20 text-5xl text-white">{`${voyage.name} Cruise`}</div>
     </div>
-    <div className="absolute rotate-y-180 back-hidden w-full h-full bg-gray-100"></div>
+    <div className="absolute rotate-y-180 back-hidden w-full h-full flex" style={{backgroundImage: `url(${voyage.url})`}}>
+
+    <div className="absolute bottom-5 left-5 text-2xl text-white">{`$${voyage.price}`}</div>
+          <div className="absolute top-20 left-20 text-5xl text-white">{`${voyage.name} Cruise`}</div>
+          <Link to={`/voyages/${voyage.id}`}>
+            <button className="absolute bottom-5 right-5 bg-primary text-black py-2 px-4 rounded-full">EXPLORE</button>
+          </Link>
+          <div className="absolute top-5 right-5 text-white"><Music index={index}/></div>
+        </div>
+
+    </div>
 
   </div>
-</div>
+
 
 )})}
 
