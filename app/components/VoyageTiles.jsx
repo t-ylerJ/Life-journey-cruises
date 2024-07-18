@@ -24,7 +24,6 @@ import { MdMusicOff } from "react-icons/md";
     }
  };
 
-
   return (
   <>
   <div className="audio-icon" onClick={handleAudioToggle}>
@@ -36,34 +35,58 @@ import { MdMusicOff } from "react-icons/md";
 
 const VoyageTiles = ({voyages}) => {
 
-  const [hoverStatus, setHoverStatus] = useState([false, false, false, false, false]);
-
-  const handleMouseEnter = (index) => {
-    var arr = [false, false, false, false, false];
-    arr[index] = true;
-    setHoverStatus(arr);
-  };
-
-  const handleMouseLeave = () => {
-    setHoverStatus[false, false, false, false, false];
-  };
-
-
   return (
-    <div className="carousel carousel-center rounded-box">
-      {voyages.map((voyage, index)=> (
-        <div className="carousel-item h-96 mx-4 my-8 relative flex" key={index} style={{backgroundImage: `url(${voyage.url})`}} onMouseEnter={()=>handleMouseEnter(index)} onMouseLeave={handleMouseLeave} >
-        <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} />
-          <div className="absolute bottom-5 left-5 text-2xl text-white">{`$${voyage.price}`}</div>
-          <div className="absolute top-20 left-20 text-5xl text-white">{`${voyage.name} Cruise`}</div>
-          <Link to={`/voyages/${voyage.id}`}>
+    <>
+      <div className="flex items-center justify-center my-4">
+      <div
+        className="text-6xl font-bold"
+        style={{
+          background: 'url(https://images.pexels.com/photos/4614703/pexels-photo-4614703.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1) no-repeat center center',
+          backgroundSize: 'cover',
+          WebkitBackgroundClip: 'text',
+          color: 'transparent',
+          WebkitTextFillColor: 'transparent',
+          WebkitTextStroke: '2px #056DBD'
+        }}
+      >
+        FIND YOUR JOURNEY
+      </div>
+    </div>
+
+<div className="flex  justify-evenly items-center w-[100%] my-4">
+{voyages.map((voyage, index)=> {
+  return (
+<div className="h-96 w-72 bg-transparent cursor-pointer group perspective" key={index}>
+  <div className="relative preserve-3d group-hover:rotate-y-180 w-full h-full duration-1000">
+    <div className="absolute  back-hidden border-2 w-full h-full">
+      <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover" ></img>
+      <div className="absolute top-20 left-20 text-5xl text-white">{`${voyage.name} Cruise`}</div>
+    </div>
+
+
+    <div className="absolute rotate-y-180 back-hidden w-full h-full flex">
+    <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover opacity-50" ></img>
+    <div className="absolute bottom-5 left-5 text-2xl text-black">{`$${voyage.price}`}</div>
+          <div className="absolute top-20 left-20 text-5xl text-black">{`${voyage.name} Cruise`}</div>
+           <Link to={`/voyages/${voyage.id}`}>
             <button className="absolute bottom-5 right-5 bg-primary text-black py-2 px-4 rounded-full">EXPLORE</button>
           </Link>
-          {hoverStatus[index] ? <div className="absolute top-5 right-5 text-white"><Music index={index}/></div>: null}
+          <div className="absolute top-5 right-5 text-white"><Music index={index}/></div>
         </div>
-      ))}
+
     </div>
+
+  </div>
+
+
+)})}
+
+</div>
+
+    </>
   )
 }
 
 export default VoyageTiles
+
+
