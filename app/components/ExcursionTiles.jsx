@@ -5,18 +5,36 @@ const ExcursionTiles = ({dailyExcursions}) => {
   const [selectedExcursions, setSelectedExcursions] = useState([]);
 
   useEffect(() => {
+
     const excurs = localStorage.getItem('excursions');
     if(excurs){
       setSelectedExcursions(JSON.parse(excurs));
       const ids = JSON.parse(excurs).map((exc) => exc.id);
       setClickedBoxes([...ids]);
     }
+   // nest all the data into one object and store it in local storage
+   /*
+    const booking = localStorage.getItem('bookingDetails');
+    if(booking){
+      setSelectedExcursions(JSON.parse(booking).excursions);
+      const ids = JSON.parse(booking).excursions.map((exc) => exc.id);
+      setClickedBoxes([...ids]);
+    }
+    */
   },[]);
 
+
   const boxOnClick = (excursionId) => {
+
     if(clickedBoxes.includes(parseInt(excursionId))) {
       setClickedBoxes(clickedBoxes.filter((box) => box !== parseInt(excursionId)));
       setSelectedExcursions(selectedExcursions.filter((exc) => parseInt(exc.id) !== parseInt(excursionId)));
+      //// nest all the data into one object and store it in local storage
+      /*
+      const bookingDetails = JSON.parse(localStorage.getItem('bookingDetails'));
+      bookingDetails.excursions = bookingDetails.excursions.filter((exc) => parseInt(exc.id) !== parseInt(excursionId));
+      localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails)); */
+
       localStorage.setItem('excursions', JSON.stringify(selectedExcursions.filter((exc) => parseInt(exc.id) !== parseInt(excursionId))));
     } else {
       setClickedBoxes([...clickedBoxes, parseInt(excursionId)]);
@@ -24,6 +42,11 @@ const ExcursionTiles = ({dailyExcursions}) => {
         dailyExcursions[i].excursions.forEach((excursion) => {
           if(parseInt(excursion.id) === parseInt(excursionId)){
             const {id, name, price} = excursion;
+            // nest all the data into one object and store it in local storage
+           /* const bookingDetails = JSON.parse(localStorage.getItem('bookingDetails')) || {};
+            bookingDetails.excursions = [...selectedExcursions, {"id": id, "name": name, "price": price}];
+            localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails)); */
+
             setSelectedExcursions([...selectedExcursions, {"id": id, "name": name, "price": price}]);
             localStorage.setItem('excursions', JSON.stringify([...selectedExcursions, {"id": id, "name": name, "price": price}]));
           }
