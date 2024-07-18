@@ -53,10 +53,10 @@ const VoyageTiles = ({voyages}) => {
         </div>
       </div>
 
-      <div className="flex  flex-wrap justify-evenly items-center w-[100%] my-4">
+      <div className="flex  flex-wrap justify-center  items-center w-[100%] my-4">
         {voyages.map((voyage, index)=> {
          return (
-          <div className="h-96 w-72 my-2 bg-transparent cursor-pointer group perspectiv" key={index}>
+          <div className="h-96 w-[19%] min-w-64 mx-1 my-2 bg-transparent cursor-pointer group perspectiv" key={index}>
             <div className="relative preserve-3d group-hover:rotate-y-180 w-full h-full duration-1000">
               <div className="absolute  back-hidden border-2 w-full h-full shadow-2xl">
                 <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover" ></img>
