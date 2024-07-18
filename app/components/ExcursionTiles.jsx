@@ -42,21 +42,25 @@ const ExcursionTiles = ({dailyExcursions}) => {
    }
   return (
 
-      <div className="flex flex-col justify-center items-center overflow-hidden p-10" >
+      <div className="flex bg-gray-100 m-0 flex-col justify-center items-center overflow-hidden p-10 m-10" >
         {dailyExcursions && dailyExcursions.map((daily) => {
           return(
-            <div key={daily.day} className=" w-[100%] rounded-lg shadow-lg overflow-hidden bg-gray-200 text-center p-10 m-10"  >
-              <h2 className="text-5xl p-2" >Day: {daily.day}</h2>
-              <h2 className="text-4xl border-b-1 border-white p-10">Port: {daily.portname}</h2>
-              <div className="flex flex-1 justify-between">
+            <div key={daily.day} className=" w-full p-0 m-0 rounded-lg shadow-lg border-overflow-hidden border-2 border-inherit bg-white justify-around text-center mb-4"  >
+              <div className="w-full pt-5" >
+                <h2 className="text-3xl font-bold" >Day: {daily.day}</h2>
+                <h2 className="text-3xl p-5">Port: {daily.portname}</h2>
+              </div>
+              <div className="flex justify-around">
               {
                 daily.excursions && daily.excursions.map((excursion) => {
                   return (
                     <button
                       className={
                         clickedBoxes.includes(parseInt(excursion.id))
-                        ? "flex flex-col bg-blue-300 border-r-2"
-                        : "flex flex-col bg-white border-r-2"
+                        ?
+                        "w-[17%] h-96 flex items-left flex-col bg-blue-600 text-white border-2 p-5 mb-10 rounded-xl"
+                        :
+                        "w-[17%] h-96 flex items-left flex-col bg-gray-100 border-2 p-5 mb-10 rounded-xl"
                       }
                       onClick={()=>{
                         boxOnClick(excursion.id);
@@ -64,12 +68,13 @@ const ExcursionTiles = ({dailyExcursions}) => {
                       value={excursion.id}
                       key={excursion.id}
                     >
-                      <h2>{excursion.name}</h2>
-                      <img className="w-48 h-32 rounded" src={excursion.image} alt={excursion.name} onClick={(e)=>{
+                      <span className="text-left text-3xl">{excursion.name}</span>
+                      <span className="text-l pt-2 pb-2">${excursion.price}</span>
+                      <img className="w-[100%] h-56 max-h-56 min-h-48 rounded" src={excursion.image} alt={excursion.name} onClick={(e)=>{
                         boxOnClick(excursion.id);
                       }} />
-                      <span>{adjustTime(excursion.time)}</span>
-                      <span>${excursion.price}</span>
+                      <span className="pb-5 pt-5">{adjustTime(excursion.time)}</span>
+
                     </button>
                   )
                 })
