@@ -3,6 +3,7 @@ import { login, loginVerify } from '../utils/auth'
 import { supabaseClient, supabaseServer } from '~/utils/supabase'
 import redirectCookie from '../utils/redirectCookie'
 import AuthForm from '../components/AuthForm'
+import OTP from '../components/OTP'
 
 export const loader = async ({ request }) => {
   const redirectURL = await redirectCookie.parse(request.headers.get('Cookie'))
@@ -38,6 +39,7 @@ const Login = () => {
 
   return (
     <>
+      {/* <OTP /> */}
       <AuthForm
         step="login"
         redirectURL={redirectURL}

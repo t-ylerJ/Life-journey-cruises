@@ -10,7 +10,6 @@ import {
 } from '@remix-run/react'
 import './tailwind.css'
 import Header from './components/Header.jsx'
-import SubHeader from './components/SubHeader.jsx'
 import Error from '~/components/Error'
 import AIssistant from '~/components/AIssistant.jsx'
 import { supabaseServer, supabaseClient } from '~/utils/supabase'
@@ -22,7 +21,7 @@ export const loader = async ({ request }) => {
     data: { user },
   } = await supabase.auth.getUser()
   // console.log(user);
-  return json({ user: user ?? null, openai : process.env.OPENAI_KEY ?? null })
+  return json({ user: user ?? null, openai: process.env.OPENAI_KEY ?? null })
 }
 export const clientAction = async () => {
   await supabaseClient.auth.signOut()
@@ -30,7 +29,7 @@ export const clientAction = async () => {
   return null
 }
 export function Layout({ children }) {
-  const { user, openai } = useRouteLoaderData("root");
+  const { user, openai } = useRouteLoaderData('root') ?? {}
   // console.log(useLoaderData());
   return (
     <html lang="en">
@@ -62,7 +61,6 @@ export function ErrorBoundary() {
   console.error(error)
   return (
     <>
-      <title>Oh no!</title>
       <Error />
     </>
   )

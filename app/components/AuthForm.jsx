@@ -23,12 +23,15 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
             type="email"
             name="email"
             placeholder="Email"
+            required
             className="form-input"
           />
           <input
             type="password"
             name="password"
             placeholder="Password"
+            minLength={8}
+            required
             className="form-input"
           />
           {step === 'signup' ? (
@@ -36,6 +39,9 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
               type="text"
               name="phone"
               placeholder="Phone"
+              minLength={11}
+              maxLength={11}
+              required
               className="form-input"
             />
           ) : null}

@@ -1,15 +1,16 @@
 import Map from '~/components/Map'
 import PortDetails from '~/components/PortDetails'
 import Ports from '~/components/Ports'
-import {json } from '@remix-run/node'
+import { json } from '@remix-run/node'
 import sql from '~/utils/sql'
 import { useLoaderData } from '@remix-run/react'
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
+import redirectCookie from '../utils/redirectCookie'
 
-export const loader = async ({ params }) => {
+export const loader = async ({ request, params }) => {
   try {
-  const voyageId = params.voyage;
-  const voyageData = await sql`select
+    const voyageId = params.voyage
+    const voyageData = await sql`select
                             vp.day,
                             p.name as portname,
                             p.description AS portdescription,
@@ -25,7 +26,7 @@ export const loader = async ({ params }) => {
                           group by vp.day, p.name, p.description, p.photo
                           order by vp.day`
 
-  const mapData = await sql`
+    const mapData = await sql`
       SELECT
         m.id,
         m.center_lat,
@@ -42,41 +43,65 @@ export const loader = async ({ params }) => {
         m.voyage_id = ${voyageId} -- Filter by the dynamic voyageId
       GROUP BY
         m.id;
-    `;
+    `
 
-  return json({ voyageData, mapData, mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN || null});
-} catch (error) {
-  console.error("Error in loader:", error);
-  throw json({error:error.message}, {status:500});
+    return json(
+      {
+        voyageData,
+        mapData,
+        mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN || null,
+      },
+      {
+        headers: {
+          'Set-Cookie': await redirectCookie.serialize(
+            new URL(request.url).pathname
+          ),
+        },
+      }
+    )
+  } catch (error) {
+    console.error('Error in loader:', error)
+    throw json(
+      { error: error.message },
+      {
+        headers: {
+          'Set-Cookie': await redirectCookie.serialize(
+            new URL(request.url).pathname
+          ),
+        },
+        status: 500,
+      }
+    )
+  }
 }
-};
-
 
 const Voyages = () => {
-  const [eventsAndExcursions, setEventsAndExcursions] = useState([]);
-  const [events, setEvents] = useState([]);
-  const [excursions, setExcursions] = useState([]);
-  const [isPortClicked, setIsPortClicked] = useState(false);
-  const [photo, setPhoto] = useState('');
-  const [description, setDescription] = useState('');
-  const { voyageData, voyageId, mapData, error, mapboxAccessToken} = useLoaderData();
+  const [eventsAndExcursions, setEventsAndExcursions] = useState([])
+  const [events, setEvents] = useState([])
+  const [excursions, setExcursions] = useState([])
+  const [isPortClicked, setIsPortClicked] = useState(false)
+  const [photo, setPhoto] = useState('')
+  const [description, setDescription] = useState('')
+  const { voyageData, voyageId, mapData, error, mapboxAccessToken } =
+    useLoaderData()
 
   useEffect(() => {
-    setEventsAndExcursions([...voyageData]);
-  }, [voyageData]);
+    setEventsAndExcursions([...voyageData])
+  }, [voyageData])
 
   const handleClose = () => {
-    setIsPortClicked(false);
+    setIsPortClicked(false)
   }
 
   const handleClick = (day) => {
-
-    const daySchedule = eventsAndExcursions.find((event) => parseInt(event.day) === parseInt(day));
-    setEvents([...(daySchedule.events)]);
-    setExcursions([...daySchedule.excursions]);
-    setDescription(daySchedule.portdescription);
-    setPhoto(daySchedule.photo);
-    setIsPortClicked(true);
+    const daySchedule = eventsAndExcursions.find(
+      (event) => parseInt(event.day) === parseInt(day)
+    )
+    setEvents([...daySchedule.events])
+    setExcursions([...daySchedule.excursions])
+    setDescription(daySchedule.portdescription)
+    setPhoto(daySchedule.photo)
+    setIsPortClicked(true)
   }
 
   return (
@@ -85,16 +110,28 @@ const Voyages = () => {
       {!isPortClicked ? (
         <>
           {mapboxAccessToken ? (
-          <Map mapData={mapData[0]} mapboxAccessToken={mapboxAccessToken} /> /* Pass data as prop */
+            <Map
+              mapData={mapData[0]}
+              mapboxAccessToken={mapboxAccessToken}
+            /> /* Pass data as prop */
           ) : (
-            <div className='map-error font-bold bg-red-600 p-2'>Mapbox access token is missing!</div>
+            <div className="map-error font-bold bg-red-600 p-2">
+              Mapbox access token is missing!
+            </div>
           )}
-          </>
-        ) : (
-        <PortDetails description={description} photo={photo} events={events} excursions={excursions} isPortClicked = {isPortClicked} closeHandler={handleClose}/>
+        </>
+      ) : (
+        <PortDetails
+          description={description}
+          photo={photo}
+          events={events}
+          excursions={excursions}
+          isPortClicked={isPortClicked}
+          closeHandler={handleClose}
+        />
       )}
     </div>
   )
 }
 
-export default Voyages;
+export default Voyages
