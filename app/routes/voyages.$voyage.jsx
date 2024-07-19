@@ -85,7 +85,7 @@ const Voyages = () => {
     <div className='flex flex-col space-x-4 h-[calc(100vh-15rem)]'>
     <div className="grid grid-cols-3 gap-4 flex-grow">
       <Ports schedule={eventsAndExcursions} clickHandler={handleClick} setHighlightedPort={setHighlightedPort} hoveredPort={hoveredPort} />
-      <div className="h-full col-span-2">
+      <div className="h-full col-span-2 p-4">
       {!isPortClicked ? (
         <>
           {mapboxAccessToken ? (

@@ -112,7 +112,7 @@ const Map = ({mapData, mapboxAccessToken, highlightedPort, hoveredPort}) => {
   }, [mapData, highlightedPort]); // Trigger effect when mapData changes
 
   return (
-    <div className="map-container h-full w-full" ref={mapContainerRef} >
+    <div className="map-container h-full w-full rounded-lg" ref={mapContainerRef} >
       {/* Map will be rendered here */}
     </div>
   );
