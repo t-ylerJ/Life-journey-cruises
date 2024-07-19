@@ -1,6 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const FlappyCruise = () => {
+  const [played, setPlayed] = useState(false)
+
   const playerRef = useRef()
 
   // useEffect(() => {
@@ -10,8 +12,9 @@ const FlappyCruise = () => {
   // }, [])
 
   const handleClick = () => {
-    if (!playerRef.current?.playing) {
+    if (!playerRef.current?.playing && !played) {
       playerRef.current?.play()
+      setPlayed(true)
     }
   }
 
