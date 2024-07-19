@@ -22,10 +22,17 @@ export const loader = async ({ request }) => {
   return json({ user, profile: profiles[0] })
 }
 
+export const meta = () => {
+  return [
+    { title: `Checkout | Life Journey Cruises` },
+    { name: 'description', content: 'Life Journey Cruises' },
+  ]
+}
+
 const Checkout = () => {
   const { profile } = useLoaderData() ?? {};
   return (
-    <div className="w-100% block mx-10 min-w-[860px] mt-12">
+    <div className="w-100% grid grid-cols-2 min-w-[860px]">
       <PurchaseSummary />
       <PaymentForm user={profile}/>
     </div>

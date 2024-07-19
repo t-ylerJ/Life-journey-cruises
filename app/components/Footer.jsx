@@ -4,7 +4,11 @@ import { Link } from '@remix-run/react'
 
 const Footer = () => {
   return (
-    <div className="flex justify-between items-center p-6 bg-white border-b-4 border-blue-500">
+    <div style={{
+      backgroundImage: "url('/FooterBG.svg')",
+      backgroundPosition: "bottom",
+      backgroundRepeat: "no-repeat"
+    }}  className="bg-white flex justify-between items-center p-6">
       <div className="text-left flex-1">
         <h1 className="text-xl font-bold">Join the Journey</h1>
         <p className="text-sm">Subscribe to our mailing list.</p>

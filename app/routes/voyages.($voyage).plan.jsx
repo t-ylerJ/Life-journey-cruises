@@ -1,9 +1,10 @@
 import ExcursionTiles from '../components/ExcursionTiles'
 import sql from '~/utils/sql'
-import {json} from '@remix-run/node'
+import { json } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 //import {supabaseServer} from '~/utils/supabase'
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
+import redirectCookie from '../utils/redirectCookie'
 /*
 export const loader = async ({ request, params}) => {
 
@@ -17,8 +18,8 @@ export const loader = async ({ request, params}) => {
 }
 */
 
-export const loader = async ({ params }) => {
-  const voyageId = params.voyage;
+export const loader = async ({ request, params }) => {
+  const voyageId = params.voyage
   const data = await sql`select
                             vp.day,
                             p.name as portname,
@@ -37,20 +38,30 @@ export const loader = async ({ params }) => {
                           group by vp.day, p.name, p.description
                           order by vp.day`
 
-   return json({data})
+  return json(
+    { data },
+    {
+      headers: {
+        'Set-Cookie': await redirectCookie.serialize(
+          new URL(request.url).pathname
+        ),
+      },
+    }
+  )
 }
 
 const Plan = () => {
-  const [excursions, setExcursions] = useState([]);
-  const {data}  = useLoaderData()
-
+  const [excursions, setExcursions] = useState([])
+  const { data } = useLoaderData()
 
   useEffect(() => {
-    setExcursions([...data.slice(0, data.length - 1)]);
-  }, []);
+    setExcursions([...data.slice(0, data.length - 1)])
+  }, [data])
 
-  return <>
-    <ExcursionTiles dailyExcursions={excursions} />
-  </>
+  return (
+    <>
+      <ExcursionTiles dailyExcursions={excursions} />
+    </>
+  )
 }
 export default Plan

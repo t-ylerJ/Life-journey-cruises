@@ -5,7 +5,9 @@ import { SlArrowRight } from "react-icons/sl";
 
 
 const Testimonials = () => {
+  const groups = [];
   const [testimonials, setTestimonials] = useState([]);
+  const [photoGroups, setPhotoGroups] = useState([]);
 
   function createTestimonials(number) {
     const startSentences = [
@@ -56,7 +58,7 @@ const Testimonials = () => {
       "We loved every moment on the Journey of the Stars. We were blown away by the ",
       "The Journey of the Stars took us to places that were breathtaking. We couldn't get enough of the ",
       "Our cruise on the Journey of the Stars was outstanding.",
-      "Every day on the Journey of the Stars was fantastic. We couldn't get enough of the",
+      "Every day on the Journey of the Stars was fantastic. We couldn't get enough of the ",
       "Our Alaskan journey on the Journey of the Stars was incredible.",
       "Our cruise on the Journey of the Seas was unforgettable.",
       "Sailing the Mexican Riviera on the Journey of the Seas was spectacular.",
@@ -82,7 +84,6 @@ const Testimonials = () => {
       "Sailing the Caribbean on the Journey of the Voyager was spectacular.",
       "We had the best time on the Journey of the Voyager. I can't wait to tell everyone I know how great this trip was. I'm still thrilled about our ",
       "The Journey of the Voyager cruise was remarkable. We thoroughly enjoyed our ",
-
       "The Journey of Serenity cruise was remarkable. We thoroughly enjoyed our ",
       "Exploring the Mediterranean with the Journey of Serenity was amazing. We were blown away by the ",
       "We enjoyed every moment on the Journey of Serenity. The adventure had the most ",
@@ -100,52 +101,93 @@ const Testimonials = () => {
       "dreamy", "luxurious", "tranquil", "romantic",
       "refreshing", "captivating", "ethereal", "lush",
       "mesmerizing", "invigorating", "thrilling"
-      ];
-
-    const names = [
-      "Liam Q.", "Emma F.", "Eric R.", "Noah J.", "Olivia I.", "Ava", "Elijah A.", "Charlotte C.", "Sophia E.",
-      "James S.", "Eric R.", "Amelia Z.", "Benjamin F.", "Mia D.", "Lucas Z.", "Harper M.", "Mason B.", "Evelyn F.",
-      "Ethan R.", "Abigail P.", "Eric R.", "Logan L.", "Ella N.", "Alexander R.", "Scarlett R.", "Jackson I.",
-      "Grace Z.", "Eric R.", "Aiden O.", "Victoria H.", "Sebastian R.", "Aria J.", "Matthew J.", "Luna L."
     ];
 
-    return Array.from({ length: number }, () => {
-      const sentence = startSentences[Math.floor(Math.random() * startSentences.length)];
-      const adjective = sentence[sentence.length -1] === '.' ? '' : adjectives[Math.floor(Math.random() * adjectives.length)] + '... ';
-      const name = names[Math.floor(Math.random() * names.length)]
-      return sentence + adjective + ' -' + name;
-    });
-  }
+    const femaleNames = [
+      "Emma F.", "Olivia I.","Ava","Charlotte C.","Sophia E.","Amelia Z.","Mia D.","Harper M.","Evelyn F.","Abigail P.","Ella N.","Scarlett R.","Grace Z.","Victoria H.","Aria J.","Luna L."
+    ];
+    const maleNames = [
+      "Liam Q.","Eric R.","Noah J.","Elijah A.","James S.","Eric R.","Benjamin F.","Lucas Z.","Mason B.","Ethan R.","Eric R.","Logan L.","Alexander R.","Jackson I.","Eric R.","Aiden O.","Sebastian R.","Matthew J."
+    ];
 
-  const refreshTestimonials = function() {
-    setTestimonials(createTestimonials(testimonials.length))
-  }
+    const generatePhotoUrl = (name) => {
+      const baseUrl = 'https://randomuser.me/api/portraits/';
+      const gender = femaleNames.includes(name) ? 'women' : 'men';
+      const randomIndex = Math.floor(Math.random() * 99);
+      const url = `${baseUrl}${gender}/${randomIndex}.jpg`;
+      return url;
+      }
 
-  useEffect(() => {
-    setTestimonials(createTestimonials(4))
-  }, [])
+
+      const pictures = [
+        'https://i.pinimg.com/736x/d0/fe/a8/d0fea88d8ff91114cca5981389413c33.jpg',
+        'https://plus.unsplash.com/premium_photo-1661776159919-ec12aefb81e7?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1617339860369-2899b2234892?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1618456724325-3590b567ec59?q=80&w=2605&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1617170708704-3189ba27e822?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.pexels.com/photos/23708739/pexels-photo-23708739/free-photo-of-passenger-on-ferry-in-sea.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/22600337/pexels-photo-22600337/free-photo-of-brunette-woman-with-camera-on-a-boat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/23708739/pexels-photo-23708739/free-photo-of-passeng[…]rry-in-sea.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/24031827/pexels-photo-24031827/free-photo-of-high-an[…]-on-a-boat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/22600337/pexels-photo-22600337/free-photo-of-brunett[…]-on-a-boat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/13485218/pexels-photo-13485218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/22600334/pexels-photo-22600334/free-photo-of-brunett[…]-on-a-boat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/6752435/pexels-photo-6752435.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      ]
+
+
+
+
+
+      return Array.from({ length: number }, () => {
+        const sentence = startSentences[Math.floor(Math.random() * startSentences.length)];
+        const adjective = sentence[sentence.length -1] === '.' ? '' : adjectives[Math.floor(Math.random() * adjectives.length)] + '... ';
+        const name = Math.random() > .5 ? femaleNames[Math.floor(Math.random() * femaleNames.length)] : maleNames[Math.floor(Math.random() * maleNames.length)]
+        const photoUrl = generatePhotoUrl(name);
+
+        return { text: sentence + adjective + '   -' + name, photo: photoUrl };
+      });
+    }
+
+
+    console.log(photoGroups)
+
+    const refreshTestimonials = function() {
+      setTestimonials(createTestimonials(testimonials.length));
+    }
+
+    useEffect(() => {
+      setTestimonials(createTestimonials(4));
+    }, [])
+
+
 
 
   return <div>
-      <div className="px-8 flex flex-row justify-center gap-x-4 mb-6 overflow-hidden">
+      <div className="px-8 gap-x-4 mb-6 flex flex-row">
         {testimonials.map((testimonial, index) => (
-        <div key={index} className="p-6 pb-8 bg-white font-roboto-flex w-1/5 shrink-0 border-2 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg">
-          {testimonial}
-          <div className="rating">
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
-          <input
-            type="radio"
-            name="rating-2"
-            className="mask mask-star-2 bg-accent" disabled
-            />
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled defaultChecked/>
-        </div>
+        <div key={index} className="p-6 pb-8 gap-2 flex flex-row font-roboto-flex w-1/5 border-2 border-secondary transform justify-between transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg bg-white">
+          <div className="flex flex-col justify-between">
+          <p>{testimonial.text}</p>
+
+          <div className="rating align-bottom">
+            <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
+            <input
+              type="radio"
+              name="rating-2"
+              className="mask mask-star-2 bg-accent" disabled
+              />
+            <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
+            <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
+            <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled defaultChecked/>
+            </div>
+
+          </div>
+            <img src={testimonial.photo} className="flex flex-grow-0 self-center size-30 rounded-full" alt="reviews of cruise ship with photos"/>
         </div>
         ))}
       <div className="flex items-center">
-        <button className="" onClick={refreshTestimonials}>See More <SlArrowRight /></button>
+        <button className="button" onClick={refreshTestimonials}>See More <SlArrowRight /></button>
       </div>
 
       </div>
