@@ -12,7 +12,7 @@ export const loader = async ({ request }) => {
   if (!user)
     throw redirect('/login', {
       headers: {
-        'Set-Cookie': await redirectCookie.serialize('/checkout'),
+        'Set-Cookie': await redirectCookie.serialize('/voyages/checkout'),
       },
     })
   const { data: profiles } = await supabase
