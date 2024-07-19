@@ -118,13 +118,34 @@ const Testimonials = () => {
       return url;
     }
 
+    const getCruisePicture = () => {
+      const pictures = [
+        'https://i.pinimg.com/736x/d0/fe/a8/d0fea88d8ff91114cca5981389413c33.jpg',
+        'https://plus.unsplash.com/premium_photo-1661776159919-ec12aefb81e7?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1617339860369-2899b2234892?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1618456724325-3590b567ec59?q=80&w=2605&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.unsplash.com/photo-1617170708704-3189ba27e822?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        'https://images.pexels.com/photos/23708739/pexels-photo-23708739/free-photo-of-passenger-on-ferry-in-sea.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/22600337/pexels-photo-22600337/free-photo-of-brunette-woman-with-camera-on-a-boat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/23708739/pexels-photo-23708739/free-photo-of-passeng[…]rry-in-sea.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/24031827/pexels-photo-24031827/free-photo-of-high-an[…]-on-a-boat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/22600337/pexels-photo-22600337/free-photo-of-brunett[…]-on-a-boat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/13485218/pexels-photo-13485218.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/22600334/pexels-photo-22600334/free-photo-of-brunett[…]-on-a-boat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        'https://images.pexels.com/photos/6752435/pexels-photo-6752435.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      ]
+
+
+    }
+
+
       return Array.from({ length: number }, () => {
         const sentence = startSentences[Math.floor(Math.random() * startSentences.length)];
         const adjective = sentence[sentence.length -1] === '.' ? '' : adjectives[Math.floor(Math.random() * adjectives.length)] + '... ';
         const name = Math.random() > .5 ? femaleNames[Math.floor(Math.random() * femaleNames.length)] : maleNames[Math.floor(Math.random() * maleNames.length)]
-        const photoUrl = generatePhotoUrl(name)
+        const photoUrl = generatePhotoUrl(name);
 
-        return { text: sentence + adjective + ' -' + name, photo: photoUrl };
+        return { text: sentence + adjective + '   -' + name, photo: photoUrl };
       });
     }
 
@@ -145,10 +166,12 @@ const Testimonials = () => {
   return <div>
       <div className="px-8 flex flex-row justify-center gap-x-4 mb-6 overflow-hidden">
         {testimonials.map((testimonial, index) => (
-        <div key={index} className="p-6 pb-8 bg-white font-roboto-flex w-1/5 shrink-0 border-2 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg">
+        <div key={index} className="p-6 pb-8 gap-2 bg-white font-roboto-flex grid grid-cols-2 w-1/5 border-2 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg">
           {testimonial.text}
-          <img src={testimonial.photo} alt="reviews of cruise ship with photos"/>
-          <div className="rating">
+          {testimonial.photo &&
+            <img src={testimonial.photo} className="flex flex-grow-0 self-center size-30 rounded-full" alt="reviews of cruise ship with photos"/>
+          }
+          <div className="rating align-bottom">
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
             <input
               type="radio"
@@ -162,7 +185,7 @@ const Testimonials = () => {
         </div>
         ))}
       <div className="flex items-center">
-        <button className="" onClick={refreshTestimonials}>See More <SlArrowRight /></button>
+        <button className="button" onClick={refreshTestimonials}>See More <SlArrowRight /></button>
       </div>
 
       </div>

@@ -17,11 +17,14 @@ body {
     @apply input input-bordered w-full;
   }
   .button {
-    @apply font-roboto-flex text-xl text-white font-normal rounded-md btn btn-primary  hover:bg-black hover:text-white;
-   }
-  button-secondary {
-    @apply font-roboto-flex text-xl btn btn-outline btn-primary;
+    @apply font-lato text-xl text-white font-normal rounded-md btn bg-primary hover:bg-black
   }
+  .secondary-button {
+    @apply font-lato text-xl text-white font-normal rounded-md btn bg-primary hover:bg-black
+  }
+  .button-outline {
+    @apply font-roboto-flex text-xl btn btn-outline btn-primary;
+}
 }
 
 
