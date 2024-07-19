@@ -4,8 +4,8 @@ import Ports from '~/components/Ports'
 import { json } from '@remix-run/node'
 import sql from '~/utils/sql'
 import { useLoaderData } from '@remix-run/react'
-import { useState, useEffect } from 'react'
 import redirectCookie from '../utils/redirectCookie'
+import { useState, useEffect, useRef } from 'react'
 
 export const loader = async ({ request, params }) => {
   try {
@@ -82,8 +82,10 @@ const Voyages = () => {
   const [isPortClicked, setIsPortClicked] = useState(false)
   const [photo, setPhoto] = useState('')
   const [description, setDescription] = useState('')
+  const [highlightedPort, setHighlightedPort] = useState('')
   const { voyageData, voyageId, mapData, error, mapboxAccessToken } =
     useLoaderData()
+  const hoveredPort = useRef(null)
 
   useEffect(() => {
     setEventsAndExcursions([...voyageData])
@@ -105,31 +107,42 @@ const Voyages = () => {
   }
 
   return (
-    <div className="flex space-x-4">
-      <Ports schedule={eventsAndExcursions} clickHandler={handleClick} />
-      {!isPortClicked ? (
-        <>
-          {mapboxAccessToken ? (
-            <Map
-              mapData={mapData[0]}
-              mapboxAccessToken={mapboxAccessToken}
-            /> /* Pass data as prop */
-          ) : (
-            <div className="map-error font-bold bg-red-600 p-2">
-              Mapbox access token is missing!
-            </div>
-          )}
-        </>
-      ) : (
-        <PortDetails
-          description={description}
-          photo={photo}
-          events={events}
-          excursions={excursions}
-          isPortClicked={isPortClicked}
-          closeHandler={handleClose}
+    <div className="flex flex-col space-x-4 h-[calc(100vh-15rem)]">
+      <div className="grid grid-cols-3 gap-4 flex-grow">
+        <Ports
+          schedule={eventsAndExcursions}
+          clickHandler={handleClick}
+          setHighlightedPort={setHighlightedPort}
+          hoveredPort={hoveredPort}
         />
-      )}
+        <div className="h-full col-span-2 p-4">
+          {!isPortClicked ? (
+            <>
+              {mapboxAccessToken ? (
+                <Map
+                  mapData={mapData[0]}
+                  mapboxAccessToken={mapboxAccessToken}
+                  highlightedPort={highlightedPort}
+                  hoveredPort={hoveredPort}
+                /> /* Pass data as prop */
+              ) : (
+                <div className="map-error font-bold bg-red-600 p-2">
+                  Mapbox access token is missing!
+                </div>
+              )}
+            </>
+          ) : (
+            <PortDetails
+              description={description}
+              photo={photo}
+              events={events}
+              excursions={excursions}
+              isPortClicked={isPortClicked}
+              closeHandler={handleClose}
+            />
+          )}
+        </div>
+      </div>
     </div>
   )
 }

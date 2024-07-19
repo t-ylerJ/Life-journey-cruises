@@ -23,6 +23,10 @@ body {
   }
 }
 
+.markerElement path:nth-child(3) {
+  fill: #e93ab5;
+}
+
 h1-lato {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
