@@ -5,7 +5,6 @@ import redirectCookie from '~/utils/redirectCookie'
 import { json, redirect, useLoaderData } from '@remix-run/react'
 
 export const loader = async ({ request }) => {
-  console.log('here');
   const supabase = supabaseServer(request)
   const {
     data: { user },
@@ -13,10 +12,9 @@ export const loader = async ({ request }) => {
   if (!user)
     throw redirect('/login', {
       headers: {
-        'Set-Cookie': await redirectCookie.serialize('/account'),
+        'Set-Cookie': await redirectCookie.serialize('/checkout'),
       },
     })
-    console.log(user);
   const { data: profiles } = await supabase
     .from('profiles')
     .select()
@@ -26,7 +24,6 @@ export const loader = async ({ request }) => {
 
 const Checkout = () => {
   const { profile } = useLoaderData() ?? {};
-  console.log(profile);
   return (
     <div className="w-100% block mx-10 min-w-[860px] mt-12">
       <PurchaseSummary />
