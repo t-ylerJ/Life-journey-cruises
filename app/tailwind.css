@@ -24,6 +24,9 @@ body {
   }
 }
 
+.markerElement path:nth-child(3) {
+  fill: #E93AB5;
+}
 
 h1-lato {
   font-family: "Lato", sans-serif;

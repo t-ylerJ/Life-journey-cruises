@@ -24,14 +24,14 @@ const BookingSelector = ({ onSubmit, rooms }) => {
 
   const getImagePath = (roomName) => {
     const roomImageMap = {
-      'Balcony Cabin': 'balconyCabin03.png',
-      'Inside Cabin': 'insideCabin01.png',
-      'Junior Suite': 'juniorSuite05.png',
-      'Ocean View Cabin': 'oceanView02.png',
-      'Penthouse Suite': 'penthouseSuite06.png',
-      'Royal Suite': 'royalSuite07.png',
-      'Studio': 'studio08.png',
-      'Suite': 'suite04.png',
+      'Balcony Cabin': 'balconycabin.png',
+      'Inside Cabin': 'insidecabin.png',
+      'Junior Suite': 'juniorsuite.png',
+      'Ocean View Cabin': 'oceanviewcabin.png',
+      'Penthouse Suite': 'penthousesuite.png',
+      'Royal Suite': 'royalsuite.png',
+      'Studio': 'studio.png',
+      'Suite': 'suite.png',
       'Accessible Cabin': 'accessibleCabin09.jpg'
     };
     return `/rooms/${roomImageMap[roomName]}`;
@@ -74,7 +74,7 @@ const BookingSelector = ({ onSubmit, rooms }) => {
               <option value="" disabled>Select Room Type</option>
               {rooms.map((room) => (
                 <option key={room.name} value={room.name}>
-                  {room.name} - {room.description} (${room.price})
+                  {room.name} - ${room.price}
                 </option>
               ))}
             </select>
