@@ -5,16 +5,17 @@ import {
   Scripts,
   ScrollRestoration,
   json,
+  redirect,
   useRouteError,
   useRouteLoaderData,
 } from '@remix-run/react'
 import './tailwind.css'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
-import SubHeader from './components/SubHeader.jsx'
 import Error from '~/components/Error'
 import AIssistant from '~/components/AIssistant.jsx'
 import { supabaseServer, supabaseClient } from '~/utils/supabase'
+import cookie from 'cookie'
 
 export const loader = async ({ request }) => {
   // console.log('hi');
@@ -23,15 +24,22 @@ export const loader = async ({ request }) => {
     data: { user },
   } = await supabase.auth.getUser()
   // console.log(user);
-  return json({ user: user ?? null, openai : process.env.OPENAI_KEY ?? null })
+  return json({ user: user ?? null, openai: process.env.OPENAI_KEY ?? null })
 }
 export const clientAction = async () => {
   await supabaseClient.auth.signOut()
-  // console.log('hello');
-  return null
+  const cookies = cookie.parse(document.cookie)
+  let redirectURL = atob(cookies.redirect)
+  redirectURL = redirectURL.slice(1, redirectURL.length - 1)
+  return new Response(null, {
+    status: 303,
+    headers: {
+      Location: redirectURL,
+    },
+  })
 }
 export function Layout({ children }) {
-  const { user, openai } = useRouteLoaderData("root");
+  const { user, openai } = useRouteLoaderData('root') ?? {}
   // console.log(useLoaderData());
   return (
     <html lang="en">
@@ -47,7 +55,7 @@ export function Layout({ children }) {
         <main className="flex-grow">{children}</main>
         <ScrollRestoration />
         <Scripts />
-        <Footer/>
+        <Footer />
 
         {openai && <AIssistant />}
       </body>
@@ -64,7 +72,6 @@ export function ErrorBoundary() {
   console.error(error)
   return (
     <>
-      <title>Oh no!</title>
       <Error />
     </>
   )

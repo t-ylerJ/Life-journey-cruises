@@ -22,6 +22,13 @@ export const loader = async ({ request }) => {
   return json({ user, profile: profiles[0] })
 }
 
+export const meta = () => {
+  return [
+    { title: `Checkout | Life Journey Cruises` },
+    { name: 'description', content: 'Life Journey Cruises' },
+  ]
+}
+
 const Checkout = () => {
   const { profile } = useLoaderData() ?? {};
   return (
