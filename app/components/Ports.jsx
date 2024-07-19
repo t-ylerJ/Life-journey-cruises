@@ -3,7 +3,7 @@ const Ports = ({schedule, clickHandler}) => {
     e.preventDefault();
     clickHandler(e.target.value);
   }
-  return <div className="w-2/5">
+  return <div className="w-full">
     {schedule.map((item) => {
       const hoverClass = item.day === 1 ?  'hover:bg-secondary/30' :'hover:bg-blue-300/30';
       return (

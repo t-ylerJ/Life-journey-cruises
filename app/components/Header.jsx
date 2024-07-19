@@ -65,8 +65,8 @@ const Header = ({ user }) => {
           </div>
         ) : (
           <div className="flex space-x-4">
-            <Link to="/login" className="secondary-button">Login</Link>
-            <Link to="/signup" className="btn secondary-button">Signup</Link>
+            <Link to="/login" className="btn bg-secondary text-white">Login</Link>
+            <Link to="/signup" className="btn bg-secondary text-white">Signup</Link>
           </div>
         )}
       </div>

@@ -116,9 +116,9 @@ const Testimonials = () => {
       const randomIndex = Math.floor(Math.random() * 99);
       const url = `${baseUrl}${gender}/${randomIndex}.jpg`;
       return url;
-    }
+      }
 
-    const getCruisePicture = () => {
+
       const pictures = [
         'https://i.pinimg.com/736x/d0/fe/a8/d0fea88d8ff91114cca5981389413c33.jpg',
         'https://plus.unsplash.com/premium_photo-1661776159919-ec12aefb81e7?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -136,7 +136,7 @@ const Testimonials = () => {
       ]
 
 
-    }
+
 
 
       return Array.from({ length: number }, () => {
@@ -164,13 +164,12 @@ const Testimonials = () => {
 
 
   return <div>
-      <div className="px-8 flex flex-row justify-center gap-x-4 mb-6 overflow-hidden">
+      <div className="px-8 gap-x-4 mb-6 flex flex-row">
         {testimonials.map((testimonial, index) => (
-        <div key={index} className="p-6 pb-8 gap-2 bg-white font-roboto-flex grid grid-cols-2 w-1/5 border-2 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg">
-          {testimonial.text}
-          {testimonial.photo &&
-            <img src={testimonial.photo} className="flex flex-grow-0 self-center size-30 rounded-full" alt="reviews of cruise ship with photos"/>
-          }
+        <div key={index} className="p-6 pb-8 gap-2 flex flex-row font-roboto-flex w-1/5 border-2 border-secondary transform justify-between transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg bg-white">
+          <div className="flex flex-col justify-between">
+          <p>{testimonial.text}</p>
+
           <div className="rating align-bottom">
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
             <input
@@ -181,7 +180,10 @@ const Testimonials = () => {
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled defaultChecked/>
+            </div>
+
           </div>
+            <img src={testimonial.photo} className="flex flex-grow-0 self-center size-30 rounded-full" alt="reviews of cruise ship with photos"/>
         </div>
         ))}
       <div className="flex items-center">
