@@ -5,7 +5,6 @@ const PaymentSummary = () => {
     React.useEffect(() => {
       setPayInfo(JSON.parse(localStorage.getItem('payInfo')));
     }, []);
-  console.log(payInfo);
   const payKeys = Object.keys(payInfo);
   if (payInfo.guests) {
     return (<div className="inline-block float-right w-1/4 text-center">
