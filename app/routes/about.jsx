@@ -25,10 +25,16 @@ const About = () => {
               Life Is a Journey, Not a Destination
             </h1>
           </div>
+
           <div className="p-4">
             <h2 className="text-2xl font-semibold text-white">
               Our Founder: Brett Spenderson Senior
             </h2>
+            <img
+              src="/brett_70.png"
+              style={{ height: '128px' }}
+              className="mx-auto"
+            />
             <p className="mt-4 text-white">
               Life Journey Cruises was founded by Brett Spenderson Senior with a
               small loan of a million dollars. With a vision to revolutionize
