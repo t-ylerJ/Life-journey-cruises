@@ -65,7 +65,7 @@ const ExcursionTiles = ({dailyExcursions}) => {
    }
   return (
 
-      <div className="flex bg-gray-100 flex-col justify-center items-center overflow-hidden md:p-10 p-4 md:m-10 m-2"  >
+      <div className="w-full flex bg-gray-100 flex-col justify-center items-center overflow-hidden md:p-10 p-4 m-0"  >
         {dailyExcursions && dailyExcursions.map((daily) => {
           return(
             <div key={daily.day} className=" w-full p-0 m-0 rounded-lg shadow-lg border-overflow-hidden border-2 border-inherit bg-white justify-around text-center mb-4"  >
@@ -81,9 +81,9 @@ const ExcursionTiles = ({dailyExcursions}) => {
                       className={
                         clickedBoxes.includes(parseInt(excursion.id))
                         ?
-                        "w-[50%] md:w-[32%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-primary text-white border-2 p-3 md:p-5 mb-2 md:mb-10 rounded-xl"
+                        "w-[46%] md:w-[31.5%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-accent text-white border-2 p-3 md:p-5 mb-2 md:mb-10 md:ml-3 m-3 rounded-xl"
                         :
-                        "w-[50%] md:w-[32%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-gray-100 border-2 p-3 md:p-5 mb-2 md:mb-10 rounded-xl"
+                        "w-[46%] md:w-[31.5%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-gray-100 border-2 p-3 md:p-5 mb-2 md:mb-10 md:ml-3 ml-3 rounded-xl"
                       }
                       onClick={()=>{
                         boxOnClick(excursion.id);
