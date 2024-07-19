@@ -60,12 +60,6 @@ const Book = () => {
     end: new Date(date.end_time)
   }));
 
-  //console.log(selectableDates);
-  /*const excursions = [
-    {id: 111, name: 'Hollywood Tour', price: 106},
-    {id: 112, name: 'Beach Day', price: 193},
-    {id: 113, name: 'Disneyland Trip', price: 187}
-  ];*/
   const handleGuestsSubmit = ({guests, selectedRooms}) => {
     setNumGuests(guests);
     setSelectedRooms(selectedRooms);
