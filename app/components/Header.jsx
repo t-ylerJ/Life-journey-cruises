@@ -12,8 +12,8 @@ const Header = ({ user }) => {
   };
 
   return (
-    <div className="flex justify-between items-center p-4 bg-white">
-      <img className="w-64" src="/Logo.svg" alt="Logo" />
+    <div style={{ backgroundImage: "url('/HeaderBG.svg')"}} className="flex justify-between items-center p-4 bg-white">
+
 
       <nav className="flex-1 flex justify-center space-x-12">
         <Link
@@ -45,21 +45,21 @@ const Header = ({ user }) => {
             <img
               src="/avatar.svg"
               alt="Avatar"
-              className="p-2 w-12 h-12 cursor-pointer"
+              className="p-2 w-20 h-20 cursor-pointer"
               onMouseEnter={() => setDropdownOpen(true)}
             />
             {dropdownOpen && (
               <div
-                className="absolute right-0 mt-2 w-20 bg-secondary rounded-md shadow-lg py-2 z-50"
+                className="absolute right-0 mt-2 w-20 bg-white rounded-md shadow-lg py-2 z-50"
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)}
               >
                 <Form method='post'>
-                  <button>
+                  <button className="b-2">
                     Logout
                   </button>
                 </Form>
-                <Link to="/account">Account</Link>
+                <Link to="/account" className="b-2">Account</Link>
               </div>
             )}
           </div>
