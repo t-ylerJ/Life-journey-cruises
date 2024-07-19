@@ -110,11 +110,12 @@ const Testimonials = () => {
       "Liam Q.","Eric R.","Noah J.","Elijah A.","James S.","Eric R.","Benjamin F.","Lucas Z.","Mason B.","Ethan R.","Eric R.","Logan L.","Alexander R.","Jackson I.","Eric R.","Aiden O.","Sebastian R.","Matthew J."
     ];
 
-    const generatePhotoUrl = (index) => {
+    const generatePhotoUrl = (name) => {
       const baseUrl = 'https://randomuser.me/api/portraits/';
       const gender = femaleNames.includes(name) ? 'women' : 'men';
       const randomIndex = Math.floor(Math.random() * 99);
-      return `${baseUrl}${gender}/${randomIndex}.jpg`
+      const url = `${baseUrl}${gender}/${randomIndex}.jpg`;
+      return url;
     }
 
       return Array.from({ length: number }, () => {
