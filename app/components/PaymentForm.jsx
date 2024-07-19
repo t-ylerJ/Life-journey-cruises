@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 
 const PaymentForm = ({ user }) => {
+  var userKeys = ['card_number', 'cvv', 'expiration', 'card_name', 'street', 'city', 'state', 'zip'];
+  userKeys.map((key) => {
+    if (!user[key]) {
+      user[key] = '';
+    }
+  })
   const [formObj, setFormObj] = useState({});
   const [guestCount, setGuestCount] = useState([]);
   useEffect(() => {
