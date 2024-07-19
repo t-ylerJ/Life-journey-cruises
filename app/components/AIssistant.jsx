@@ -79,10 +79,10 @@ const AIssistant = () => {
           </form>
         </>
       ) : (
-        <motion.div layout className="chat chat-start">
-          <div className="chat-bubble text-white flex justify-center bg-secondary p-1">
+        <motion.div className="chat chat-start w-full h-full">
+          <div className="chat-bubble text-white flex justify-center bg-secondary p-1 w-full h-full">
             {/* <PiRobot size={48} /> */}
-            <svg
+            <motion.svg
               className="w-8 h-8"
               viewBox="0 0 28 35"
               fill="none"
@@ -95,7 +95,7 @@ const AIssistant = () => {
                 stroke="currentColor"
                 strokeWidth="2"
               />
-            </svg>
+            </motion.svg>
           </div>
         </motion.div>
       )}
