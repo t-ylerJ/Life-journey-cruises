@@ -5,6 +5,7 @@ import {
   Scripts,
   ScrollRestoration,
   json,
+  redirect,
   useRouteError,
   useRouteLoaderData,
 } from '@remix-run/react'
@@ -14,6 +15,7 @@ import Footer from './components/Footer.jsx'
 import Error from '~/components/Error'
 import AIssistant from '~/components/AIssistant.jsx'
 import { supabaseServer, supabaseClient } from '~/utils/supabase'
+import cookie from 'cookie'
 
 export const loader = async ({ request }) => {
   // console.log('hi');
@@ -26,8 +28,15 @@ export const loader = async ({ request }) => {
 }
 export const clientAction = async () => {
   await supabaseClient.auth.signOut()
-  // console.log('hello');
-  return null
+  const cookies = cookie.parse(document.cookie)
+  let redirectURL = atob(cookies.redirect)
+  redirectURL = redirectURL.slice(1, redirectURL.length - 1)
+  return new Response(null, {
+    status: 303,
+    headers: {
+      Location: redirectURL,
+    },
+  })
 }
 export function Layout({ children }) {
   const { user, openai } = useRouteLoaderData('root') ?? {}
