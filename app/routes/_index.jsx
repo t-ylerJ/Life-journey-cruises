@@ -1,4 +1,3 @@
-
 import BigPicture from '../components/BigPicture'
 import Testimonials from '../components/Testimonials'
 import VoyageTiles from '../components/VoyageTiles'

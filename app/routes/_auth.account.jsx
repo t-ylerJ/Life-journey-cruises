@@ -3,6 +3,13 @@ import { useEffect, useRef } from 'react'
 import { supabaseServer } from '~/utils/supabase'
 import redirectCookie from '~/utils/redirectCookie'
 
+export const meta = () => {
+  return [
+    { title: `Account | Life Journey Cruises` },
+    { name: 'description', content: 'Life Journey Cruises' },
+  ]
+}
+
 export const loader = async ({ request }) => {
   const supabase = supabaseServer(request)
   const {

@@ -13,7 +13,3 @@ body {
     @apply input input-bordered w-full;
   }
 }
-
-input:invalid {
-  border-color: red;
-}

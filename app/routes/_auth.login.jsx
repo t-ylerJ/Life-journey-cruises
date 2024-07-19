@@ -5,6 +5,13 @@ import redirectCookie from '../utils/redirectCookie'
 import AuthForm from '../components/AuthForm'
 import OTP from '../components/OTP'
 
+export const meta = () => {
+  return [
+    { title: `Login | Life Journey Cruises` },
+    { name: 'description', content: 'Life Journey Cruises' },
+  ]
+}
+
 export const loader = async ({ request }) => {
   const redirectURL = await redirectCookie.parse(request.headers.get('Cookie'))
   console.log(redirectURL)

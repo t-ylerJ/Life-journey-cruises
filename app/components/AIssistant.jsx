@@ -80,8 +80,22 @@ const AIssistant = () => {
         </>
       ) : (
         <motion.div layout className="chat chat-start">
-          <div className="chat-bubble text-white flex justify-center bg-neutral-600 p-1">
-            <PiRobot size={48} />
+          <div className="chat-bubble text-white flex justify-center bg-accent p-1">
+            {/* <PiRobot size={48} /> */}
+            <svg
+              className="w-8 h-8"
+              viewBox="0 0 28 35"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="10" cy="23" r="2" fill="currentColor" />
+              <circle cx="18" cy="23" r="2" fill="currentColor" />
+              <path
+                d="M4 23V20C4 20 4 16 8 16C8.66667 16 9.33333 16 10 16M4 23H1V29H4M4 23V29M4 29V34H8M24 23V20C24 20 24 16 20 16C19.3333 16 18.6667 16 18 16M24 23H27V29H24M24 23V29M24 29V34H20M8 34V29H12M8 34H12M20 34V29H16M20 34H16M12 29V34M12 29H16M12 34H16M16 29V34M10 16L14 4L18 16M10 16C12.6667 16 15.3333 16 18 16"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+            </svg>
           </div>
         </motion.div>
       )}
@@ -95,8 +109,8 @@ const Message = ({ message, index }) => {
       className={`chat w-full ${index % 2 === 0 ? 'chat-start' : 'chat-end'}`}
     >
       <div
-        className={`chat-bubble flex items-center text-white ${
-          index % 2 === 0 ? 'bg-neutral-600' : 'bg-neutral-400'
+        className={`chat-bubble flex items-center text-white font-medium ${
+          index % 2 === 0 ? 'bg-accent' : 'bg-primary'
         }`}
       >
         {message === 'typing' ? (

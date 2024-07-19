@@ -1,6 +1,7 @@
-import { Form } from '@remix-run/react'
+import { Form, Link } from '@remix-run/react'
 import { useEffect, useRef } from 'react'
 import OTP from './OTP'
+import { signup } from '../utils/auth'
 
 const AuthForm = ({ step, redirectURL, actionData }) => {
   const emailRef = useRef()
@@ -14,16 +15,20 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
     }
   }, [actionData])
 
+  const labelStyle = 'invisible w-0 h-0'
+
   return (
     <>
       {!actionData ? (
         <Form className="flex flex-col gap-4" key={step} method="post">
           <input
             ref={emailRef}
+            id="email"
             type="email"
             name="email"
             placeholder="Email"
             required
+            aria-label="email"
             className="form-input"
           />
           <input
@@ -32,6 +37,7 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
             placeholder="Password"
             minLength={8}
             required
+            aria-label="password"
             className="form-input"
           />
           {step === 'signup' ? (
@@ -42,12 +48,26 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
               minLength={11}
               maxLength={11}
               required
+              aria-label="phone"
               className="form-input"
             />
           ) : null}
           <button name="action" value={step} className="btn btn-primary">
             SUBMIT
           </button>
+          {
+            <p>
+              {step === 'signup'
+                ? 'Already have an account? Log in '
+                : 'New cruiser? Sign up '}
+              <Link
+                className="underline"
+                to={step === 'signup' ? '/login' : '/signup'}
+              >
+                here.
+              </Link>
+            </p>
+          }
         </Form>
       ) : actionData.verify ? (
         <>
