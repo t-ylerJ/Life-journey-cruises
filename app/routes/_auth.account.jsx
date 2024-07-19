@@ -108,7 +108,7 @@ const Account = () => {
         />
         <input
           name="expiration"
-          placeholder="Card Number"
+          placeholder="Expiration"
           className="form-input"
         />
         <input

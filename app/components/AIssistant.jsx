@@ -80,7 +80,7 @@ const AIssistant = () => {
         </>
       ) : (
         <motion.div layout className="chat chat-start">
-          <div className="chat-bubble text-white flex justify-center bg-accent p-1">
+          <div className="chat-bubble text-white flex justify-center bg-secondary p-1">
             {/* <PiRobot size={48} /> */}
             <svg
               className="w-8 h-8"
@@ -110,7 +110,7 @@ const Message = ({ message, index }) => {
     >
       <div
         className={`chat-bubble flex items-center text-white font-medium ${
-          index % 2 === 0 ? 'bg-accent' : 'bg-primary'
+          index % 2 === 0 ? 'bg-secondary' : 'bg-primary'
         }`}
       >
         {message === 'typing' ? (

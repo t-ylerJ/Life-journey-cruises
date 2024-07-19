@@ -10,6 +10,7 @@ import {
 } from '@remix-run/react'
 import './tailwind.css'
 import Header from './components/Header.jsx'
+import Footer from './components/Footer.jsx'
 import Error from '~/components/Error'
 import AIssistant from '~/components/AIssistant.jsx'
 import { supabaseServer, supabaseClient } from '~/utils/supabase'
@@ -45,6 +46,7 @@ export function Layout({ children }) {
         <main className="flex-grow">{children}</main>
         <ScrollRestoration />
         <Scripts />
+        <Footer />
 
         {openai && <AIssistant />}
       </body>
