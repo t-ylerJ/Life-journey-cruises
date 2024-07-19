@@ -1,4 +1,10 @@
-import { Form, json, redirect, useLoaderData } from '@remix-run/react'
+import {
+  Form,
+  json,
+  redirect,
+  useActionData,
+  useLoaderData,
+} from '@remix-run/react'
 import { useEffect, useRef } from 'react'
 import { supabaseServer } from '~/utils/supabase'
 import redirectCookie from '~/utils/redirectCookie'
@@ -40,12 +46,13 @@ export const action = async ({ request }) => {
   }
   // console.log(formData)
   await supabase.from('profiles').upsert(formData, { onConflict: 'user_id' })
-  return null
+  return true
 }
 
 const Account = () => {
-  const { user, profile } = useLoaderData()
+  const { user, profile } = useLoaderData() ?? {}
   // console.log(user, profile)
+  const submitted = useActionData()
 
   const formRef = useRef()
 
@@ -80,53 +87,100 @@ const Account = () => {
         method="post"
       >
         <input type="hidden" name="user_id" />
-        <input
-          name="first_name"
-          placeholder="First Name"
-          className="form-input"
-        />
-        <input
-          name="last_name"
-          placeholder="Last Name"
-          className="form-input"
-        />
-        <input
-          type="date"
-          name="birthday"
-          placeholder="Date of Birth"
-          className="form-input"
-        />
-        <input
-          name="passport"
-          placeholder="Passport Number"
-          className="form-input"
-        />
-        <input
-          name="card_number"
-          placeholder="Card Number"
-          className="form-input"
-        />
-        <input
-          name="expiration"
-          placeholder="Expiration"
-          className="form-input"
-        />
-        <input
-          name="card_name"
-          placeholder="Name on Card"
-          className="form-input"
-        />
-        <input
-          type="number"
-          name="cvv"
-          placeholder="CVV"
-          className="form-input"
-        />
-        <input name="street" placeholder="Address" className="form-input" />
-        <input name="city" placeholder="City" className="form-input" />
-        <input name="state" placeholder="State" className="form-input" />
-        <input name="zip" placeholder="Zip Code" className="form-input" />
-        <button className="btn btn-primary">SAVE</button>
+        <fieldset>
+          <legend>Personal</legend>
+          <label>
+            First Name:
+            <input
+              name="first_name"
+              placeholder="First Name"
+              className="form-input"
+            />
+          </label>
+          <label>
+            Last Name:
+            <input
+              name="last_name"
+              placeholder="Last Name"
+              className="form-input"
+            />
+          </label>
+          <label>
+            Date of Birth:
+            <input
+              type="date"
+              name="birthday"
+              placeholder="Date of Birth"
+              className="form-input"
+            />
+          </label>
+          <label>
+            Passport Number:
+            <input
+              name="passport"
+              placeholder="Passport Number"
+              className="form-input"
+            />
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Address:</legend>
+          <label>
+            Street address:
+            <input name="street" placeholder="Address" className="form-input" />
+          </label>
+          <label>
+            City:
+            <input name="city" placeholder="City" className="form-input" />
+          </label>
+          <label>
+            State:
+            <input name="state" placeholder="State" className="form-input" />
+          </label>
+          <label>
+            Zip Code:
+            <input name="zip" placeholder="Zip Code" className="form-input" />
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>Payment Info</legend>
+          <label>
+            Name on Card:
+            <input
+              name="card_name"
+              placeholder="Name on Card"
+              className="form-input"
+            />
+          </label>
+          <label>
+            Card Number:
+            <input
+              name="card_number"
+              placeholder="Card Number"
+              className="form-input"
+            />
+          </label>
+          <label>
+            Expiration Date:
+            <input
+              name="expiration"
+              placeholder="Expiration"
+              className="form-input"
+            />
+          </label>
+          <label>
+            CVV:
+            <input
+              type="number"
+              name="cvv"
+              placeholder="CVV"
+              className="form-input"
+            />
+          </label>
+        </fieldset>
+        <button className="btn btn-primary" disabled={submitted}>{`SAVE${
+          submitted ? 'D' : ''
+        }`}</button>
       </Form>
     </>
   )

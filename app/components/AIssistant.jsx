@@ -2,7 +2,7 @@ import { useFetcher } from '@remix-run/react'
 import { useEffect, useRef, useState } from 'react'
 import { PiRobot } from 'react-icons/pi'
 import { IoIosClose } from 'react-icons/io'
-import { motion } from 'framer-motion'
+import { LayoutGroup, motion } from 'framer-motion'
 
 const initial = {
   role: 'assistant',
@@ -80,7 +80,7 @@ const AIssistant = () => {
         </>
       ) : (
         <motion.div className="chat chat-start w-full h-full">
-          <div className="chat-bubble text-white flex justify-center bg-secondary p-1 w-full h-full">
+          <motion.div className="chat-bubble text-white flex justify-center bg-secondary p-1 w-full h-full">
             {/* <PiRobot size={48} /> */}
             <motion.svg
               className="w-8 h-8"
@@ -96,7 +96,7 @@ const AIssistant = () => {
                 strokeWidth="2"
               />
             </motion.svg>
-          </div>
+          </motion.div>
         </motion.div>
       )}
     </motion.div>

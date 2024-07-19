@@ -5,7 +5,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 html,
 body {
   min-height: 100vh;
@@ -18,24 +17,30 @@ body {
   }
   button {
     @apply font-roboto-flex text-xl text-white font-normal rounded-md btn btn-primary  hover:bg-black hover:text-white;
-   }
+  }
   button-secondary {
     @apply font-roboto-flex text-xl btn btn-outline btn-primary;
   }
 }
 
-
 h1-lato {
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: 300;
   font-style: normal;
   font-size: 24px;
 }
 
 h2 {
-  font-family: "Roboto Flex", sans-serif;
+  font-family: 'Roboto Flex', sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-};
+}
 
+fieldset {
+  @apply border p-4;
+}
+
+legend {
+  @apply bg-white px-2;
+}

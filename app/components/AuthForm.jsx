@@ -21,6 +21,11 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
     <>
       {!actionData ? (
         <Form className="flex flex-col gap-4" key={step} method="post">
+          {step === 'login' ? (
+            <p>Login:</p>
+          ) : step === 'signup' ? (
+            <p>Sign up:</p>
+          ) : null}
           <input
             ref={emailRef}
             id="email"
