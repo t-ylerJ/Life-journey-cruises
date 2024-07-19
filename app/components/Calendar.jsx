@@ -53,8 +53,7 @@ const Calendar = ({selectableDates, setSelectedDateRange}) => {
   return (
     <div className="p-4">
       <h1 className="text-white mb-2 mt-3 text-2xl text-center tracking-wider">Select Your Journey Date</h1>
-      <div className="flex justify-center">
-      <div className="relative">
+      <div className="flex  flex-col items-center relative">
         <button
           className="flex items-center border p-2 px-20 rounded shadow"
           onClick={() => setShowCalendar(!showCalendar)}
@@ -63,7 +62,7 @@ const Calendar = ({selectableDates, setSelectedDateRange}) => {
           <FaCalendarAlt className="w-4 h-4 text-white"/>
         </button>
         {showCalendar && (
-          <div className="absolute">
+          <div className="">
             <DatePicker
               selected={startDate}
               onChange={handleDateChange}
@@ -73,7 +72,6 @@ const Calendar = ({selectableDates, setSelectedDateRange}) => {
               />
           </div>
         )}
-      </div>
       </div>
     </div>
   );
