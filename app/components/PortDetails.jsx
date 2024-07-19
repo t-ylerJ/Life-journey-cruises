@@ -18,7 +18,7 @@ const PortDetails = ({ events, excursions, closeHandler, photo, description }) =
           <p className="mt-4 text-center leading-normal">{description}</p>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4 text-justify mt-4">
+      <div className="grid grid-cols-2 gap-4 text-center mt-4">
         <div>
           <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
             Event during the cruise

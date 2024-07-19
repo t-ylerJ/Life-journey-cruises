@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import brett60 from '/brett_60.png';
+import brett70 from '/brett_70.png';
 
 const About = () => {
   return (

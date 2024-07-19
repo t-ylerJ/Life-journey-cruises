@@ -17,7 +17,7 @@ const TileClass = plugin(function({addUtilities}) {
     ".back-hidden": {
       backfaceVisibility: "hidden",
     },
-    
+
 
   })
 });
@@ -25,7 +25,22 @@ const TileClass = plugin(function({addUtilities}) {
 export default {
   content: ['./app/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        customBlue: '#056DBD',
+        customOrange: '#FF7233',
+        customYellow: '#FBD756',
+        customPink: '#E93AB5'
+      },
+      fontFamily: {
+        'roboto-flex': ['"Roboto Flex"', 'sans-serif'],
+        'lato': ['"Lato"', 'sans-serif'],
+
+      },
+      fontSize: {
+        md: '14px'
+      }
+    },
   },
   plugins: [require('daisyui'), TileClass],
   daisyui: {
@@ -33,12 +48,19 @@ export default {
       {
         light: {
           ...themes['light'],
-          primary: '#0578D6',
-          secondary: '#FBD756',
-          accent: '#FF7233',
+         primary: '#056DBD',
+         secondary: '#FF7233',
+         accent: '#FBD756',
           warning: '#E93AB5',
         },
+        party: {
+          primary: '#3b82f6',
+          secondary: '#fb923c',
+          neutral: '#f472b6',
+          accent: '#bef264',
+        }
       },
     ],
   },
 } satisfies Config
+
