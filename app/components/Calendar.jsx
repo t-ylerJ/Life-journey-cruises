@@ -3,14 +3,29 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FaCalendarAlt } from 'react-icons/fa';
 
-const Calendar = ({selectableDates, setSelectedDate}) => {
+const Calendar = ({selectableDates, setSelectedDateRange}) => {
   const [startDate, setStartDate] = useState(null);
   const [showCalendar, setShowCalendar] = useState(false);
 
+  // const isSelectable = (date) => {
+  //   return selectableDates.some(
+  //     ({start, end}) => date >= start && date <= end
+  //   );
+  // };
+
+  const stripTime = (date) => {
+    const newDate = new Date(date);
+    newDate.setHours(0, 0, 0, 0);
+    return newDate;
+  };
+
   const isSelectable = (date) => {
-    return selectableDates.some(
-      (selectableDate) => selectableDate.toDateString() === date.toDateString()
-    );
+    const strippedDate = stripTime(date);
+    return selectableDates.some(({ start, end }) => {
+      const startDate = stripTime(start);
+      const endDate = stripTime(end);
+      return strippedDate >= startDate && strippedDate <= endDate;
+    });
   };
 
  /* return (
@@ -26,28 +41,35 @@ const Calendar = ({selectableDates, setSelectedDate}) => {
   const handleDateChange = (date) => {
     setStartDate(date);
     setShowCalendar(false);
-    setSelectedDate(date); // Hide calendar after date selection
+    const strippedDate = stripTime(date);
+    const selectedRange = selectableDates.find(
+      ({ start, end }) => strippedDate >= stripTime(start) && strippedDate <= stripTime(end)
+    );
+    if (selectedRange) {
+      setSelectedDateRange(selectedRange);
+    }
   };
 
   return (
     <div className="p-4">
-      <h2 className="text-lg font-semibold mb-2">Select Starting Date</h2>
-      <div className="relative">
-        <button
-          className="flex items-center border p-2 rounded shadow"
+      <h1 className="text-white mb-2 mt-3 text-2xl text-center tracking-wider">Select Your Journey Date</h1>
+      <div className="flex  flex-col items-center relative">
+        <div
+          className="flex items-center border p-2 px-20 rounded shadow"
           onClick={() => setShowCalendar(!showCalendar)}
         >
-          <span className="mr-2">{startDate ? startDate.toDateString() : "Select Date"}</span>
-          <FaCalendarAlt />
-        </button>
+          <span className="mr-2 text-white tracking-wider">{startDate ? startDate.toDateString() : " __/__/____ "}</span>
+          <FaCalendarAlt className="w-4 h-4 text-white"/>
+        </div>
         {showCalendar && (
-          <div className="absolute top-full mt-2 bg-white border rounded shadow z-10">
+          <div className="">
             <DatePicker
               selected={startDate}
               onChange={handleDateChange}
               filterDate={isSelectable}
               inline
-            />
+              monthsShown={2}
+              />
           </div>
         )}
       </div>

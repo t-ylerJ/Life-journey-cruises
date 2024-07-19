@@ -3,7 +3,6 @@ import sql from '~/utils/sql'
 import {json} from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 //import {supabaseServer} from '~/utils/supabase'
-import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 /*
 export const loader = async ({ request, params}) => {
@@ -43,26 +42,6 @@ export const loader = async ({ params }) => {
 
 const Plan = () => {
   const [excursions, setExcursions] = useState([]);
-  const [selectedExcursions, setSelectedExcursions] = useState([]);
-
-  const handleCheckExcursionChange = (event) => {
-    const excursionId = event.target.value;
-    if (event.target.checked) {
-      for(let i = 0; i < excursions.length; i++){
-        excursions[i].excursions.forEach((excursion) => {
-          if(parseInt(excursion.id) === parseInt(excursionId)){
-            const {id, name, price} = excursion;
-            setSelectedExcursions([...selectedExcursions, {"id": id, "name": name, "price": price}]);
-          }
-       })
-      }
-    } else {
-      const updatedExcursions = selectedExcursions.filter((ex) =>{
-        return parseInt(ex.id) !== parseInt(excursionId)
-      } );
-      setSelectedExcursions(updatedExcursions);
-    }
-  };
   const {data}  = useLoaderData()
 
 
@@ -70,12 +49,8 @@ const Plan = () => {
     setExcursions([...data.slice(0, data.length - 1)]);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('excursions', JSON.stringify(selectedExcursions));
-  }, [selectedExcursions]);
-
   return <>
-    <ExcursionTiles dailyExcursions={excursions} checkChanged={handleCheckExcursionChange}/>
+    <ExcursionTiles dailyExcursions={excursions} />
   </>
 }
 export default Plan

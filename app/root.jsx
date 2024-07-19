@@ -5,11 +5,12 @@ import {
   Scripts,
   ScrollRestoration,
   json,
-  useLoaderData,
   useRouteError,
+  useRouteLoaderData,
 } from '@remix-run/react'
 import './tailwind.css'
 import Header from './components/Header.jsx'
+import Footer from './components/Footer.jsx'
 import SubHeader from './components/SubHeader.jsx'
 import Error from '~/components/Error'
 import AIssistant from '~/components/AIssistant.jsx'
@@ -22,7 +23,7 @@ export const loader = async ({ request }) => {
     data: { user },
   } = await supabase.auth.getUser()
   // console.log(user);
-  return json({ user: user ?? null })
+  return json({ user: user ?? null, openai : process.env.OPENAI_KEY ?? null })
 }
 export const clientAction = async () => {
   await supabaseClient.auth.signOut()
@@ -30,7 +31,7 @@ export const clientAction = async () => {
   return null
 }
 export function Layout({ children }) {
-  const { user } = useLoaderData()
+  const { user, openai } = useRouteLoaderData("root");
   // console.log(useLoaderData());
   return (
     <html lang="en">
@@ -46,8 +47,9 @@ export function Layout({ children }) {
         <main className="flex-grow">{children}</main>
         <ScrollRestoration />
         <Scripts />
+        <Footer/>
 
-        <AIssistant />
+        {openai && <AIssistant />}
       </body>
     </html>
   )

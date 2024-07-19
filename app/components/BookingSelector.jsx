@@ -22,21 +22,37 @@ const BookingSelector = ({ onSubmit, rooms }) => {
     onSubmit({guests, selectedRooms});
   };
 
+  const getImagePath = (roomName) => {
+    const roomImageMap = {
+      'Balcony Cabin': 'balconycabin.png',
+      'Inside Cabin': 'insidecabin.png',
+      'Junior Suite': 'juniorsuite.png',
+      'Ocean View Cabin': 'oceanviewcabin.png',
+      'Penthouse Suite': 'penthousesuite.png',
+      'Royal Suite': 'royalsuite.png',
+      'Studio': 'studio.png',
+      'Suite': 'suite.png',
+      'Accessible Cabin': 'accessibleCabin09.jpg'
+    };
+    return `/rooms/${roomImageMap[roomName]}`;
+  };
+
+
   return (
-    <div className="p-4 border rounded shadow mt-4">
-      <h2 className="text-lg font-semibold mb-2">Number of Guests and Rooms</h2>
+    <div className="p-4 mt-4 animate-slide-up bg-white/50 rounded-lg">
+      <h2 className="text-2xl mb-2 tracking-wider text-center">Guests and Rooms</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="number"
           value={guests}
           onChange={(e) => setGuests(e.target.value)}
           placeholder="Enter number of guests"
-          className="border p-2 rounded"
+          className="border p-2 rounded w-full"
           min="1"
           required
         />
-        <div className="mt-4">
-          <label>Number of Rooms:</label>
+        <div className="mt-4 tracking-wider">
+          <p>Number of Rooms:</p>
           <input
             type="number"
             value={roomCount}
@@ -52,29 +68,31 @@ const BookingSelector = ({ onSubmit, rooms }) => {
             <select
               value={selectedRooms[index] || ''}
               onChange={(e) => handleRoomChange(index, e.target.value)}
-              className="border p-2 rounded"
+              className="border p-2 rounded w-full"
               required
             >
               <option value="" disabled>Select Room Type</option>
               {rooms.map((room) => (
                 <option key={room.name} value={room.name}>
-                  {room.name} - {room.description} (${room.price})
+                  {room.name} - ${room.price}
                 </option>
               ))}
             </select>
           </div>
         ))}
-        <button type="submit" className="ml-2 bg-blue-500 text-white p-2 rounded">Submit</button>
+        <button type="submit" className="mt-2 bg-primary text-white p-2 rounded">Submit</button>
       </form>
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <h3 className="text-lg font-semibold mb-2 col-span-full">Available Rooms</h3>
+        <h3 className="text-lg font-semibold col-span-full">Available Rooms</h3>
         {rooms.map((room) => (
-          <div key={room.name} className="border rounded shadow p-4">
+          <div key={room.name} className="border rounded shadow p-4 bg-white flex flex-col">
             <h4 className="text-md font-semibold">{room.name}</h4>
-            <p className="text-sm">{room.description}</p>
+            <p className="text-sm flex-grow">{room.description}</p>
             <p className="text-sm font-semibold">${room.price}</p>
-            <img src="https://www.sunway.ie/cruise/images/ships/Silver-Ray/Master-Suite.jpg" alt="available room"
-              className="mt-2 w-full rounded"/>
+            <div className="w-full overflow-hidden mt-auto">
+            <img src={getImagePath(room.name)} alt="available room"
+              className="object-cover h-full w-full"/>
+          </div>
           </div>
         ))}
       </div>
