@@ -81,7 +81,7 @@ const ExcursionTiles = ({dailyExcursions}) => {
                       className={
                         clickedBoxes.includes(parseInt(excursion.id))
                         ?
-                        "w-[46%] md:w-[30.5%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-accent text-white border-2 p-3 md:p-3 mb-2 md:mb-10 md:ml-2 m-2 rounded-xl"
+                        "w-[46%] md:w-[30.5%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-accent text-primary border-2 p-3 md:p-3 mb-2 md:mb-10 md:ml-2 m-2 rounded-xl"
                         :
                         "w-[46%] md:w-[30.5%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-gray-100 border-2 p-3 md:p-3 mb-2 md:mb-10 md:ml-2 m-2 rounded-xl"
                       }
