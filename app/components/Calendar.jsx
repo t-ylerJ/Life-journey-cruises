@@ -55,10 +55,10 @@ const Calendar = ({selectableDates, setSelectedDateRange}) => {
       <h1 className="text-white mb-2 mt-3 text-2xl text-center tracking-wider">Select Your Journey Date</h1>
       <div className="flex  flex-col items-center relative">
         <div
-          className="flex items-center border p-2 px-20 rounded shadow cursor-pointer"
+          className="flex items-center border p-2 px-20 rounded shadow"
           onClick={() => setShowCalendar(!showCalendar)}
         >
-          <span className="mr-2 text-white tracking-wider bg-transparent">{startDate ? startDate.toDateString() : " __/__/____ "}</span>
+          <span className="mr-2 text-white tracking-wider">{startDate ? startDate.toDateString() : " __/__/____ "}</span>
           <FaCalendarAlt className="w-4 h-4 text-white"/>
         </div>
         {showCalendar && (

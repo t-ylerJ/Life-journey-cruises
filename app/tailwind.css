@@ -16,12 +16,12 @@ body {
   .form-input {
     @apply input input-bordered w-full;
   }
-  /* button {
+  button {
     @apply font-roboto-flex text-xl text-white font-normal rounded-md btn btn-primary  hover:bg-black hover:text-white;
-   } */
-  /* button-secondary {
+   }
+  button-secondary {
     @apply font-roboto-flex text-xl btn btn-outline btn-primary;
-  } */
+  }
 }
 
 
