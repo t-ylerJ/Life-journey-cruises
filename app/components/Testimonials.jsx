@@ -5,7 +5,9 @@ import { SlArrowRight } from "react-icons/sl";
 
 
 const Testimonials = () => {
+  const groups = [];
   const [testimonials, setTestimonials] = useState([]);
+  const [photoGroups, setPhotoGroups] = useState([]);
 
   function createTestimonials(number) {
     const startSentences = [
@@ -56,7 +58,7 @@ const Testimonials = () => {
       "We loved every moment on the Journey of the Stars. We were blown away by the ",
       "The Journey of the Stars took us to places that were breathtaking. We couldn't get enough of the ",
       "Our cruise on the Journey of the Stars was outstanding.",
-      "Every day on the Journey of the Stars was fantastic. We couldn't get enough of the",
+      "Every day on the Journey of the Stars was fantastic. We couldn't get enough of the ",
       "Our Alaskan journey on the Journey of the Stars was incredible.",
       "Our cruise on the Journey of the Seas was unforgettable.",
       "Sailing the Mexican Riviera on the Journey of the Seas was spectacular.",
@@ -82,7 +84,6 @@ const Testimonials = () => {
       "Sailing the Caribbean on the Journey of the Voyager was spectacular.",
       "We had the best time on the Journey of the Voyager. I can't wait to tell everyone I know how great this trip was. I'm still thrilled about our ",
       "The Journey of the Voyager cruise was remarkable. We thoroughly enjoyed our ",
-
       "The Journey of Serenity cruise was remarkable. We thoroughly enjoyed our ",
       "Exploring the Mediterranean with the Journey of Serenity was amazing. We were blown away by the ",
       "We enjoyed every moment on the Journey of Serenity. The adventure had the most ",
@@ -100,48 +101,63 @@ const Testimonials = () => {
       "dreamy", "luxurious", "tranquil", "romantic",
       "refreshing", "captivating", "ethereal", "lush",
       "mesmerizing", "invigorating", "thrilling"
-      ];
-
-    const names = [
-      "Liam Q.", "Emma F.", "Eric R.", "Noah J.", "Olivia I.", "Ava", "Elijah A.", "Charlotte C.", "Sophia E.",
-      "James S.", "Eric R.", "Amelia Z.", "Benjamin F.", "Mia D.", "Lucas Z.", "Harper M.", "Mason B.", "Evelyn F.",
-      "Ethan R.", "Abigail P.", "Eric R.", "Logan L.", "Ella N.", "Alexander R.", "Scarlett R.", "Jackson I.",
-      "Grace Z.", "Eric R.", "Aiden O.", "Victoria H.", "Sebastian R.", "Aria J.", "Matthew J.", "Luna L."
     ];
 
-    return Array.from({ length: number }, () => {
-      const sentence = startSentences[Math.floor(Math.random() * startSentences.length)];
-      const adjective = sentence[sentence.length -1] === '.' ? '' : adjectives[Math.floor(Math.random() * adjectives.length)] + '... ';
-      const name = names[Math.floor(Math.random() * names.length)]
-      return sentence + adjective + ' -' + name;
-    });
-  }
+    const femaleNames = [
+      "Emma F.", "Olivia I.","Ava","Charlotte C.","Sophia E.","Amelia Z.","Mia D.","Harper M.","Evelyn F.","Abigail P.","Ella N.","Scarlett R.","Grace Z.","Victoria H.","Aria J.","Luna L."
+    ];
+    const maleNames = [
+      "Liam Q.","Eric R.","Noah J.","Elijah A.","James S.","Eric R.","Benjamin F.","Lucas Z.","Mason B.","Ethan R.","Eric R.","Logan L.","Alexander R.","Jackson I.","Eric R.","Aiden O.","Sebastian R.","Matthew J."
+    ];
 
-  const refreshTestimonials = function() {
-    setTestimonials(createTestimonials(testimonials.length))
-  }
+    const generatePhotoUrl = (index) => {
+      const baseUrl = 'https://randomuser.me/api/portraits/';
+      const gender = femaleNames.includes(name) ? 'women' : 'men';
+      const randomIndex = Math.floor(Math.random() * 99);
+      return `${baseUrl}${gender}/${randomIndex}.jpg`
+    }
 
-  useEffect(() => {
-    setTestimonials(createTestimonials(4))
-  }, [])
+      return Array.from({ length: number }, () => {
+        const sentence = startSentences[Math.floor(Math.random() * startSentences.length)];
+        const adjective = sentence[sentence.length -1] === '.' ? '' : adjectives[Math.floor(Math.random() * adjectives.length)] + '... ';
+        const name = Math.random() > .5 ? femaleNames[Math.floor(Math.random() * femaleNames.length)] : maleNames[Math.floor(Math.random() * maleNames.length)]
+        const photoUrl = generatePhotoUrl(name)
+
+        return { text: sentence + adjective + ' -' + name, photo: photoUrl };
+      });
+    }
+
+
+    console.log(photoGroups)
+
+    const refreshTestimonials = function() {
+      setTestimonials(createTestimonials(testimonials.length));
+    }
+
+    useEffect(() => {
+      setTestimonials(createTestimonials(4));
+    }, [])
+
+
 
 
   return <div>
       <div className="px-8 flex flex-row justify-center gap-x-4 mb-6 overflow-hidden">
         {testimonials.map((testimonial, index) => (
         <div key={index} className="p-6 pb-8 bg-white font-roboto-flex w-1/5 shrink-0 border-2 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg">
-          {testimonial}
+          {testimonial.text}
+          <img src={testimonial.photo} alt="reviews of cruise ship with photos"/>
           <div className="rating">
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
-          <input
-            type="radio"
-            name="rating-2"
-            className="mask mask-star-2 bg-accent" disabled
-            />
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
-          <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled defaultChecked/>
-        </div>
+            <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
+            <input
+              type="radio"
+              name="rating-2"
+              className="mask mask-star-2 bg-accent" disabled
+              />
+            <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
+            <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
+            <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled defaultChecked/>
+          </div>
         </div>
         ))}
       <div className="flex items-center">
