@@ -13,3 +13,7 @@ body {
     @apply input input-bordered w-full;
   }
 }
+
+.markerElement path:nth-child(3) {
+  fill: #FF7233;
+}

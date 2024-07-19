@@ -3,12 +3,14 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 
-const Map = ({mapData, mapboxAccessToken}) => {
+const Map = ({mapData, mapboxAccessToken, highlightedPort, hoveredPort}) => {
   const mapContainerRef = useRef(null);
   const [map, setMap] = useState(null);
   const initialBoundsRef = useRef(null);
+  const mapInstance = useRef(null);
 
   useEffect(() => {
+
     console.log('mapData: ', mapData);
     mapboxgl.accessToken = mapboxAccessToken;
 
@@ -18,17 +20,17 @@ const Map = ({mapData, mapboxAccessToken}) => {
       console.log('center_lat: ', center_lat);
       console.log('center_long: ', center_long);
       console.log('zoom: ', zoom);
-      const mapInstance = new mapboxgl.Map({
+      mapInstance.current = new mapboxgl.Map({
         container: mapContainerRef.current,
         style: 'mapbox://styles/mapbox/streets-v12', // Choose a style
         center: [center_long, center_lat], // Use center coordinates from data
         zoom, // Use zoom level from data
       });
 
-      initialBoundsRef.current = mapInstance.getBounds(); // Save initial bounds
-      mapInstance.setMaxBounds(initialBoundsRef.current); // Set bounds
+      initialBoundsRef.current = mapInstance.current.getBounds(); // Save initial bounds
+      mapInstance.current.setMaxBounds(initialBoundsRef.current); // Set bounds
 
-      mapInstance.on('load', () => {
+      mapInstance.current.on('load', () => {
         if (mapData && mapData.ports) { // Check if mapData and port data are available
           // Extract coordinates from ports objects
           const routeCoordinates = mapData.ports.map(p => [p.long, p.lat]);
@@ -36,7 +38,7 @@ const Map = ({mapData, mapboxAccessToken}) => {
           console.log('mapData.ports: ', mapData.ports);
           console.log('routeCoordinates: ', routeCoordinates);
 
-          mapInstance.addSource('route', {
+          mapInstance.current.addSource('route', {
             type: 'geojson',
             data: {
               type: 'Feature',
@@ -48,7 +50,7 @@ const Map = ({mapData, mapboxAccessToken}) => {
             },
           });
 
-          mapInstance.addLayer({
+          mapInstance.current.addLayer({
             id: 'route',
             type: 'line',
             source: 'route',
@@ -64,24 +66,53 @@ const Map = ({mapData, mapboxAccessToken}) => {
         }
       });
 
-      // Add markers for ports
+      // // Add markers for ports
+      // ports.forEach((p, index) => {
+      //   new mapboxgl.Marker({
+      //     color: index === 0 ? '#E93AB5' : '#056DBD', // Orange for the first marker, pink for the rest
+      //   })
+      //     .setLngLat([p.long, p.lat])
+      //     .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(p.name))
+      //     .addTo(mapInstance);
+      // });
+          // Add markers for ports
+      const markers = [];
       ports.forEach((p, index) => {
-        new mapboxgl.Marker({
-          color: index === 0 ? '#E93AB5' : '#056DBD', // Orange for the first marker, pink for the rest
-        })
-          .setLngLat([p.long, p.lat])
-          .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(p.name))
-          .addTo(mapInstance);
-      });
+        const marker = new mapboxgl.Marker({
+        color: highlightedPort === p.name ? '#FF0000' : (index === 0 ? '#E93AB5' : '#056DBD'), // Red for first, blue for rest                   // Add a base class to all markers
+      })
+        .setLngLat([p.long, p.lat])
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(p.name))
+        .addTo(mapInstance.current);
+        markers.push(marker);
+    });
 
-      setMap(mapInstance); // Save the map instance
+      markers.push(markers[0]);
+      console.log('markers: ', markers);
+      const animate = () => {
+        //do loops stuff
+        markers.forEach((marker, index) => {
+          // Check if index matches the highlighted port
+          if (index === hoveredPort.current) {
+            marker.addClassName("markerElement");
+        } else if (index !== markers.length - 1) {
+            marker.removeClassName("markerElement");
+        }});
+        // console.log("cactus");
+        // if (hoveredPort.current) {
+        //   console.log('hoveredPort: ', hoveredPort.current);
+        // }
+        requestAnimationFrame(animate);
+      }
+      animate();
+      setMap(mapInstance.current); // Save the map instance
 
-      return () => mapInstance.remove(); // Clean up on unmount
+      return () => mapInstance.current.remove(); // Clean up on unmount
     }
-  }, [mapData]); // Trigger effect when mapData changes
+  }, [mapData, highlightedPort]); // Trigger effect when mapData changes
 
   return (
-    <div className="map-container h-[400px] w-[600px]" ref={mapContainerRef} >
+    <div className="map-container h-full w-full" ref={mapContainerRef} >
       {/* Map will be rendered here */}
     </div>
   );
