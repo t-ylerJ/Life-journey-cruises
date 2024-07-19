@@ -5,18 +5,36 @@ const ExcursionTiles = ({dailyExcursions}) => {
   const [selectedExcursions, setSelectedExcursions] = useState([]);
 
   useEffect(() => {
+
     const excurs = localStorage.getItem('excursions');
     if(excurs){
       setSelectedExcursions(JSON.parse(excurs));
       const ids = JSON.parse(excurs).map((exc) => exc.id);
       setClickedBoxes([...ids]);
     }
+   // nest all the data into one object and store it in local storage
+   /*
+    const booking = localStorage.getItem('bookingDetails');
+    if(booking){
+      setSelectedExcursions(JSON.parse(booking).excursions);
+      const ids = JSON.parse(booking).excursions.map((exc) => exc.id);
+      setClickedBoxes([...ids]);
+    }
+    */
   },[]);
 
+
   const boxOnClick = (excursionId) => {
+
     if(clickedBoxes.includes(parseInt(excursionId))) {
       setClickedBoxes(clickedBoxes.filter((box) => box !== parseInt(excursionId)));
       setSelectedExcursions(selectedExcursions.filter((exc) => parseInt(exc.id) !== parseInt(excursionId)));
+      //// nest all the data into one object and store it in local storage
+      /*
+      const bookingDetails = JSON.parse(localStorage.getItem('bookingDetails'));
+      bookingDetails.excursions = bookingDetails.excursions.filter((exc) => parseInt(exc.id) !== parseInt(excursionId));
+      localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails)); */
+
       localStorage.setItem('excursions', JSON.stringify(selectedExcursions.filter((exc) => parseInt(exc.id) !== parseInt(excursionId))));
     } else {
       setClickedBoxes([...clickedBoxes, parseInt(excursionId)]);
@@ -24,6 +42,11 @@ const ExcursionTiles = ({dailyExcursions}) => {
         dailyExcursions[i].excursions.forEach((excursion) => {
           if(parseInt(excursion.id) === parseInt(excursionId)){
             const {id, name, price} = excursion;
+            // nest all the data into one object and store it in local storage
+           /* const bookingDetails = JSON.parse(localStorage.getItem('bookingDetails')) || {};
+            bookingDetails.excursions = [...selectedExcursions, {"id": id, "name": name, "price": price}];
+            localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails)); */
+
             setSelectedExcursions([...selectedExcursions, {"id": id, "name": name, "price": price}]);
             localStorage.setItem('excursions', JSON.stringify([...selectedExcursions, {"id": id, "name": name, "price": price}]));
           }
@@ -42,21 +65,25 @@ const ExcursionTiles = ({dailyExcursions}) => {
    }
   return (
 
-      <div className="flex flex-col justify-center items-center overflow-hidden p-10" >
+      <div className="flex bg-gray-100 flex-col justify-center items-center overflow-hidden md:p-10 p-4 md:m-10 m-2"  >
         {dailyExcursions && dailyExcursions.map((daily) => {
           return(
-            <div key={daily.day} className=" w-[100%] rounded-lg shadow-lg overflow-hidden bg-gray-200 text-center p-10 m-10"  >
-              <h2 className="text-5xl p-2" >Day: {daily.day}</h2>
-              <h2 className="text-4xl border-b-1 border-white p-10">Port: {daily.portname}</h2>
-              <div className="flex flex-1 justify-between">
+            <div key={daily.day} className=" w-full p-0 m-0 rounded-lg shadow-lg border-overflow-hidden border-2 border-inherit bg-white justify-around text-center mb-4"  >
+              <div className="w-full pt-5" >
+                <h1 className="text-2xl md:text-3xl font-bold" >Day: {daily.day}</h1>
+                <h2 className="text-2xl md:text-3xl p-5 md:p-2">Port: {daily.portname}</h2>
+              </div>
+              <div className="flex flex-wrap justify-start xl:justify-around" >
               {
                 daily.excursions && daily.excursions.map((excursion) => {
                   return (
                     <button
                       className={
                         clickedBoxes.includes(parseInt(excursion.id))
-                        ? "flex flex-col bg-blue-300 border-r-2"
-                        : "flex flex-col bg-white border-r-2"
+                        ?
+                        "w-[50%] md:w-[32%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-primary text-white border-2 p-3 md:p-5 mb-2 md:mb-10 rounded-xl"
+                        :
+                        "w-[50%] md:w-[32%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-gray-100 border-2 p-3 md:p-5 mb-2 md:mb-10 rounded-xl"
                       }
                       onClick={()=>{
                         boxOnClick(excursion.id);
@@ -64,12 +91,13 @@ const ExcursionTiles = ({dailyExcursions}) => {
                       value={excursion.id}
                       key={excursion.id}
                     >
-                      <h2>{excursion.name}</h2>
-                      <img className="w-48 h-32 rounded" src={excursion.image} alt={excursion.name} onClick={(e)=>{
+                      <h3 className="text-left text-lg md:text-3xl">{excursion.name}</h3>
+                      <span className="text-sm md:text-l pt-1 md:pt-2  pb-1 md:pb-2">${excursion.price}</span>
+                      <img className="w-full h-32 md:h-56 max-h-32 md:max-h-56 min-h-24 md:min-h-48 rounded object-cover" src={excursion.image} alt={excursion.name} onClick={(e)=>{
                         boxOnClick(excursion.id);
                       }} />
-                      <span>{adjustTime(excursion.time)}</span>
-                      <span>${excursion.price}</span>
+                      <span className="pb-1 md:pb-5 pt-1 md:pt-5">{adjustTime(excursion.time)}</span>
+
                     </button>
                   )
                 })
