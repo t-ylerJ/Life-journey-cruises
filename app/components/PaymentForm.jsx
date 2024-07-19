@@ -21,48 +21,48 @@ const PaymentForm = ({ user }) => {
   useEffect(() => {
     localStorage.setItem('payInfo', JSON.stringify(formObj));
   }, [formObj])
-  return (<div className="block mr-75px w-96 p-2 float-right border-2 border-gray-100 rounded">
-    <form id="payment">
+  return (<div className="block p-2 border-2 border-gray-100 rounded flex flex-col items-center max-w-[600px] w-full">
+    <form id="payment" className="flex flex-col gap-4 px-4 w-full">
     <fieldset>
         <legend>Guest Info</legend>
     {
       guestCount.map((item, index) => {
         return (<div key={item}>
-              <p className="ml-5 mt-5">Guest {index + 1} First Name:</p>
-              <input className="w-80 mx-5 form-input" name={index} required={true}></input>
-              <p className="ml-5 mt-5">Guest {index + 1} Last Name:</p>
-              <input className="w-80 mx-5 form-input" name={index} required={true}></input>
-              <p className="ml-5 mt-5">Guest {index + 1} Passport Number:</p>
-              <input className="w-80 mx-5 form-input" name={index} required={true}></input>
+              <p className="">Guest {index + 1} First Name:</p>
+              <input className="form-input" name={index} required={true}></input>
+              <p className="">Guest {index + 1} Last Name:</p>
+              <input className="form-input" name={index} required={true}></input>
+              <p className="">Guest {index + 1} Passport Number:</p>
+              <input className="form-input" name={index} required={true}></input>
           </div>)
       })
     }
       </fieldset>
-      <fieldset className="mt-5">
+      <fieldset className="">
         <legend>Card Info</legend>
-        <p className="ml-5 mt-5">Card Number:</p>
-        <input className="w-80 mx-5 form-input" name="pay" defaultValue={user.card_number} required={true}></input>
-        <p className="ml-5 mt-2">CVV:</p>
-        <input className="w-80 mx-5 form-input" name="pay" defaultValue={user.cvv} required={true}></input>
-        <p className="ml-5 mt-2">Expiration:</p>
-        <input className="w-80 mx-5 form-input" name="pay" defaultValue={user.expiration} required={true}></input>
-        <p className="ml-5 mt-2">Name on the Card:</p>
-        <input className="w-80 mx-5 form-input" name="pay" defaultValue={user.card_name} required={true}></input>
+        <p className=" ">Card Number:</p>
+        <input className=" form-input" name="pay" defaultValue={user.card_number} required={true}></input>
+        <p className=" ">CVV:</p>
+        <input className=" form-input" name="pay" defaultValue={user.cvv} required={true}></input>
+        <p className=" ">Expiration:</p>
+        <input className=" form-input" name="pay" defaultValue={user.expiration} required={true}></input>
+        <p className=" ">Name on the Card:</p>
+        <input className=" form-input" name="pay" defaultValue={user.card_name} required={true}></input>
       </fieldset>
-      <fieldset className="mt-5">
+      <fieldset className="">
         <legend>Billing Info</legend>
-        <p className="ml-5 mt-2">Billing Address:</p>
-        <input className="w-80 mx-5 form-input" name="pay" defaultValue={user.street} required={true}></input>
-        <p className="ml-5 mt-2">City:</p>
-        <input className="w-80 mx-5 form-input" name="pay" defaultValue={user.city} required={true}></input>
-        <p className="ml-5 mt-2">State:</p>
-        <input className="w-80 mx-5 form-input" name="pay" defaultValue={user.state} required={true}></input>
-        <p className="ml-5 mt-2">Zip:</p>
-        <input className="w-80 mx-5 form-input" name="pay" defaultValue={user.zip} required={true}></input>
+        <p className=" ">Billing Address:</p>
+        <input className=" form-input" name="pay" defaultValue={user.street} required={true}></input>
+        <p className=" ">City:</p>
+        <input className=" form-input" name="pay" defaultValue={user.city} required={true}></input>
+        <p className=" ">State:</p>
+        <input className=" form-input" name="pay" defaultValue={user.state} required={true}></input>
+        <p className=" ">Zip:</p>
+        <input className=" form-input" name="pay" defaultValue={user.zip} required={true}></input>
       </fieldset>
     </form>
     <Link to="/voyages/summary">
-    <button className="w-80 mx-5 my-8 button" onClick={() => {
+    <button className="w-80 mt-4 mx-auto button" onClick={() => {
       var paymentData = new FormData(document.getElementById('payment'));
       var values = paymentData.getAll('pay');
       var keys = ['card_number', 'cvv', 'expiration', 'card_name', 'street', 'city', 'state', 'zip'];

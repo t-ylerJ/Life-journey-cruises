@@ -32,7 +32,7 @@ export const meta = () => {
 const Checkout = () => {
   const { profile } = useLoaderData() ?? {};
   return (
-    <div className="w-100% block mx-10 min-w-[860px] mt-12">
+    <div className="w-100% grid grid-cols-2 min-w-[860px]">
       <PurchaseSummary />
       <PaymentForm user={profile}/>
     </div>
