@@ -178,7 +178,7 @@ const Account = () => {
             />
           </label>
         </fieldset>
-        <button className="btn btn-primary" disabled={submitted}>{`SAVE${
+        <button className="button" disabled={submitted}>{`SAVE${
           submitted ? 'D' : ''
         }`}</button>
       </Form>

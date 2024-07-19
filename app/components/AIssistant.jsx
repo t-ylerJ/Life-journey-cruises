@@ -47,7 +47,7 @@ const AIssistant = () => {
   return (
     <motion.div
       layout
-      className={`flex flex-col justify-center items-center gap-2 fixed right-4 bottom-4 bg-white p-2 border rounded-2xl shadow-xl ${
+      className={`flex flex-col justify-center items-center gap-2 fixed right-4 bottom-4 bg-white p-2 border rounded-2xl shadow-xl z-[9999] ${
         open ? 'max-h-[50%] w-96' : ''
       }`}
       onClick={handleOpen}

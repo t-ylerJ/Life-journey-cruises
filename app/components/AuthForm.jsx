@@ -57,7 +57,7 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
               className="form-input"
             />
           ) : null}
-          <button name="action" value={step} className="btn btn-primary">
+          <button name="action" value={step} className="button">
             SUBMIT
           </button>
           {
@@ -85,11 +85,7 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
             <OTP />
             <input type="hidden" name="phone" value={actionData.phone ?? ''} />
             <input type="hidden" name="redirectURL" value={redirectURL} />
-            <button
-              className="btn btn-primary w-full"
-              name="action"
-              value="verify"
-            >
+            <button className="button w-full" name="action" value="verify">
               VERIFY
             </button>
           </Form>
