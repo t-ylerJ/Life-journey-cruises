@@ -95,7 +95,7 @@ const SubHeader = () => {
           <div></div>
         )}
 
-        <ul className="steps steps-vertical lg:steps-horizontal">
+        <ul className="steps steps-horizontal">
           <li className={voyageStep}>Voyage</li>
           <li className={planStep}>Plan</li>
           <li className={bookStep}>Book</li>
