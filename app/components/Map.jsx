@@ -79,7 +79,7 @@ const Map = ({mapData, mapboxAccessToken, highlightedPort, hoveredPort}) => {
       const markers = [];
       ports.forEach((p, index) => {
         const marker = new mapboxgl.Marker({
-        color: highlightedPort === p.name ? '#FF0000' : (index === 0 ? '#E93AB5' : '#056DBD'), // Red for first, blue for rest                   // Add a base class to all markers
+        color: highlightedPort === p.name ? '#FF0000' : (index === 0 ? '#FF7233' : '#056DBD'), // Red for first, blue for rest                   // Add a base class to all markers
       })
         .setLngLat([p.long, p.lat])
         .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(p.name))
