@@ -114,7 +114,7 @@ const Testimonials = () => {
       const baseUrl = 'https://randomuser.me/api/portraits/';
       const gender = femaleNames.includes(name) ? 'women' : 'men';
       const randomIndex = Math.floor(Math.random() * 99);
-      const url = `${baseUrl}${gender}/${randomIndex}.jpg`;
+      const url = Math.random() > .7 ? `${baseUrl}${gender}/${randomIndex}.jpg` : pictures[Math.floor(Math.random() * pictures.length)]
       return url;
       }
 
@@ -145,7 +145,7 @@ const Testimonials = () => {
         const name = Math.random() > .5 ? femaleNames[Math.floor(Math.random() * femaleNames.length)] : maleNames[Math.floor(Math.random() * maleNames.length)]
         const photoUrl = generatePhotoUrl(name);
 
-        return { text: sentence + adjective + '   -' + name, photo: photoUrl };
+        return { text: sentence + adjective, name: ' -' + name,  photo: photoUrl };
       });
     }
 
@@ -163,14 +163,16 @@ const Testimonials = () => {
 
 
 
-  return <div>
-      <div className="px-8 gap-x-4 mb-6 flex flex-row">
+  return (
+   <div>
+      <div className="h-38 px-8 gap-x-6 mb-4 flex flex-row">
         {testimonials.map((testimonial, index) => (
-        <div key={index} className="p-6 pb-8 gap-2 flex flex-row font-roboto-flex w-1/5 border-2 border-secondary transform justify-between transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg bg-white">
-          <div className="flex flex-col justify-between">
-          <p>{testimonial.text}</p>
-
-          <div className="rating align-bottom">
+        <div key={index} className="p-4 pb-2 gap-2 grid grid-rows-4 grid-flow-col font-roboto-flex w-1/5 border-2 border-secondary transform justify-between transition-transform duration-300 ease-in-out hover:scale-110 hover:z-10 hover:shadow-lg bg-white">
+          <div className="row-span-4 col-span-1 justify-between overflow-hidden">
+          <p className="row-span-2 col-span-1 text-ellipsis  max-w-full line-clamp">{testimonial.text}</p>
+          <p className="row-span-1 max-w-full">{testimonial.name}</p>
+          <div className="flex-grow"></div>
+          <div className="rating self-end">
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
             <input
               type="radio"
@@ -183,7 +185,7 @@ const Testimonials = () => {
             </div>
 
           </div>
-            <img src={testimonial.photo} className="flex flex-grow-0 self-center size-30 rounded-full" alt="reviews of cruise ship with photos"/>
+            <img src={testimonial.photo} className="row-span-4 self-center size-24 rounded-full object-cover aspect-square" alt="reviews of cruise ship with photos"/>
         </div>
         ))}
       <div className="flex items-center">
@@ -192,6 +194,7 @@ const Testimonials = () => {
 
       </div>
     </div>
+  )
 }
 
 export default Testimonials
