@@ -33,26 +33,50 @@
 
 
 ## About:
-Ahoy!
+:anchor: Ahoy!
 Welcome to Life Journey Cruises, a sample platform where users can explore, plan, and book cruises. Our application uses a streamlined checkout process and user-friendly features --such as our AI chatbot -- to simplify the booking process and offer an enhanced user experience.
 
 
-## Technologies:
-  Front-End
-- Tailwind CSS[Tailwind CSS](https://tailwindcss.com/)
+## :computer: Technologies:
+Front-End:
+![Tailwind](https://img.shields.io/badge/tailwind-black?style=for-the-badge&logo=tailwindcss)
+![JavaScript](https://img.shields.io/badge/javascript-black?style=for-the-badge&logo=javascript)
+![React](https://img.shields.io/badge/react-black?style=for-the-badge&logo=react)
+![Vite](https://img.shields.io/badge/vite-black?style=for-the-badge&logo=vite)
+- Framer Motion
+- Mapbox
 
-  Back End:
-- 📖Remix [Docs 📖](https://remix.run/docs)
+Back End:
+![Remix](https://img.shields.io/badge/remix-black?style=for-the-badge&logo=remix)
+![Supabase](https://img.shields.io/badge/supabase-black?style=for-the-badge&logo=supabase)
+
+Testing:
+![k6](https://img.shields.io/badge/k6-black?style=for-the-badge&logo=k6)
+![Jest](https://img.shields.io/badge/jest-black?style=for-the-badge&logo=jest)
+
+
+
+
 
 
 ## Our Team: The Nautical Nine
 
 ### Full-Stack Developers:
-Michael, Shaoyu, Denis, Tanner, Lu Lu, Liru, Tyler, Jason, Pallavi
-### Product Manager: Pallavi/ Architecture Owner: Jason / UI Designer: Tyler
+Michael
+Shaoyu
+Denis
+Tanner
+Lu Lu
+Liru
+Tyler
+Jason
+Pallavi
+### Product Manager: Pallavi
+### Architecture Owner: Jason
+### UI Designer: Tyler
 
 
-## Roadmap
+## :file_folder: Roadmap
  - [X] Set up a Remix framework to make sure everyone’s on the same page concerning the project structure
  - [X] Set up a Supabase database and map out all of the schemas to make sure we’re inputting data properly
  - [X] Landing Page to hook in customers and begin the booking process
@@ -63,14 +87,14 @@ Michael, Shaoyu, Denis, Tanner, Lu Lu, Liru, Tyler, Jason, Pallavi
  - [X] Stylized with Tailwind, made to look like a party, tailored towards the mid-20s demographic
  - [X] AI Chat Assistance able to answer any questions you may have for cruise booking
 
-### Prerequisites
+### :white_check_mark: Prerequisites
 ![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
 ```sh
 npm install
 ```
 
 
-### Installation
+## Installation
 1. Clone the repo
 ```sh
   git clone https://github.com/thenauticalnine/rfp2404-blueocean.git
@@ -90,4 +114,19 @@ npm install
   npm run dev
 ```
 
-
+## Git Workflow
+ 	# Switch to the main branch
+git checkout main
+# Update the main branch with the latest changes from the remote repository
+git pull origin main
+# Switch to your feature branch
+git checkout <branchname>
+# Merge the latest changes from the main branch into your feature branch
+git merge main
+# Check the status of your feature branch to see if there are any uncommitted changes
+git status
+# If there are changes, add and commit them
+git add .
+git commit -m "Your commit message"
+# Push your feature branch to the remote repository
+git push origin <branchname>
