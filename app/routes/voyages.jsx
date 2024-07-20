@@ -1,6 +1,20 @@
-import { json, Link, Outlet } from '@remix-run/react'
+import { json, Outlet } from '@remix-run/react'
 import SubHeader from '~/components/SubHeader.jsx'
 import redirectCookie from '../utils/redirectCookie'
+
+export const meta = ({ params }) => {
+  const voyages = {
+    1: 'Mexican Riviera',
+    2: 'Alaskan',
+    3: 'Caribbean',
+    4: 'South Pacific',
+    5: 'Mediterranean',
+  }
+  return [
+    { title: `${voyages[params.voyage]} | Life Journey Cruises` },
+    { name: 'description', content: 'Life Journey Cruises' },
+  ]
+}
 
 export const loader = async ({ request }) => {
   return json(null, {
@@ -15,8 +29,7 @@ export const loader = async ({ request }) => {
 const voyages = () => {
   return (
     <>
-
-    <SubHeader/>
+      <SubHeader />
       <Outlet />
     </>
   )

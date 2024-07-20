@@ -1,6 +1,7 @@
-import { Form } from '@remix-run/react'
+import { Form, Link } from '@remix-run/react'
 import { useEffect, useRef } from 'react'
 import OTP from './OTP'
+import { signup } from '../utils/auth'
 
 const AuthForm = ({ step, redirectURL, actionData }) => {
   const emailRef = useRef()
@@ -14,21 +15,34 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
     }
   }, [actionData])
 
+  const labelStyle = 'invisible w-0 h-0'
+
   return (
     <>
       {!actionData ? (
         <Form className="flex flex-col gap-4" key={step} method="post">
+          {step === 'login' ? (
+            <p>Login:</p>
+          ) : step === 'signup' ? (
+            <p>Sign up:</p>
+          ) : null}
           <input
             ref={emailRef}
+            id="email"
             type="email"
             name="email"
             placeholder="Email"
+            required
+            aria-label="email"
             className="form-input"
           />
           <input
             type="password"
             name="password"
             placeholder="Password"
+            minLength={8}
+            required
+            aria-label="password"
             className="form-input"
           />
           {step === 'signup' ? (
@@ -36,12 +50,29 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
               type="text"
               name="phone"
               placeholder="Phone"
+              minLength={11}
+              maxLength={11}
+              required
+              aria-label="phone"
               className="form-input"
             />
           ) : null}
-          <button name="action" value={step} className="btn btn-primary">
+          <button name="action" value={step} className="button">
             SUBMIT
           </button>
+          {
+            <p>
+              {step === 'signup'
+                ? 'Already have an account? Log in '
+                : 'New cruiser? Sign up '}
+              <Link
+                className="underline"
+                to={step === 'signup' ? '/login' : '/signup'}
+              >
+                here.
+              </Link>
+            </p>
+          }
         </Form>
       ) : actionData.verify ? (
         <>
@@ -54,11 +85,7 @@ const AuthForm = ({ step, redirectURL, actionData }) => {
             <OTP />
             <input type="hidden" name="phone" value={actionData.phone ?? ''} />
             <input type="hidden" name="redirectURL" value={redirectURL} />
-            <button
-              className="btn btn-primary w-full"
-              name="action"
-              value="verify"
-            >
+            <button className="button w-full" name="action" value="verify">
               VERIFY
             </button>
           </Form>

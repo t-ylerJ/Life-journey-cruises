@@ -4,6 +4,13 @@ import AuthForm from '../components/AuthForm'
 import redirectCookie from '../utils/redirectCookie'
 import { supabaseServer } from '~/utils/supabase'
 
+export const meta = () => {
+  return [
+    { title: `Signup | Life Journey Cruises` },
+    { name: 'description', content: 'Life Journey Cruises' },
+  ]
+}
+
 export const loader = async ({ request }) => {
   const redirectURL = await redirectCookie.parse(request.headers.get('Cookie'))
   console.log(redirectURL)
