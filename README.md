@@ -37,7 +37,7 @@ Make sure to deploy the output of `npm run build`
 
 ### Developers
 
-| Shaoyu Chen   |  Liru Zhao    |   Denis More   |  Jason  Ullrich| Tyler  Johnson      |   Tanner   Jacobson|   Michael   Trofimov   |                 |               |
+| Shaoyu Chen   |  Liru Zhao    |   Denis More   |  Jason  Ullrich| Tyler  Johnson      |   Tanner   Jacobson|   Michael   Trofimov   |    Pallavi Kishore             |               |
 | :----------: | :----------:    | :----------:    | :----------:   |  :----------:|:----------:|:----------:|:----------:|:----------:|
 |  LinkIn       |  LinkIn       |  LinkIn        |  LinkIn        |  LinkIn             |  LinkIn            |  LinkIn          |  LinkIn         |  LinkIn       |
 |  Github       |  Github       |  Github        |  Github        |  Github             |  Github            |  Github          |  Github         |  Github       |
