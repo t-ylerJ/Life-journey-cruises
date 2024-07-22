@@ -35,6 +35,13 @@ Make sure to deploy the output of `npm run build`
 - `build/server`
 - `build/client`
 
+### Developers
+
+| Shaoyu Chen   |  Liru Zhao    |   Denis More   |  Jason  Ullrich| Tyler  Johnson      |   Tanner   Jacobson|   Michael   Trofimov   |                 |               |
+| :----------: | :----------:    | :----------:    | :----------:   |  :----------:|:----------:|:----------:|:----------:|:----------:|
+|  LinkIn       |  LinkIn       |  LinkIn        |  LinkIn        |  LinkIn             |  LinkIn            |  LinkIn          |  LinkIn         |  LinkIn       |
+|  Github       |  Github       |  Github        |  Github        |  Github             |  Github            |  Github          |  Github         |  Github       |
+
 ## Styling
 
 This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
