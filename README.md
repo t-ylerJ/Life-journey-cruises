@@ -7,7 +7,10 @@
    <a href="#about">About</a>
    <ul>
     <li>
-     <a href="#built-with">Built With</a>
+     <a href="#technologies">Built With</a>
+    </li>
+    <li>
+      <a href="#developers">Our Team:</a>
     </li>
    </ul>
   </li>
@@ -22,12 +25,11 @@
     </li>
    </ul>
   </li>
-  <li>
-   <a href="#roadmap">Roadmap</a>
-  </li>
-  <li>
-   <a href=“#developers”>Developers</a>
-  </li>
+  <ul>
+    <li>
+     <a href="#roadmap">Roadmap</a>
+    </li>
+  </ul>
  </ol>
 </details>
 
@@ -36,6 +38,14 @@
 :anchor: Ahoy!
 Welcome to Life Journey Cruises, a sample platform where users can explore, plan, and book cruises. Our application uses a streamlined checkout process and user-friendly features --such as our AI chatbot -- to simplify the booking process and offer an enhanced user experience.
 
+<div align="center">
+:earth_americas: <h3> Explore</h3>
+  <img src="/public/readme/landingpage.gif" alt="project landing page image" width="600px" />
+:clipboard: <h3> Plan</h3>
+  <img src="/public/readme/plan.gif" alt="project planning page image" width="600px" />
+:date: <h3> Book</h3>
+  <img src="/public/readme/book.gif" alt="project booking page image" width="600px" />
+</div>
 
 ## :computer: Technologies:
 Front-End:
@@ -43,8 +53,7 @@ Front-End:
 ![JavaScript](https://img.shields.io/badge/javascript-black?style=for-the-badge&logo=javascript)
 ![React](https://img.shields.io/badge/react-black?style=for-the-badge&logo=react)
 ![Vite](https://img.shields.io/badge/vite-black?style=for-the-badge&logo=vite)
-- Framer Motion
-- Mapbox
+
 
 Back End:
 ![Remix](https://img.shields.io/badge/remix-black?style=for-the-badge&logo=remix)
@@ -59,18 +68,19 @@ Testing:
 
 
 
-## Our Team: The Nautical Nine
+## Developers:
+The Nautical Nine
 
 ### Full-Stack Developers:
-Michael
-Shaoyu
-Denis
-Tanner
+Michael Trofimov
+Shaoyu Chen
+Denis More
+Tanner Jacobson
 Lu Lu
-Liru
-Tyler
-Jason
-Pallavi
+Liru Zhao
+Tyler Johnson
+Jason Ullrich
+Pallavi Kishore
 ### Product Manager: Pallavi
 ### Architecture Owner: Jason
 ### UI Designer: Tyler
@@ -87,14 +97,15 @@ Pallavi
  - [X] Stylized with Tailwind, made to look like a party, tailored towards the mid-20s demographic
  - [X] AI Chat Assistance able to answer any questions you may have for cruise booking
 
+
+## Getting Started
 ### :white_check_mark: Prerequisites
 ![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
 ```sh
 npm install
 ```
 
-
-## Installation
+### Installation
 1. Clone the repo
 ```sh
   git clone https://github.com/thenauticalnine/rfp2404-blueocean.git
