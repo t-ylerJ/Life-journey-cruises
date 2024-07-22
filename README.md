@@ -122,19 +122,4 @@ npm install
   npm run dev
 ```
 
-## Git Workflow
- 	# Switch to the main branch
-git checkout main
-# Update the main branch with the latest changes from the remote repository
-git pull origin main
-# Switch to your feature branch
-git checkout <branchname>
-# Merge the latest changes from the main branch into your feature branch
-git merge main
-# Check the status of your feature branch to see if there are any uncommitted changes
-git status
-# If there are changes, add and commit them
-git add .
-git commit -m "Your commit message"
-# Push your feature branch to the remote repository
-git push origin <branchname>
+
