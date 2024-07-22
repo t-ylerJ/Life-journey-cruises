@@ -72,15 +72,12 @@ Testing:
 The Nautical Nine
 
 ### Full-Stack Developers:
-Michael Trofimov
-Shaoyu Chen
-Denis More
-Tanner Jacobson
-Lu Lu
-Liru Zhao
-Tyler Johnson
-Jason Ullrich
-Pallavi Kishore
+|  Shaoyu Chen   |  Liru Zhao     |  Denis More    |  Jason  Ullrich  |  Tyler  Johnson  |  Tanner  Jacobson  |  Michael  Trofimov  |  Pallavi  Kishore  |  Lu  Lu        |
+|  :----------:  |  :----------:  |  :----------:  |  :----------:    |  :----------:    |  :----------:      |  :----------:       |  :----------:      |  :----------:  |
+|  LinkedIn      |  LinkedIn      |  LinkedIn      |  LinkedIn        |  LinkedIn        |  LinkedIn          |  LinkedIn           |  LinkedIn          |  LinkedIn      |
+|  Github        |  Github        |  Github        |  Github          |  Github          |  Github            |  Github             |  Github            |  Github        |
+
+
 ### Product Manager: Pallavi
 ### Architecture Owner: Jason
 ### UI Designer: Tyler
