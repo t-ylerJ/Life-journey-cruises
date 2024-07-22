@@ -51,3 +51,11 @@ fieldset {
 legend {
   @apply bg-white px-2;
 }
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+}

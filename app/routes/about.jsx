@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
+import brett_70 from '/brett_70.png'
 import React from 'react'
 
 export const meta = () => {
@@ -35,6 +36,8 @@ const About = () => {
               style={{ height: '128px' }}
               className="mx-auto"
             />
+            <h2 className="text-2xl font-semibold text-white">Our Founder: Brett Spenderson Senior</h2>
+            <img src="brett_70" alt="Brett Spenderson Senior" />
             <p className="mt-4 text-white">
               Life Journey Cruises was founded by Brett Spenderson Senior with a
               small loan of a million dollars. With a vision to revolutionize
