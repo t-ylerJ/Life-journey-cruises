@@ -7,47 +7,39 @@
    <a href="#about">About</a>
    <ul>
     <li>
-     <a href="#technologies">Built With</a>
+     <a href="#computer-technologies">Technologies</a>
     </li>
     <li>
-      <a href="#developers">Our Team:</a>
+      <a href="#ship-our-team">Our Team:</a>
     </li>
    </ul>
   </li>
   <li>
-   <a href="#getting-started">Getting Started</a>
-   <ul>
-    <li>
-     <a href="#prerequisites">Prerequisites</a>
-    </li>
-    <li>
-     <a href="#installation">Installation</a>
-    </li>
-   </ul>
+   <a href="#white_check_mark-getting-started">Getting Started</a>
   </li>
   <ul>
     <li>
-     <a href="#roadmap">Roadmap</a>
+     <a href="#file_folder-roadmap">Roadmap</a>
     </li>
   </ul>
  </ol>
 </details>
 
 
-## About:
+## About
 :anchor: Ahoy!
-Welcome to Life Journey Cruises, a sample platform where users can explore, plan, and book cruises. Our application uses a streamlined checkout process and user-friendly features --such as our AI chatbot -- to simplify the booking process and offer an enhanced user experience.
+Welcome to Life Journey Cruises, a sample platform where users can explore, plan, and book a cruise to one of our many destinations. Our application uses a streamlined checkout process and user-friendly features --such as our AI chatbot -- to simplify the booking process and offer an enhanced user experience.
 
 <div align="center">
-:earth_americas: <h3> Explore</h3>
+ <h3> Explore :earth_americas:</h3>
   <img src="/public/readme/landingpage.gif" alt="project landing page image" width="600px" />
-:clipboard: <h3> Plan</h3>
+<h3> Plan :clipboard: </h3>
   <img src="/public/readme/plan.gif" alt="project planning page image" width="600px" />
-:date: <h3> Book</h3>
+<h3> Book :date: </h3>
   <img src="/public/readme/book.gif" alt="project booking page image" width="600px" />
 </div>
 
-## :computer: Technologies:
+## :computer: Technologies
 Front-End:
 ![Tailwind](https://img.shields.io/badge/tailwind-black?style=for-the-badge&logo=tailwindcss)
 ![JavaScript](https://img.shields.io/badge/javascript-black?style=for-the-badge&logo=javascript)
@@ -68,19 +60,15 @@ Testing:
 
 
 
-## Developers:
-The Nautical Nine
+## :ship: Our Team
 
-### Full-Stack Developers:
+### Full-Stack Developers - The Nautical Nine
 |  Shaoyu Chen   |  Liru Zhao     |  Denis More    |  Jason  Ullrich  |  Tyler  Johnson  |  Tanner  Jacobson  |  Michael  Trofimov  |  Pallavi  Kishore  |  Lu  Lu        |
 |  :----------:  |  :----------:  |  :----------:  |  :----------:    |  :----------:    |  :----------:      |  :----------:       |  :----------:      |  :----------:  |
 |  LinkedIn      |  LinkedIn      |  LinkedIn      |  LinkedIn        |  LinkedIn        |  LinkedIn          |  LinkedIn           |  LinkedIn          |  LinkedIn      |
 |  Github        |  Github        |  Github        |  Github          |  Github          |  Github            |  Github             |  Github            |  Github        |
 
-
-### Product Manager: Pallavi
-### Architecture Owner: Jason
-### UI Designer: Tyler
+ Product Manager: Pallavi :small_blue_diamond: Architecture Owner: Jason :small_blue_diamond: UI Designer: Tyler
 
 
 ## :file_folder: Roadmap
@@ -95,19 +83,19 @@ The Nautical Nine
  - [X] AI Chat Assistance able to answer any questions you may have for cruise booking
 
 
-## Getting Started
-### :white_check_mark: Prerequisites
+## :white_check_mark: Getting Started
+###  Prerequisites
 ![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
 ```sh
 npm install
 ```
 
 ### Installation
-1. Clone the repo
+1. Clone the repo.
 ```sh
   git clone https://github.com/thenauticalnine/rfp2404-blueocean.git
 ```
-2. Install NPM packages
+2. Install NPM packages.
 ```sh
   npm install
 ```
@@ -122,7 +110,7 @@ npm install
   npm run dev
 ```
 
-## Git Workflow
+## Git Workflow :arrows_clockwise:
  	# Switch to the main branch
 git checkout main
 # Update the main branch with the latest changes from the remote repository
