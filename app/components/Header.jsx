@@ -15,35 +15,37 @@ const Header = ({ user }) => {
     <div
       // style={{ backgroundImage: "url('/HeaderBG.svg')" }}
 
-      className="flex justify-between items-center p-4 py-8 bg-white relative"
+      className="flex justify-between items-center px-4 py-2 relative"
     >
-      <img src="/LogoTop.svg" style={{ width: '220px' }} />
+      <div className="relative">
+        <img src="/LogoTop.svg" style={{ width: '220px' }} />
+        <img
+          className="absolute top-0 left-0 z-30"
+          src="/LogoBottom.svg"
+          style={{ width: '220px' }}
+        />
+      </div>
 
       <div
         className="absolute inset-0"
         style={{
           background: 'url(/wave.svg)',
-          backgroundRepeat: 'space no-repeat',
-          backgroundPosition: '0% 100%',
-          backgroundSize: '1.19%',
+          backgroundRepeat: 'repeat-x',
+          backgroundPosition: 'bottom',
+          backgroundSize: '30px 65%',
         }}
-      ></div>
-      <img
-        className="absolute left-3 bottom-2"
-        src="/LogoBottom.svg"
-        style={{ width: '220px' }}
       />
-      <nav className="flex-1 flex justify-center space-x-12 z-30 -translate-y-4">
+      <nav className="flex-1 flex justify-center space-x-12 z-30 relative top-1/4 text-white">
         <Link
           onClick={handleHomeClick}
           to="/"
-          className="text-lg pr-20 font-semibold text-black no-underline hover:underline"
+          className="text-lg pr-20 font-semibold no-underline hover:underline"
         >
           Home
         </Link>
         <Link
           to="/about"
-          className="text-lg pl-20 pr-40 font-semibold text-black no-underline hover:underline"
+          className="text-lg pl-20 pr-40 font-semibold  no-underline hover:underline"
         >
           About
         </Link>

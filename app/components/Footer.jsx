@@ -4,17 +4,30 @@ import { Link } from '@remix-run/react'
 
 const Footer = () => {
   return (
-    <div style={{
-      backgroundImage: "url('/FooterBG.svg')",
-      backgroundPosition: "bottom",
-      backgroundRepeat: "no-repeat"
-    }}  className="bg-white flex justify-between items-center p-6">
-      <div className="text-left flex-1">
+    <div
+      // style={{
+      //   backgroundImage: "url('/wave.svg')",
+      //   backgroundSize: '30px auto',
+      //   backgroundPosition: '0% 180%',
+      //   backgroundRepeat: 'repeat-x',
+      // }}
+      className="flex justify-between items-center relative overflow-clip"
+    >
+      <div
+        className="absolute w-full h-full top-[20%] -z-10"
+        style={{
+          background: 'url(/wave.svg)',
+          backgroundRepeat: 'repeat-x',
+          backgroundPosition: 'bottom',
+          backgroundSize: '30px 35%',
+        }}
+      />
+      <div className="ml-6 flex flex-col">
         <h1 className="text-xl font-bold">Join the Journey</h1>
         <p className="text-sm">Subscribe to our mailing list.</p>
       </div>
 
-      <div className="text-center flex-1">
+      <div className="flex flex-col items-center pb-6">
         <h1 className="text-xl font-bold">Follow the Journey</h1>
         <p className="text-sm">
           <Link to="/flappycruise">#JourneyCruises</Link>
@@ -26,7 +39,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="text-right flex-1">
+      <div className="flex flex-col mr-6">
         <h1 className="text-xl font-bold">Become the Journey</h1>
         <p className="text-sm">JOBS.CAREERS@LIFEJOURNEYCRUISES.COM</p>
       </div>

@@ -53,11 +53,11 @@ export function Layout({ children }) {
       <body className="relative flex flex-col">
         <Header user={user} />
         <main className="flex-grow">{children}</main>
-        <ScrollRestoration />
-        <Scripts />
         <Footer />
 
         {openai && <AIssistant />}
+        <ScrollRestoration />
+        <Scripts />
       </body>
     </html>
   )
