@@ -110,30 +110,30 @@ npm install
 
 ## :arrows_clockwise: Git Workflow
 
-#### 1. Update the main branch with the latest changes from the remote repository
+1. Update the main branch with the latest changes from the remote repository
 
 ````sh
 git checkout main
 git pull origin main
 ````
-#### 2. Switch to your feature branch
+2. Switch to your feature branch
 ````sh
 git checkout <branch name>
 ````
-#### 3. Merge the latest changes from the main branch into your feature branch
+3. Merge the latest changes from the main branch into your feature branch
 ````sh 
 git merge main
 ````
-#### 4. Check the status of your feature branch to see if there are any uncommitted changes
+4. Check the status of your feature branch to see if there are any uncommitted changes
 ````sh 
 git status
 ````
-#### 5. If there are changes, add and commit them
+5. If there are changes, add and commit them
 ````sh
 git add .
 git commit -m "<commit message>"
 ````
-#### 6. Push your feature branch to the remote repository
+6. Push your feature branch to the remote repository
 ````sh
 git push origin <branch name>
 ````
