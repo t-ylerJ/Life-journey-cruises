@@ -65,8 +65,7 @@ Testing:
 ### Full-Stack Developers - The Nautical Nine
 |  Shaoyu Chen   |  Liru Zhao     |  Denis More    |  Jason  Ullrich  |  Tyler  Johnson  |  Tanner  Jacobson  |  Michael  Trofimov  |  Pallavi  Kishore  |  Lu  Lu        |
 |  :----------:  |  :----------:  |  :----------:  |  :----------:    |  :----------:    |  :----------:      |  :----------:       |  :----------:      |  :----------:  |
-|  LinkedIn      |  LinkedIn      |  LinkedIn      |  LinkedIn        |  LinkedIn        |  LinkedIn          |  LinkedIn           |  LinkedIn          |  LinkedIn      |
-|  Github        |  Github        |  Github        |  Github          |  Github          |  Github            |  Github             |  Github            |  Github        |
+
 
  Product Manager: Pallavi :small_blue_diamond: Architecture Owner: Jason :small_blue_diamond: UI Designer: Tyler
 
@@ -84,8 +83,7 @@ Testing:
 
 
 ## :white_check_mark: Getting Started
-###  Prerequisites
-![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
+###  Prerequisites ![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
 ```sh
 npm install
 ```
@@ -110,19 +108,32 @@ npm install
   npm run dev
 ```
 
-## Git Workflow :arrows_clockwise:
- 	# Switch to the main branch
+## :arrows_clockwise: Git Workflow
+
+#### 1. Update the main branch with the latest changes from the remote repository
+
+````sh
 git checkout main
-# Update the main branch with the latest changes from the remote repository
 git pull origin main
-# Switch to your feature branch
-git checkout <branchname>
-# Merge the latest changes from the main branch into your feature branch
+````
+#### 2. Switch to your feature branch
+````sh
+git checkout <branch name>
+````
+#### 3. Merge the latest changes from the main branch into your feature branch
+````sh 
 git merge main
-# Check the status of your feature branch to see if there are any uncommitted changes
+````
+#### 4. Check the status of your feature branch to see if there are any uncommitted changes
+````sh 
 git status
-# If there are changes, add and commit them
+````
+#### 5. If there are changes, add and commit them
+````sh
 git add .
-git commit -m "Your commit message"
-# Push your feature branch to the remote repository
-git push origin <branchname>
+git commit -m "<commit message>"
+````
+#### 6. Push your feature branch to the remote repository
+````sh
+git push origin <branch name>
+````
