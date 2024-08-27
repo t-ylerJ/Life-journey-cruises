@@ -30,7 +30,7 @@
 :anchor: Ahoy!
 Welcome to Life Journey Cruises, a sample platform where users can explore, plan, and book a cruise to one of our many destinations. Our application uses a streamlined checkout process and user-friendly features --such as our AI chatbot -- to simplify the booking process and offer an enhanced user experience.
 
-<div align="center">
+<div>
  <h3> Explore :earth_americas:</h3>
   <img src="/public/readme/landingpage.gif" alt="project landing page image" width="600px" />
 <h3> Plan :clipboard: </h3>
@@ -99,9 +99,9 @@ npm install
 ```
 3. Make a copy of the `.exampleenv` file and rename it to `.env`. Enter the following in the `.env` file.
 ```sh
-	MAPBOX_ACCESS_TOKEN = "Mapbox Access Token"
-	POSTGRES_URL="Postgres URL"
-	OPENAI_KEY = "OpenAI Key"
+  MAPBOX_ACCESS_TOKEN = "Mapbox Access Token"
+  POSTGRES_URL="Postgres URL"
+  OPENAI_KEY = "OpenAI Key"
 ```
 4. Run in dev environment.
 ```sh
