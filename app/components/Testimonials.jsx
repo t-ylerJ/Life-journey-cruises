@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
 import { SlArrowRight } from "react-icons/sl";
 
-
-
-
 const Testimonials = () => {
   const groups = [];
   const [testimonials, setTestimonials] = useState([]);
@@ -118,7 +115,6 @@ const Testimonials = () => {
       return url;
       }
 
-
       const pictures = [
         'https://i.pinimg.com/736x/d0/fe/a8/d0fea88d8ff91114cca5981389413c33.jpg',
         'https://plus.unsplash.com/premium_photo-1661776159919-ec12aefb81e7?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -135,22 +131,15 @@ const Testimonials = () => {
         'https://images.pexels.com/photos/6752435/pexels-photo-6752435.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
       ]
 
-
-
-
-
       return Array.from({ length: number }, () => {
         const sentence = startSentences[Math.floor(Math.random() * startSentences.length)];
         const adjective = sentence[sentence.length -1] === '.' ? '' : adjectives[Math.floor(Math.random() * adjectives.length)] + '... ';
         const name = Math.random() > .5 ? femaleNames[Math.floor(Math.random() * femaleNames.length)] : maleNames[Math.floor(Math.random() * maleNames.length)]
         const photoUrl = generatePhotoUrl(name);
-
+        
         return { text: sentence + adjective, name: ' -' + name,  photo: photoUrl };
       });
     }
-
-
-    console.log(photoGroups)
 
     const refreshTestimonials = function() {
       setTestimonials(createTestimonials(testimonials.length));
@@ -159,9 +148,6 @@ const Testimonials = () => {
     useEffect(() => {
       setTestimonials(createTestimonials(4));
     }, [])
-
-
-
 
   return (
    <div>
@@ -183,7 +169,6 @@ const Testimonials = () => {
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled/>
             <input type="radio" name="rating-2" className="mask mask-star-2 bg-accent" disabled defaultChecked/>
             </div>
-
           </div>
             <img src={testimonial.photo} className="row-span-4 self-center size-24 rounded-full object-cover aspect-square" alt="reviews of cruise ship with photos"/>
         </div>
