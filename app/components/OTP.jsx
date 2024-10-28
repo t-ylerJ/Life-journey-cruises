@@ -2,9 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const OTP = () => {
   const [input, setInput] = useState({})
-
   const refs = useRef({})
-
   const handleChange = (e, i) => {
     setInput((current) => ({
       ...current,
@@ -43,7 +41,7 @@ const OTP = () => {
             value={Object.values(input).join('')}
             onChange={() => {}}
           />
-          {/* <pre>{JSON.stringify(input, null, 2)}</pre> */}
+          <pre>{JSON.stringify(input, null, 2)}</pre>
         </div>
       </div>
     </>
