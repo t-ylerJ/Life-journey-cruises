@@ -14,11 +14,8 @@ const AIssistant = () => {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState()
   const fetcher = useFetcher()
-
   const formRef = useRef()
   const chatRef = useRef()
-
-  // console.log('fetcher data:', fetcher.data)
 
   const handleOpen = () => {
     if (!open) setOpen(true)
