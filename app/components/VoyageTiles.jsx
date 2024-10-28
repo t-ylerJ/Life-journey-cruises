@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import { MdOutlineMusicNote } from "react-icons/md";
 import { MdMusicOff } from "react-icons/md";
 
-
  const Music = ({index}) => {
   const [currentlyPlaying, setCurrentlyPlaying] = useState(false);
   const audioRef = React.createRef();
@@ -46,7 +45,7 @@ const VoyageTiles = ({voyages}) => {
           WebkitBackgroundClip: 'text',
           color: 'transparent',
           WebkitTextFillColor: 'transparent',
-          // WebkitTextStroke: '1px black'
+          WebkitTextStroke: '1px black'
         }}
       >
         FIND YOUR JOURNEY
@@ -61,10 +60,8 @@ const VoyageTiles = ({voyages}) => {
               <div className="absolute  back-hidden border-2 w-full h-full shadow-2xl">
                 <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover" ></img>
                   <div className="absolute inset-0 flex justify-center top-12 text-4xl text-white" style={{WebkitTextStroke: '0.5px white'}}>{`${voyage.name}`}
-
                   </div>
               </div>
-
                <div className="absolute rotate-y-180 back-hidden w-full h-full flex">
                  <img src={`${voyage.url}`} alt={`${voyage.name} Cruise`} className="w-full h-full object-cover opacity-40" ></img>
                    <div className="absolute bottom-5 left-5 text-2xl text-black font-bold">{`$${voyage.price}`}
