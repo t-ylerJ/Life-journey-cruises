@@ -27,8 +27,8 @@ const Itinerary = ({ voyageName, price, selectedDate, excursions, numGuests, sel
               return (
               <li key={index} className="tracking-wider p-2">
                 {room} - ${roomDetail.price}
-                {/* <img src="https://www.sunway.ie/cruise/images/ships/Silver-Ray/Master-Suite.jpg" alt="booked room"
-                className="mt-2" /> */}
+                <img src="https://www.sunway.ie/cruise/images/ships/Silver-Ray/Master-Suite.jpg" alt="booked room"
+                className="mt-2" />
               </li>
               );
             })}
