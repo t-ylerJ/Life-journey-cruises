@@ -7,11 +7,11 @@ const Calendar = ({selectableDates, setSelectedDateRange}) => {
   const [startDate, setStartDate] = useState(null);
   const [showCalendar, setShowCalendar] = useState(false);
 
-  // const isSelectable = (date) => {
-  //   return selectableDates.some(
-  //     ({start, end}) => date >= start && date <= end
-  //   );
-  // };
+  const isSelectable = (date) => {
+    return selectableDates.some(
+      ({start, end}) => date >= start && date <= end
+    );
+  };
 
   const stripTime = (date) => {
     const newDate = new Date(date);
@@ -28,7 +28,7 @@ const Calendar = ({selectableDates, setSelectedDateRange}) => {
     });
   };
 
- /* return (
+  return (
     <DatePicker
       showIcon
       selected={startDate}
@@ -36,7 +36,6 @@ const Calendar = ({selectableDates, setSelectedDateRange}) => {
       filterDate={isSelectable}
       placeholderText="Select Starting Date"
       />
-  ) */
 
   const handleDateChange = (date) => {
     setStartDate(date);
