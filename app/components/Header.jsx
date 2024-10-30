@@ -5,16 +5,13 @@ const Header = ({ user }) => {
   const [currentPage, setCurrentPage] = useState(0)
   const navigate = useNavigate()
   const [dropdownOpen, setDropdownOpen] = useState(false)
-
   const handleHomeClick = () => {
     setCurrentPage(0)
     navigate('/')
   }
-
   return (
     <div
-      // style={{ backgroundImage: "url('/HeaderBG.svg')" }}
-
+      style={{ backgroundImage: "url('/HeaderBG.svg')" }}
       className="flex justify-between items-center px-4 py-2 relative"
     >
       <div className="relative">
@@ -25,7 +22,6 @@ const Header = ({ user }) => {
           style={{ width: '220px' }}
         />
       </div>
-
       <div
         className="absolute inset-0"
         style={{
