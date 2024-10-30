@@ -5,7 +5,6 @@ const ExcursionTiles = ({dailyExcursions}) => {
   const [selectedExcursions, setSelectedExcursions] = useState([]);
 
   useEffect(() => {
-
     const excurs = localStorage.getItem('excursions');
     if(excurs){
       setSelectedExcursions(JSON.parse(excurs));
@@ -13,28 +12,24 @@ const ExcursionTiles = ({dailyExcursions}) => {
       setClickedBoxes([...ids]);
     }
    // nest all the data into one object and store it in local storage
-   /*
     const booking = localStorage.getItem('bookingDetails');
     if(booking){
       setSelectedExcursions(JSON.parse(booking).excursions);
       const ids = JSON.parse(booking).excursions.map((exc) => exc.id);
       setClickedBoxes([...ids]);
     }
-    */
   },[]);
 
 
   const boxOnClick = (excursionId) => {
-
     if(clickedBoxes.includes(parseInt(excursionId))) {
       setClickedBoxes(clickedBoxes.filter((box) => box !== parseInt(excursionId)));
       setSelectedExcursions(selectedExcursions.filter((exc) => parseInt(exc.id) !== parseInt(excursionId)));
+      
       //// nest all the data into one object and store it in local storage
-      /*
       const bookingDetails = JSON.parse(localStorage.getItem('bookingDetails'));
       bookingDetails.excursions = bookingDetails.excursions.filter((exc) => parseInt(exc.id) !== parseInt(excursionId));
       localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails)); */
-
       localStorage.setItem('excursions', JSON.stringify(selectedExcursions.filter((exc) => parseInt(exc.id) !== parseInt(excursionId))));
     } else {
       setClickedBoxes([...clickedBoxes, parseInt(excursionId)]);
@@ -42,11 +37,11 @@ const ExcursionTiles = ({dailyExcursions}) => {
         dailyExcursions[i].excursions.forEach((excursion) => {
           if(parseInt(excursion.id) === parseInt(excursionId)){
             const {id, name, price} = excursion;
+            
             // nest all the data into one object and store it in local storage
-           /* const bookingDetails = JSON.parse(localStorage.getItem('bookingDetails')) || {};
+            const bookingDetails = JSON.parse(localStorage.getItem('bookingDetails')) || {};
             bookingDetails.excursions = [...selectedExcursions, {"id": id, "name": name, "price": price}];
-            localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails)); */
-
+            localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails)); 
             setSelectedExcursions([...selectedExcursions, {"id": id, "name": name, "price": price}]);
             localStorage.setItem('excursions', JSON.stringify([...selectedExcursions, {"id": id, "name": name, "price": price}]));
           }
@@ -57,12 +52,12 @@ const ExcursionTiles = ({dailyExcursions}) => {
 
   const adjustTime = (timeStamp) => {
     const date = new Date(timeStamp);
-
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const adjustMinutes = minutes < 30 ? `00` : '30';
     return `${hours}:${adjustMinutes}`
    }
+  
   return (
 
       <div className="w-full flex bg-gray-100 flex-col justify-center items-center overflow-hidden md:p-10 p-4 m-0"  >
@@ -84,8 +79,6 @@ const ExcursionTiles = ({dailyExcursions}) => {
                         "w-[46%] md:w-[31.5%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-accent/75 text-black border-2 p-3 md:p-5 mb-2 md:mb-10 md:ml-3 m-3 rounded-xl transform scale-95"
                         :
                         "w-[46%] md:w-[31.5%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-gray-100 border-2 p-3 md:p-5 mb-2 md:mb-10 md:ml-3 m-3 rounded-xl"
-
-
                       }
                       onClick={()=>{
                         boxOnClick(excursion.id);
@@ -113,7 +106,7 @@ const ExcursionTiles = ({dailyExcursions}) => {
   )
 }
 
-     // "w-[46%] md:w-[30.5%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-accent text-primary border-2 p-3 md:p-3 mb-2 md:mb-10 md:ml-2  m-2 rounded-xl"
-      // :
-        // "w-[46%] md:w-[30.5%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-gray-100 border-2 p-3 md:p-3 mb-2 md:mb-10 md:ml-2 m-2 rounded-xl"
+     "w-[46%] md:w-[30.5%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-accent text-primary border-2 p-3 md:p-3 mb-2 md:mb-10 md:ml-2  m-2 rounded-xl"
+      :
+      "w-[46%] md:w-[30.5%] xl:w-[17%] h-60 md:h-96 flex items-left flex-col bg-gray-100 border-2 p-3 md:p-3 mb-2 md:mb-10 md:ml-2 m-2 rounded-xl"
 export default ExcursionTiles
