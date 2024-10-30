@@ -5,12 +5,12 @@ import { Link } from '@remix-run/react'
 const Footer = () => {
   return (
     <div
-      // style={{
-      //   backgroundImage: "url('/wave.svg')",
-      //   backgroundSize: '30px auto',
-      //   backgroundPosition: '0% 180%',
-      //   backgroundRepeat: 'repeat-x',
-      // }}
+      style={{
+        backgroundImage: "url('/wave.svg')",
+        backgroundSize: '30px auto',
+        backgroundPosition: '0% 180%',
+        backgroundRepeat: 'repeat-x',
+      }}
       className="flex justify-between items-center relative overflow-clip"
     >
       <div
