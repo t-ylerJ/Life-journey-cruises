@@ -3,17 +3,15 @@ const Ports = ({ schedule, clickHandler, setHighlightedPort, hoveredPort }) => {
     e.preventDefault()
     clickHandler(e.target.value)
   }
-  // Function for handling mouse enter event
+
   function handleMouseEnter(portName) {
-    // setHighlightedPort(portName);
+    setHighlightedPort(portName);
     hoveredPort.current = portName
-    console.log('cactus')
     console.log('hoveredPort: ', hoveredPort.current)
   }
 
-  // Function for handling mouse leave event
   function handleMouseLeave() {
-    // setHighlightedPort('');
+    setHighlightedPort('');
     hoveredPort.current = null
   }
 
