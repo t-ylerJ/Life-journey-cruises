@@ -35,7 +35,7 @@ const PurchaseSummary = () => {
         return (
           <section key={room.name + index} className="flex items-baseline text-xl">
             <p>{room.name} Room</p>
-            <span className="flex-1 truncate">.........................................................................................................</span>
+            <span className="flex-1 truncate">.........</span>
             <p>${room.price}</p>
           </section>
         )
@@ -45,14 +45,14 @@ const PurchaseSummary = () => {
         return (
           <section className="flex items-baseline text-xl" key={item.name + index}>
             <p >{item.name}</p>
-            <span className="flex-1 truncate">......................................................................................................</span>
+            <span className="flex-1 truncate">.........</span>
             <p>${item.price}</p>
           </section>
         )
       })}
       <section className="mt-10 flex items-baseline text-xl">
         <p>Total</p>
-        <span className="flex-1 truncate">......................................................................................................................</span>
+        <span className="flex-1 truncate">.........</span>
         <p>${total}</p>
       </section>
     </div>
