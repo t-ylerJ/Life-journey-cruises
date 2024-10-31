@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+// If using linter, you will need to modify linter rules or add: eslint-disable no-unused-vars
 import { useState, useEffect } from 'react'
 
 import {
