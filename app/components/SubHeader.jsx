@@ -1,4 +1,3 @@
-// If using linter, you will need to modify linter rules or add: eslint-disable no-unused-vars
 import { useState, useEffect } from 'react'
 
 import {
@@ -25,14 +24,13 @@ const SubHeader = () => {
   const [checkoutPrevPath, setCheckoutPrevPath] = useState()
   const [checkoutPrevName, setCheckoutPrevName] = useState()
 
-  //if path ends in number,
-  //next button should be plan
-  //if path ends in plan,
-  //back button should remove /plan
-  //next button should remove /plan and add /book
-  //if path ends in book
-  //back button should remove /book and add /plan
-  //next button should remove everything and add /book
+  /* Page navigation layout: 
+  if path ends in number, next button should be plan
+  if path ends in plan, back button should remove /plan
+  next button should remove /plan and add /book
+  if path ends in book back button should remove /book and add /plan
+  next button should remove everything and add /book
+  */
   useEffect(() => {
     if (
       !isNaN(
